@@ -23,7 +23,8 @@ namespace Gerene.DFe.EscPos
         public PrinterType TipoImpressora { get; set; }
         public bool CortarPapel { get; set; }
         public bool ProdutoDuasLinhas { get; set; }
-        public bool UsarBarrasComoCodio { get; set; }
+        public bool UsarBarrasComoCodigo { get; set; }
+        public bool DocumentoCancelado { get; set; }
         public byte[] Logotipo { get; set; }
 
         private CultureInfo _Cultura => new CultureInfo("pt-Br");
@@ -88,12 +89,24 @@ namespace Gerene.DFe.EscPos
             }
             #endregion
 
+            #region Documento Cancelado
+            if (DocumentoCancelado)
+            {
+                _Printer.Separator();
+                _Printer.AlignCenter();
+                _Printer.BoldMode(PrinterModeState.On);
+                _Printer.Append("***DOCUMENTO CANCELADO ***");
+                _Printer.BoldMode(PrinterModeState.Off);
+                _Printer.Separator();
+            }
+            #endregion
+
             #region Consumidor
             _Printer.AlignLeft();
             _Printer.CondensedMode(PrinterModeState.On);
             _Printer.AppendWithoutLf("CPF/CNPJ do Consumidor: ");
-            _Printer.Append(_CFe.InfCFe.Dest?.CPF.IsNotNull() == true ? _CFe.InfCFe.Dest.CPF.FormataCPF() :
-                            _CFe.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFe.InfCFe.Dest.CNPJ.FormataCNPJ() :
+            _Printer.Append(_CFe.InfCFe.Dest?.CPF.IsNotNull() == true ? _CFe.InfCFe.Dest.CPF.FormatoCpfCnpj() :
+                            _CFe.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFe.InfCFe.Dest.CNPJ.FormatoCpfCnpj() :
                             "000.000.000-00");
             _Printer.AppendWithoutLf("Razao Social/Nome: ");
             _Printer.Append(_CFe.InfCFe.Dest?.Nome ?? "CONSUMIDOR");
@@ -116,8 +129,8 @@ namespace Gerene.DFe.EscPos
                 string textoE = string.Empty;
 
                 string codProd = det.Prod.CProd;                
-                if (UsarBarrasComoCodio)
-                    codProd = $"{(UsarBarrasComoCodio && det.Prod.CEAN.IsNotNull() ? det.Prod.CEAN : det.Prod.CProd).PadRight(13)}";
+                if (UsarBarrasComoCodigo)
+                    codProd = $"{(UsarBarrasComoCodigo && det.Prod.CEAN.IsNotNull() ? det.Prod.CEAN : det.Prod.CProd).PadRight(13)}";
 
                 if (ProdutoDuasLinhas)
                     textoE = $"{ det.NItem:D3} | {codProd}";

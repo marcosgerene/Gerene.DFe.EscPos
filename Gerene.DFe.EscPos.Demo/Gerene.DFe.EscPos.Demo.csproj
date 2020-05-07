@@ -45,6 +45,27 @@
     <Reference Include="ACBr.Net.Sat, Version=1.2.7.1, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
       <HintPath>..\packages\ACBr.Net.Sat.1.2.7.1\lib\net452\ACBr.Net.Sat.dll</HintPath>
     </Reference>
+    <Reference Include="DFe.Classes, Version=1.0.0.768, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.1007\lib\net40\DFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Utils, Version=1.0.0.768, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.1007\lib\net40\DFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Wsdl, Version=1.0.0.768, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.1007\lib\net40\DFe.Wsdl.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Classes, Version=1.0.0.768, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.1007\lib\net40\NFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Servicos, Version=1.0.0.768, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.1007\lib\net40\NFe.Servicos.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Utils, Version=1.0.0.768, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.1007\lib\net40\NFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Wsdl, Version=1.0.0.768, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.1007\lib\net40\NFe.Wsdl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
