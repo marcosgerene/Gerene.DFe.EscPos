@@ -21,6 +21,8 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter();
 	_printer.Imprimir(string_com_o_conteudo_do_xml);
 }
 ```
+O projeto é construído em .Net Standard 2.0.
+O demo está em .Net Framework 4.6.2
 
 
 Implementando um novo tipo documento:
