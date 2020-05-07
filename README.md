@@ -1,4 +1,7 @@
 # Gerene.DFe.EscPos
+
+[![Nuget count](http://img.shields.io/nuget/v/Gerene.DFe.EscPos.svg)](https://www.nuget.org/packages/Gerene.DFe.EscPos)
+
 Impressão em ESC/POS e BemaPOS para DFes
 
 Atualmente a biblioteca atende os documentos SAT e NFCe.
