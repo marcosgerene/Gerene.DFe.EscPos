@@ -2,12 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>Gerene Sistemas de Informação</Company>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/marcosgerene/Gerene.DFe.EscPos</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="ACBr.Net.Sat" Version="1.2.7.1" />
     <PackageReference Include="Vip.Printer" Version="1.0.13" />
     <PackageReference Include="Zeus.Net.NFe.NFCe" Version="1.0.1.1007" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\Gerene\Área de Trabalho\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
