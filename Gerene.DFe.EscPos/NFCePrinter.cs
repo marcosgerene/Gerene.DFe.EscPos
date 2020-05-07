@@ -1,20 +1,11 @@
-﻿using ACBr.Net.Core.Extensions;
-using DFe.Classes.Flags;
-using DFe.Utils;
-using NFe.Utils.InformacoesSuplementares;
-using Shared.DFe.Utils;
-using System;
-using System.Collections.Generic;
+﻿using DFeBR.EmissorNFe.Utilidade;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Vip.Printer;
 using Vip.Printer.Enums;
 
-using NotaFiscal = NFe.Classes.nfeProc;
-
+using NotaFiscal = DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.nfeProc;
 
 
 namespace Gerene.DFe.EscPos
@@ -24,7 +15,7 @@ namespace Gerene.DFe.EscPos
         public NFCePrinter()
         {
             _NFCe = new NotaFiscal();
-            NomeDaVia = "Via do Consumidor";
+            NomeDaVia = "Via do Consumidor";            
         }
 
         #region IDfe
@@ -43,9 +34,7 @@ namespace Gerene.DFe.EscPos
 
         public void Imprimir(string xmlcontent)
         {
-            _NFCe = new NotaFiscal().CarregarDeXmlString(xmlcontent);
-
-            _Printer = new Printer(NomeImpressora, TipoImpressora);
+            _NFCe = Utils.ConverterXMLParaClasse<NotaFiscal>(xmlcontent);
 
             _Printer = new Printer(NomeImpressora, TipoImpressora);
 
@@ -90,7 +79,7 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Homologação
-            if (_NFCe.NFe.infNFe.ide.tpAmb == TipoAmbiente.Homologacao)
+            if (_NFCe.NFe.infNFe.ide.tpAmb == DFeBR.EmissorNFe.Utilidade.Tipos.TipoAmbiente.Homologacao)
             {
                 _Printer.Separator();
                 _Printer.AlignCenter();
@@ -349,7 +338,7 @@ namespace Gerene.DFe.EscPos
             _Printer.CondensedMode(PrinterModeState.On);
 
             _Printer.Append("Protocolo de autorização");
-            _Printer.Append($"{_NFCe.protNFe.infProt.nProt} {_NFCe.protNFe.infProt.dhRecbto:@dd/MM/yyyy HH:mm:ss}");
+            _Printer.Append($"{_NFCe.protNFe.infProt.First().nProt} {_NFCe.protNFe.infProt.First().dhRecbto:@dd/MM/yyyy HH:mm:ss}");
 
             _Printer.CondensedMode(PrinterModeState.Off);
             #endregion
