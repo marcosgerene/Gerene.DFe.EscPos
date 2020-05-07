@@ -1,7 +1,5 @@
 ﻿using ACBr.Net.Core.Extensions;
 using ACBr.Net.Sat;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -20,12 +18,14 @@ namespace Gerene.DFe.EscPos
             _CFe = new CFe();
         }
 
-
-
         #region IDfe
         public string NomeImpressora { get; set; }
         public PrinterType TipoImpressora { get; set; }
         public bool CortarPapel { get; set; }
+        public bool ProdutoDuasLinhas { get; set; }
+        public bool UsarBarrasComoCodio { get; set; }
+        public byte[] Logotipo { get; set; }
+
         private CultureInfo _Cultura => new CultureInfo("pt-Br");
 
         private Printer _Printer { get; set; }
@@ -39,6 +39,13 @@ namespace Gerene.DFe.EscPos
             _Printer = new Printer(NomeImpressora, TipoImpressora);
 
             #region Cabeçalho
+
+            #region Logotipo
+            if (Logotipo != null)
+            {
+                //Impressão do logotipo ainda não implementada
+            }
+            #endregion
 
             #region Dados do Emitente
             _Printer.AlignCenter();
@@ -97,13 +104,80 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Detalhes
-            //To do
+            _Printer.AlignCenter();
+            _Printer.BoldMode("#|COD|DESC|QTD|UN|VL UN|DESC|VL ITEM");
+            _Printer.Separator();
+
+            #region Produtos
+            _Printer.AlignLeft();
+            _Printer.CondensedMode(PrinterModeState.On);
+            foreach (var det in _CFe.InfCFe.Det)
+            {
+                string textoE = string.Empty;
+
+                string codProd = det.Prod.CProd;                
+                if (UsarBarrasComoCodio)
+                    codProd = $"{(UsarBarrasComoCodio && det.Prod.CEAN.IsNotNull() ? det.Prod.CEAN : det.Prod.CProd).PadRight(13)}";
+
+                if (ProdutoDuasLinhas)
+                    textoE = $"{ det.NItem:D3} | {codProd}";
+                else
+                    textoE = $"{ det.NItem:D3} | {codProd} {det.Prod.XProd}";
+
+                string textoR = $"{det.Prod.QCom:N3} {det.Prod.UCom} x {det.Prod.VUnCom:N2} = {det.Prod.VItem:N2}";
+
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita(textoE, textoR, _Printer.ColsCondensed));
+                
+                if (ProdutoDuasLinhas)
+                    _Printer.Append(det.Prod.XProd);
+
+                if (det.Prod.VOutro > 0)
+                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", det.Prod.VDesc.ToString("C2", _Cultura), _Printer.ColsCondensed));
+
+                if (det.Prod.VDesc > 0)
+                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", det.Prod.VDesc.ToString("C2", _Cultura), _Printer.ColsCondensed));
+            }
+            _Printer.CondensedMode(PrinterModeState.Off);
+            _Printer.Separator();
+
+            #region Totais
+            _Printer.BoldMode(PrinterModeState.On);
+            _Printer.CondensedMode(PrinterModeState.On);
+
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Subtotal:", _CFe.InfCFe.Total.ICMSTot.VProd.ToString("C2", _Cultura), _Printer.ColsCondensed));
+
+            if (_CFe.InfCFe.Total.ICMSTot.VOutro > 0)
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", _CFe.InfCFe.Total.ICMSTot.VOutro.ToString("C2", _Cultura), _Printer.ColsCondensed));
+
+            if (_CFe.InfCFe.Total.ICMSTot.VDesc > 0)
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", _CFe.InfCFe.Total.ICMSTot.VDesc.ToString("C2", _Cultura), _Printer.ColsCondensed));
+
+            _Printer.CondensedMode(PrinterModeState.Off);
+
+
+            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor TOTAL:", _CFe.InfCFe.Total.VCFe.ToString("C2", _Cultura), _Printer.ColsNomal));
+
+            _Printer.BoldMode(PrinterModeState.Off);
+            #endregion
+            #endregion
+
+            _Printer.NewLine();
             #endregion
 
             #region Pagamentos
-            //To do
+            _Printer.AlignLeft();
+            _Printer.CondensedMode(PrinterModeState.On);
+
+            foreach (var _pagto in _CFe.InfCFe.Pagto.Pagamentos)
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita(_pagto.CMp.GetDescription(), _pagto.VMp.ToString("C2", _Cultura), _Printer.ColsCondensed));
+
+            _Printer.CondensedMode(PrinterModeState.Off);
+
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Troco:", _CFe.InfCFe.Pagto.VTroco.ToString("C2", _Cultura), _Printer.ColsNomal));
+            _Printer.NewLine();
             #endregion
 
+            #region Rodape
             #region Dados da entrega            
             if (_CFe.InfCFe.Entrega != null && !_CFe.InfCFe.Entrega.XLgr.IsNull())
             {
@@ -175,26 +249,20 @@ namespace Gerene.DFe.EscPos
 
             #endregion
 
-            #region Rodape
-
             #region Número do extrato
             _Printer.AlignCenter();
             _Printer.Append($"SAT No. {_CFe.InfCFe.Ide.NSerieSAT:D9}");
             _Printer.CondensedMode(PrinterModeState.On);
             _Printer.Append($"Data e Hora {_CFe.InfCFe.Ide.DEmi:dd/MM/yyyy} {_CFe.InfCFe.Ide.HEmi:HH:mm:ss}");
             _Printer.CondensedMode(PrinterModeState.Off);
-            _Printer.NewLine();
             #endregion
 
             #region Chave de Acesso
-            _Printer.AlignLeft();
-            _Printer.CondensedMode(PrinterModeState.On);
-            _Printer.Append(Regex.Replace(_CFe.InfCFe.Id.OnlyNumber(), ".{4}", "$0 "));
-
-            _Printer.NewLine();
-
             _Printer.AlignCenter();
-            _Printer.Code128(_CFe.InfCFe.Id.OnlyNumber().Substring(0,22));
+            _Printer.CondensedMode(PrinterModeState.On);
+            _Printer.BoldMode(Regex.Replace(_CFe.InfCFe.Id.OnlyNumber(), ".{4}", "$0 "));
+
+            _Printer.Code128(_CFe.InfCFe.Id.OnlyNumber().Substring(0, 22));
             _Printer.Code128(_CFe.InfCFe.Id.OnlyNumber().Substring(22));
 
             _Printer.NewLine();
@@ -211,6 +279,8 @@ namespace Gerene.DFe.EscPos
                              $"{_CFe.InfCFe.Ide.AssinaturaQrcode}";
 
             _Printer.QrCode(_qrCode, QrCodeSize.Size1);
+
+            _Printer.NewLine();
             #endregion
 
             _Printer.AlignCenter();

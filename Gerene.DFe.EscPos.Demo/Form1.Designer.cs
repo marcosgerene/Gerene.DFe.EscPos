@@ -40,6 +40,8 @@
             this.BtnImprimir = new System.Windows.Forms.Button();
             this.ComboImpressoras = new System.Windows.Forms.ComboBox();
             this.ChbCortar = new System.Windows.Forms.CheckBox();
+            this.ChbDuasLinhas = new System.Windows.Forms.CheckBox();
+            this.ChbBarrasCodigo = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -136,7 +138,7 @@
             // 
             this.BtnImprimir.FlatAppearance.BorderSize = 0;
             this.BtnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnImprimir.Location = new System.Drawing.Point(12, 182);
+            this.BtnImprimir.Location = new System.Drawing.Point(288, 182);
             this.BtnImprimir.Name = "BtnImprimir";
             this.BtnImprimir.Size = new System.Drawing.Size(118, 36);
             this.BtnImprimir.TabIndex = 22;
@@ -159,18 +161,44 @@
             this.ChbCortar.Checked = true;
             this.ChbCortar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChbCortar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChbCortar.Location = new System.Drawing.Point(294, 138);
+            this.ChbCortar.Location = new System.Drawing.Point(302, 138);
             this.ChbCortar.Name = "ChbCortar";
             this.ChbCortar.Size = new System.Drawing.Size(69, 20);
             this.ChbCortar.TabIndex = 24;
             this.ChbCortar.Text = "Cortar";
             this.ChbCortar.UseVisualStyleBackColor = true;
             // 
+            // ChbDuasLinhas
+            // 
+            this.ChbDuasLinhas.AutoSize = true;
+            this.ChbDuasLinhas.Checked = true;
+            this.ChbDuasLinhas.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChbDuasLinhas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChbDuasLinhas.Location = new System.Drawing.Point(12, 180);
+            this.ChbDuasLinhas.Name = "ChbDuasLinhas";
+            this.ChbDuasLinhas.Size = new System.Drawing.Size(189, 20);
+            this.ChbDuasLinhas.TabIndex = 25;
+            this.ChbDuasLinhas.Text = "Produto em duas linhas";
+            this.ChbDuasLinhas.UseVisualStyleBackColor = true;
+            // 
+            // ChbBarrasCodigo
+            // 
+            this.ChbBarrasCodigo.AutoSize = true;
+            this.ChbBarrasCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChbBarrasCodigo.Location = new System.Drawing.Point(12, 204);
+            this.ChbBarrasCodigo.Name = "ChbBarrasCodigo";
+            this.ChbBarrasCodigo.Size = new System.Drawing.Size(167, 20);
+            this.ChbBarrasCodigo.TabIndex = 26;
+            this.ChbBarrasCodigo.Text = "Barras como código";
+            this.ChbBarrasCodigo.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 230);
+            this.ClientSize = new System.Drawing.Size(415, 239);
+            this.Controls.Add(this.ChbBarrasCodigo);
+            this.Controls.Add(this.ChbDuasLinhas);
             this.Controls.Add(this.ChbCortar);
             this.Controls.Add(this.ComboImpressoras);
             this.Controls.Add(this.BtnImprimir);
@@ -204,6 +232,8 @@
         private System.Windows.Forms.Button BtnImprimir;
         private System.Windows.Forms.ComboBox ComboImpressoras;
         private System.Windows.Forms.CheckBox ChbCortar;
+        private System.Windows.Forms.CheckBox ChbDuasLinhas;
+        private System.Windows.Forms.CheckBox ChbBarrasCodigo;
     }
 }
 

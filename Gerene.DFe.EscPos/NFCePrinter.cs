@@ -21,9 +21,12 @@ namespace Gerene.DFe.EscPos
 
         #region IDfe
         public string NomeImpressora { get; set; }
-        public bool CortarPapel { get; set; }
         public PrinterType TipoImpressora { get; set; }
-                
+        public bool CortarPapel { get; set; }
+        public bool ProdutoDuasLinhas { get; set; }
+        public bool UsarBarrasComoCodio { get; set; }
+        public byte[] Logotipo { get; set; }
+
         private Printer _Printer { get; set; }
         private NotaFiscal _NFCe { get; set; }
 
@@ -31,12 +34,9 @@ namespace Gerene.DFe.EscPos
         {
             _NFCe = FuncoesXml.XmlStringParaClasse<NotaFiscal>(xmlcontent);
 
-
             _Printer = new Printer(NomeImpressora, TipoImpressora);
 
-            _Printer.AlignCenter();
-
-
+            
         }
 
         #endregion

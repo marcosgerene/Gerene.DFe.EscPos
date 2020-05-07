@@ -91,8 +91,13 @@ namespace Gerene.DFe.EscPos
         public static string TextoEsquerda_Direita(string textoE, string textoR, int colunas)
         {
             int padLenght = colunas - (textoR.Length + 1);
-            
-            string textoE_new = textoE.PadRight(padLenght);
+
+            string textoE_new = string.Empty;
+
+            if (textoE.Length + 3 >= padLenght)
+                textoE_new = textoE.Substring(0, padLenght - 3).PadRight(padLenght);
+            else
+                textoE_new = textoE.PadRight(padLenght);
 
             return  textoE_new + textoR;
         }

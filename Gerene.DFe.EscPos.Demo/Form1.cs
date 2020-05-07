@@ -105,6 +105,8 @@ namespace Gerene.DFe.EscPos.Demo
                 _printer.TipoImpressora = (PrinterType)ComboTipoImpressora.SelectedItem;
                 _printer.NomeImpressora = ComboImpressoras.Text;
                 _printer.CortarPapel = ChbCortar.Checked;
+                _printer.ProdutoDuasLinhas = ChbDuasLinhas.Checked;
+                _printer.UsarBarrasComoCodio = ChbBarrasCodigo.Checked;
 
                 _printer.Imprimir(xml);
             }

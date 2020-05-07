@@ -8,6 +8,9 @@ namespace Gerene.DFe.EscPos
         string NomeImpressora { get; set; }
         PrinterType TipoImpressora { get; set; }
         bool CortarPapel { get; set; }
+        bool ProdutoDuasLinhas { get; set; }
+        bool UsarBarrasComoCodio { get; set; }
+        byte[] Logotipo { get; set; }
 
         void Imprimir(string xmlcontent);
     }
