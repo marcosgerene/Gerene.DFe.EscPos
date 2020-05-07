@@ -19,7 +19,8 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter();
 	_printer.NomeImpressora = "Nome da impressora";
 	_printer.CortarPapel = true;
 	_printer.ProdutoDuasLinhas = false;
-	_printer.UsarBarrasComoCodio = false;
+	_printer.UsarBarrasComoCodigo = false;
+	_printer.DocumentoCancelado = false;
 
 	_printer.Imprimir(string_com_o_conteudo_do_xml);
 }
@@ -40,7 +41,8 @@ public interface IDfePrinter : IDisposable
 	PrinterType TipoImpressora { get; set; }
 	bool CortarPapel { get; set; }
 	bool ProdutoDuasLinhas { get; set; }
-	bool UsarBarrasComoCodio { get; set; }
+	bool UsarBarrasComoCodigo { get; set; }
+	bool DocumentoCancelado {get; set; }
 	byte[] Logotipo { get; set; }
 
 	void Imprimir(string xmlcontent);
@@ -57,11 +59,6 @@ ACBr.Net.Sat - https://github.com/ACBrNet/ACBr.Net.Sat
 DFe.Net - https://github.com/ZeusAutomacao/DFe.NET
 
 ----
-
-
-Exemplo de impressão (SAT)
----
-![](https://user-images.githubusercontent.com/15945003/81335501-19b82900-907e-11ea-907a-065ba23e3897.jpeg)
 
 
 A licença do projeto é MIT, o seu uso é livre.
