@@ -10,7 +10,7 @@ O projeto conta com um DEMO construído em WinForms para facilitar o entendiment
 
 Exemplo de uso:
 ```
-using (var _printer = new SatPrinter()) //ou bew NFCePrinter();
+using (var _printer = new SatPrinter()) //ou new NFCePrinter();
 {
 	_printer.TipoImpressora = PrinterType.Epson; //Ou bematech para bemapos
 	_printer.NomeImpressora = "Nome da impressora";
@@ -21,9 +21,6 @@ using (var _printer = new SatPrinter()) //ou bew NFCePrinter();
 	_printer.Imprimir(string_com_o_conteudo_do_xml);
 }
 ```
-
-
-
 
 
 Implementando um novo tipo documento:
