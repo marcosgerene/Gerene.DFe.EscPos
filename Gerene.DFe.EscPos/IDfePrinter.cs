@@ -1,4 +1,5 @@
-﻿using Vip.Printer.Enums;
+﻿using System;
+using Vip.Printer.Enums;
 
 namespace Gerene.DFe.EscPos
 {

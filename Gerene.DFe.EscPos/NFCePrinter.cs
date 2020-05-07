@@ -1,28 +1,58 @@
-﻿using NFe.Classes;
+﻿using DFe.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Vip.Printer;
 using Vip.Printer.Enums;
+
 using NotaFiscal = NFe.Classes.nfeProc;
+
+
 
 namespace Gerene.DFe.EscPos
 {
     public sealed class NFCePrinter : IDfePrinter
     {
+        public NFCePrinter()
+        {
+            _NFCe = new NotaFiscal();
+        }
+
         #region IDfe
         public string NomeImpressora { get; set; }
-        public PrinterType TipoImpressora { get; set; }        
+        public PrinterType TipoImpressora { get; set; }
+                
+        private Printer _Printer { get; set; }
+        private NotaFiscal _NFCe { get; set; }
 
         public void Imprimir(string xmlcontent)
         {
-            throw new NotImplementedException();
+            _NFCe = FuncoesXml.XmlStringParaClasse<NotaFiscal>(xmlcontent);
+
+
+            _Printer = new Printer(NomeImpressora, TipoImpressora);
+
+            _Printer.AlignCenter();
+
+
         }
+
         #endregion
 
         #region IDisposable
         public void Dispose()
         {
+            if (_NFCe != null)
+            {
+                _NFCe = null;
+            }
+
+            if (_Printer != null)
+            {
+                _Printer.Clear();
+                _Printer = null;
+            }
         }
         #endregion
     }
