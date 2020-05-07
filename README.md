@@ -56,7 +56,7 @@ Vip.Printer - https://github.com/leandrovip/Vip.Printer
 
 ACBr.Net.Sat - https://github.com/ACBrNet/ACBr.Net.Sat
 
-DFe.Net - https://github.com/ZeusAutomacao/DFe.NET
+DFeBR.Net - https://github.com/dfebr/dfebr-net
 
 ----
 
