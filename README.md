@@ -53,5 +53,11 @@ DFe.Net - https://github.com/ZeusAutomacao/DFe.NET
 
 ----
 
+
+Exemplo de impressão (SAT)
+---
+![](https://user-images.githubusercontent.com/15945003/81335501-19b82900-907e-11ea-907a-065ba23e3897.jpeg)
+
+
 A licença do projeto é MIT, o seu uso é livre.
 Não garantimos QUALQUER suporte.
