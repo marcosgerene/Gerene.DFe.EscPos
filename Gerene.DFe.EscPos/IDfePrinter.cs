@@ -7,6 +7,7 @@ namespace Gerene.DFe.EscPos
     {
         string NomeImpressora { get; set; }
         PrinterType TipoImpressora { get; set; }
+        bool CortarPapel { get; set; }
 
         void Imprimir(string xmlcontent);
     }

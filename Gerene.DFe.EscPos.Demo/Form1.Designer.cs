@@ -39,6 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.BtnImprimir = new System.Windows.Forms.Button();
             this.ComboImpressoras = new System.Windows.Forms.ComboBox();
+            this.ChbCortar = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -135,7 +136,7 @@
             // 
             this.BtnImprimir.FlatAppearance.BorderSize = 0;
             this.BtnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnImprimir.Location = new System.Drawing.Point(288, 125);
+            this.BtnImprimir.Location = new System.Drawing.Point(12, 182);
             this.BtnImprimir.Name = "BtnImprimir";
             this.BtnImprimir.Size = new System.Drawing.Size(118, 36);
             this.BtnImprimir.TabIndex = 22;
@@ -152,11 +153,25 @@
             this.ComboImpressoras.Size = new System.Drawing.Size(351, 24);
             this.ComboImpressoras.TabIndex = 23;
             // 
+            // ChbCortar
+            // 
+            this.ChbCortar.AutoSize = true;
+            this.ChbCortar.Checked = true;
+            this.ChbCortar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChbCortar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChbCortar.Location = new System.Drawing.Point(294, 138);
+            this.ChbCortar.Name = "ChbCortar";
+            this.ChbCortar.Size = new System.Drawing.Size(69, 20);
+            this.ChbCortar.TabIndex = 24;
+            this.ChbCortar.Text = "Cortar";
+            this.ChbCortar.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 172);
+            this.ClientSize = new System.Drawing.Size(418, 230);
+            this.Controls.Add(this.ChbCortar);
             this.Controls.Add(this.ComboImpressoras);
             this.Controls.Add(this.BtnImprimir);
             this.Controls.Add(this.ComboTipoImpressora);
@@ -188,6 +203,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button BtnImprimir;
         private System.Windows.Forms.ComboBox ComboImpressoras;
+        private System.Windows.Forms.CheckBox ChbCortar;
     }
 }
 

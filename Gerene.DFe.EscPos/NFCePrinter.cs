@@ -21,6 +21,7 @@ namespace Gerene.DFe.EscPos
 
         #region IDfe
         public string NomeImpressora { get; set; }
+        public bool CortarPapel { get; set; }
         public PrinterType TipoImpressora { get; set; }
                 
         private Printer _Printer { get; set; }

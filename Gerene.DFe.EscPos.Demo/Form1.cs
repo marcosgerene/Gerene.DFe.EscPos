@@ -85,7 +85,7 @@ namespace Gerene.DFe.EscPos.Demo
                 if (!File.Exists(TextArquivoXml.Text))
                     throw new ArgumentException("Arquivo xml não encontrado");
 
-                if (string.IsNullOrEmpty(ComboImpressoras.Text.Trim()))
+                if (ComboImpressoras.Text.IsNull())
                     throw new ArgumentException("Nenhuma impressora preenchida");
 
                 string xml = File.ReadAllText(TextArquivoXml.Text, Encoding.UTF8);
@@ -104,6 +104,7 @@ namespace Gerene.DFe.EscPos.Demo
 
                 _printer.TipoImpressora = (PrinterType)ComboTipoImpressora.SelectedItem;
                 _printer.NomeImpressora = ComboImpressoras.Text;
+                _printer.CortarPapel = ChbCortar.Checked;
 
                 _printer.Imprimir(xml);
             }
