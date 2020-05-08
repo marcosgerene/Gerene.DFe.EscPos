@@ -26,7 +26,8 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter();
 }
 ```
 O projeto é construído em .Net Standard 2.0.
-O demo está em .Net Framework 4.6.2
+
+O projeto conta com dois demos um em .Net Framework 4.6.2 e outro em .Net 3.1
 
 
 Implementando um novo tipo documento:
