@@ -51,11 +51,11 @@ namespace Gerene.DFe.EscPos
             #region Dados do Emitente
             _Printer.AlignCenter();
             _Printer.BoldMode(PrinterModeState.On);
-            _Printer.Append(_CFe.InfCFe.Emit.XFant.RemoveAccent());
+            _Printer.Append(_CFe.InfCFe.Emit.XFant.LimitarString(_Printer.ColsNomal).RemoveAccent());
 
             _Printer.AlignLeft();
             _Printer.BoldMode(PrinterModeState.Off);
-            _Printer.Append(_CFe.InfCFe.Emit.XNome.RemoveAccent());
+            _Printer.Append(_CFe.InfCFe.Emit.XNome.LimitarString(_Printer.ColsNomal).RemoveAccent());
 
             _Printer.CondensedMode(PrinterModeState.On);
             _Printer.Append(GereneHelpers.TextoEsquerda_Direita($"Cnpj: {_CFe.InfCFe.Emit.CNPJ.FormatoCpfCnpj()}", $"I.E.: {_CFe.InfCFe.Emit.IE}", _Printer.ColsCondensed));
@@ -109,7 +109,7 @@ namespace Gerene.DFe.EscPos
                             _CFe.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFe.InfCFe.Dest.CNPJ.FormatoCpfCnpj() :
                             "000.000.000-00");
             _Printer.AppendWithoutLf("Razao Social/Nome: ");
-            _Printer.Append(_CFe.InfCFe.Dest?.Nome ?? "CONSUMIDOR");
+            _Printer.Append((_CFe.InfCFe.Dest?.Nome ?? "CONSUMIDOR").LimitarString(_Printer.ColsCondensed));
             _Printer.CondensedMode(PrinterModeState.Off);
             #endregion
 
@@ -182,7 +182,7 @@ namespace Gerene.DFe.EscPos
             _Printer.CondensedMode(PrinterModeState.On);
 
             foreach (var _pagto in _CFe.InfCFe.Pagto.Pagamentos)
-                _Printer.Append(GereneHelpers.TextoEsquerda_Direita(_pagto.CMp.GetDescription(), _pagto.VMp.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita(_pagto.CMp.GetDescription().RemoveAccent(), _pagto.VMp.ToString("C2", _Cultura), _Printer.ColsCondensed));
 
             _Printer.CondensedMode(PrinterModeState.Off);
 
@@ -255,11 +255,9 @@ namespace Gerene.DFe.EscPos
 
             _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _CFe.InfCFe.Total.VCFeLei12741.ToString("C2", _Cultura), _Printer.ColsCondensed));
             _Printer.Append("(Conforme Lei Fed. 12.741/2012)");
-
-            _Printer.NewLine();
-
             _Printer.CondensedMode(PrinterModeState.Off);
 
+            _Printer.Separator();
             #endregion
 
             #region Número do extrato

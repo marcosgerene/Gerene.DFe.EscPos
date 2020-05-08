@@ -50,11 +50,11 @@ namespace Gerene.DFe.EscPos
             #region Dados do Emitente
             _Printer.AlignCenter();
             _Printer.BoldMode(PrinterModeState.On);
-            _Printer.Append(_NFCe.NFe.infNFe.emit.xFant.RemoverAcentos());
+            _Printer.Append(_NFCe.NFe.infNFe.emit.xFant.LimitarString(_Printer.ColsNomal).RemoverAcentos());
 
             _Printer.AlignLeft();
             _Printer.BoldMode(PrinterModeState.Off);
-            _Printer.Append(_NFCe.NFe.infNFe.emit.xNome.RemoverAcentos());
+            _Printer.Append(_NFCe.NFe.infNFe.emit.xNome.LimitarString(_Printer.ColsNomal).RemoverAcentos());
 
             _Printer.CondensedMode(PrinterModeState.On);
             _Printer.Append(GereneHelpers.TextoEsquerda_Direita($"Cnpj: {_NFCe.NFe.infNFe.emit.CNPJ.FormatoCpfCnpj()}", $"I.E.: {_NFCe.NFe.infNFe.emit.IE}", _Printer.ColsCondensed));
@@ -71,13 +71,10 @@ namespace Gerene.DFe.EscPos
 
             #region DANFE e Via
             _Printer.AlignCenter();
-            _Printer.CondensedMode(PrinterModeState.On);
             _Printer.BoldMode("DANFE NFC-e");
+            _Printer.CondensedMode(PrinterModeState.On);
             _Printer.BoldMode("Documento Auxiliar da Nota Fiscal de Consumidor Eletronica");
-            _Printer.NewLine();
-            _Printer.Append(NomeDaVia);
             _Printer.CondensedMode(PrinterModeState.Off);
-            _Printer.NewLine();
             #endregion
 
             #region Homologação
@@ -178,18 +175,25 @@ namespace Gerene.DFe.EscPos
             #region Pagamentos
             _Printer.AlignLeft();
 
+            bool imprimiutroco = false;
             foreach (var _pagto in _NFCe.NFe.infNFe.pag)
             {
                 _Printer.CondensedMode(PrinterModeState.On);
 
                 foreach (var _detpagto in _pagto.detPag)
-                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita(_detpagto.tPag.Descricao(), _detpagto.vPag.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita(_detpagto.tPag.Descricao().RemoverAcentos(), _detpagto.vPag.ToString("C2", _Cultura), _Printer.ColsCondensed));
 
                 _Printer.CondensedMode(PrinterModeState.Off);
 
                 if (_pagto.vTroco.HasValue && _pagto.vTroco.Value > 0)
+                {
+                    imprimiutroco = true;
                     _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Troco:", _pagto.vTroco.Value.ToString("C2", _Cultura), _Printer.ColsNomal));
+                }
             }
+
+            if (!imprimiutroco)
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Troco:", 0.ToString("C2", _Cultura), _Printer.ColsNomal));
 
             _Printer.NewLine();
             #endregion
@@ -263,35 +267,6 @@ namespace Gerene.DFe.EscPos
             _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.ToString("C2", _Cultura), _Printer.ColsCondensed));
             _Printer.Append("(Conforme Lei Fed. 12.741/2012)");
 
-            _Printer.NewLine();
-
-            _Printer.CondensedMode(PrinterModeState.Off);
-
-            #endregion
-
-            #region Número e série do documento
-            _Printer.Separator(); 
-            _Printer.AlignCenter();
-            _Printer.BoldMode(PrinterModeState.On);
-            _Printer.Append($"No.: {_NFCe.NFe.infNFe.ide.nNF:D9} Série: {_NFCe.NFe.infNFe.ide.serie:D3}");
-            _Printer.Append($"Emissão: {_NFCe.NFe.infNFe.ide.dhEmi:dd/MM/yyyy HH:mm:ss}");
-            _Printer.BoldMode(PrinterModeState.Off);
-            _Printer.Separator();
-            #endregion
-
-            #region Chave de Acesso
-            _Printer.CondensedMode(PrinterModeState.On);
-
-            _Printer.AlignCenter();
-
-            _Printer.Append("Consulte pela chave de acesso em:");
-            _Printer.Append(_NFCe.NFe.infNFeSupl.urlChave);
-
-            _Printer.Append("Chave de Acesso");
-            _Printer.BoldMode(Regex.Replace(_NFCe.NFe.infNFe.Id.OnlyNumber(), ".{4}", "$0 "));
-
-            _Printer.NewLine();
-
             _Printer.CondensedMode(PrinterModeState.Off);
             #endregion
 
@@ -306,7 +281,7 @@ namespace Gerene.DFe.EscPos
                                 _NFCe.NFe.infNFe.dest?.CNPJ.IsNotNull() == true ? _NFCe.NFe.infNFe.dest.CNPJ.FormatoCpfCnpj() :
                                 "000.000.000-00");
                 _Printer.AppendWithoutLf("Razao Social/Nome: ");
-                _Printer.Append(_NFCe.NFe.infNFe.dest?.xNome ?? "CONSUMIDOR");
+                _Printer.Append((_NFCe.NFe.infNFe.dest?.xNome ?? "CONSUMIDOR").LimitarString(_Printer.ColsCondensed));
                 _Printer.CondensedMode(PrinterModeState.Off);
             }
             else
@@ -319,6 +294,31 @@ namespace Gerene.DFe.EscPos
             }
             _Printer.Separator();
             #endregion
+
+            #region Número e série do documento
+            _Printer.AlignCenter();
+            _Printer.BoldMode(PrinterModeState.On);
+            _Printer.Append($"No.: {_NFCe.NFe.infNFe.ide.nNF:D9} Serie: {_NFCe.NFe.infNFe.ide.serie:D3}");
+            _Printer.Append($"Emissão: {_NFCe.NFe.infNFe.ide.dhEmi:dd/MM/yyyy HH:mm:ss}");
+            _Printer.BoldMode(PrinterModeState.Off);
+            _Printer.Append(NomeDaVia);
+
+            _Printer.Separator();
+            #endregion
+
+            #region Chave de Acesso
+            _Printer.CondensedMode(PrinterModeState.On);
+
+            _Printer.AlignCenter();
+
+            _Printer.Append("Consulte pela chave de acesso em:");
+            _Printer.Append(_NFCe.NFe.infNFeSupl.urlChave);
+
+            _Printer.Append("Chave de Acesso");
+            _Printer.BoldMode(Regex.Replace(_NFCe.NFe.infNFe.Id.OnlyNumber(), ".{4}", "$0 "));
+
+            _Printer.CondensedMode(PrinterModeState.Off);
+            #endregion   
 
             #region QrCode
             if (_NFCe.NFe.infNFeSupl != null && _NFCe.NFe.infNFeSupl.qrCode.IsNotNull())
@@ -338,7 +338,7 @@ namespace Gerene.DFe.EscPos
             _Printer.AlignCenter();
             _Printer.CondensedMode(PrinterModeState.On);
 
-            _Printer.Append("Protocolo de autorização");
+            _Printer.Append("Protocolo de autorizacao");
             _Printer.Append($"{_NFCe.protNFe.infProt.First().nProt} {_NFCe.protNFe.infProt.First().dhRecbto:@dd/MM/yyyy HH:mm:ss}");
 
             _Printer.CondensedMode(PrinterModeState.Off);
