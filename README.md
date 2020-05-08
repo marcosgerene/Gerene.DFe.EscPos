@@ -9,7 +9,7 @@ Atualmente a biblioteca atende os documentos SAT e NFCe.
 Funcionamento:
 ----
 
-O projeto conta com um DEMO construído em WinForms para facilitar o entendimento.
+O projeto é construído em .Net Standard 2.0 e conta com dois demos (.Net Framework 4.6.2 e .Net Core 3.1).
 
 Exemplo de uso:
 ```
@@ -25,8 +25,6 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter();
 	_printer.Imprimir(string_com_o_conteudo_do_xml);
 }
 ```
-O projeto é construído em .Net Standard 2.0.
-O demo está em .Net Framework 4.6.2
 
 
 Implementando um novo tipo documento:
@@ -52,11 +50,11 @@ public interface IDfePrinter : IDisposable
 Dependências:
 ----
 
-Vip.Printer - https://github.com/leandrovip/Vip.Printer
+Vip.Printer (motor de impressão) - https://github.com/leandrovip/Vip.Printer
 
-ACBr.Net.Sat - https://github.com/ACBrNet/ACBr.Net.Sat
+ACBr.Net.Sat (desserialização do xml do SAT) - https://github.com/ACBrNet/ACBr.Net.Sat
 
-DFeBR.Net - https://github.com/dfebr/dfebr-net
+DFeBR.Net (desserialização do xml da NFCe) - https://github.com/dfebr/dfebr-net
 
 ----
 
