@@ -50,11 +50,11 @@ public interface IDfePrinter : IDisposable
 Dependências:
 ----
 
-Vip.Printer - https://github.com/leandrovip/Vip.Printer
+Vip.Printer (motor de impressão) - https://github.com/leandrovip/Vip.Printer
 
-ACBr.Net.Sat - https://github.com/ACBrNet/ACBr.Net.Sat
+ACBr.Net.Sat (desserialização do xml do SAT) - https://github.com/ACBrNet/ACBr.Net.Sat
 
-DFeBR.Net - https://github.com/dfebr/dfebr-net
+DFeBR.Net (desserialização do xml da NFCe) - https://github.com/dfebr/dfebr-net
 
 ----
 
