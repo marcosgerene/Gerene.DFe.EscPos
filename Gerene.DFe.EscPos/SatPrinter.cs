@@ -95,7 +95,7 @@ namespace Gerene.DFe.EscPos
                 _Printer.Separator();
                 _Printer.AlignCenter();
                 _Printer.BoldMode(PrinterModeState.On);
-                _Printer.Append("***DOCUMENTO CANCELADO ***");
+                _Printer.Append("*** DOCUMENTO CANCELADO ***");
                 _Printer.BoldMode(PrinterModeState.Off);
                 _Printer.Separator();
             }
@@ -142,7 +142,7 @@ namespace Gerene.DFe.EscPos
                 _Printer.Append(GereneHelpers.TextoEsquerda_Direita(textoE, textoR, _Printer.ColsCondensed));
                 
                 if (ProdutoDuasLinhas)
-                    _Printer.Append(det.Prod.XProd);
+                    _Printer.Append(det.Prod.XProd.LimitarString(_Printer.ColsCondensed));
 
                 if (det.Prod.VOutro > 0)
                     _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", det.Prod.VDesc.ToString("C2", _Cultura), _Printer.ColsCondensed));

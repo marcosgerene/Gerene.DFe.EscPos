@@ -70,9 +70,11 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region DANFE e Via
-            _Printer.AlignLeft();
+            _Printer.AlignCenter();
             _Printer.CondensedMode(PrinterModeState.On);
-            _Printer.BoldMode("DANFE NFC-e - Documento Auxiliar da Nota Fiscal de Consumidor Eletronica");
+            _Printer.BoldMode("DANFE NFC-e");
+            _Printer.BoldMode("Documento Auxiliar da Nota Fiscal de Consumidor Eletronica");
+            _Printer.NewLine();
             _Printer.Append(NomeDaVia);
             _Printer.CondensedMode(PrinterModeState.Off);
             _Printer.NewLine();
@@ -86,7 +88,6 @@ namespace Gerene.DFe.EscPos
                 _Printer.BoldMode(PrinterModeState.On);
                 _Printer.Append("AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL");
                 _Printer.BoldMode(PrinterModeState.Off);
-                _Printer.Separator();
             }
             #endregion
 
@@ -96,9 +97,8 @@ namespace Gerene.DFe.EscPos
                 _Printer.Separator();
                 _Printer.AlignCenter();
                 _Printer.BoldMode(PrinterModeState.On);
-                _Printer.Append("***DOCUMENTO CANCELADO ***");
+                _Printer.Append("*** DOCUMENTO CANCELADO ***");
                 _Printer.BoldMode(PrinterModeState.Off);
-                _Printer.Separator();
             }
             #endregion
 
@@ -131,7 +131,7 @@ namespace Gerene.DFe.EscPos
                 _Printer.Append(GereneHelpers.TextoEsquerda_Direita(textoE, textoR, _Printer.ColsCondensed));
 
                 if (ProdutoDuasLinhas)
-                    _Printer.Append(det.prod.xProd);
+                    _Printer.Append(det.prod.xProd.LimitarString(_Printer.ColsCondensed));
 
                 if (det.prod.vOutro.HasValue && det.prod.vOutro.Value > 0)
                     _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", det.prod.vOutro.Value.ToString("C2", _Cultura), _Printer.ColsCondensed));
@@ -273,7 +273,8 @@ namespace Gerene.DFe.EscPos
             _Printer.Separator(); 
             _Printer.AlignCenter();
             _Printer.BoldMode(PrinterModeState.On);
-            _Printer.Append($"No.: {_NFCe.NFe.infNFe.ide.nNF:D9} Série: {_NFCe.NFe.infNFe.ide.serie:D3} Emissão: {_NFCe.NFe.infNFe.ide.dhEmi:@dd/MM/yyyy HH:mm:ss}");
+            _Printer.Append($"No.: {_NFCe.NFe.infNFe.ide.nNF:D9} Série: {_NFCe.NFe.infNFe.ide.serie:D3}");
+            _Printer.Append($"Emissão: {_NFCe.NFe.infNFe.ide.dhEmi:dd/MM/yyyy HH:mm:ss}");
             _Printer.BoldMode(PrinterModeState.Off);
             _Printer.Separator();
             #endregion
@@ -312,7 +313,7 @@ namespace Gerene.DFe.EscPos
             {
                 _Printer.AlignLeft();
                 _Printer.CondensedMode(PrinterModeState.On);
-                _Printer.BoldMode("CONSUMIDOR NÃO IDENTIFICADO");
+                _Printer.BoldMode("CONSUMIDOR NAO IDENTIFICADO");
                 _Printer.CondensedMode(PrinterModeState.Off);
 
             }

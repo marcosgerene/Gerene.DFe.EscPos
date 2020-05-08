@@ -102,6 +102,13 @@ namespace Gerene.DFe.EscPos
             return  textoE_new + textoR;
         }
 
+        public static string LimitarString(this string txt, int length)
+        {
+            if (txt.Length < length)
+                return txt;
+
+            return txt.Substring(0, length);
+        }
 
         #endregion
     }
