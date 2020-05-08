@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <Company>Gerene Sistemas de Informação</Company>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/marcosgerene/Gerene.DFe.EscPos</PackageProjectUrl>
@@ -11,8 +11,8 @@
 
   <ItemGroup>
     <PackageReference Include="ACBr.Net.Sat" Version="1.2.7.1" />
-    <PackageReference Include="DFeBR.EmissorNFe" Version="0.0.1" />
     <PackageReference Include="Vip.Printer" Version="1.0.13" />
+    <PackageReference Include="Zeus.Net.NFe.NFCe" Version="1.0.1.1007" />
   </ItemGroup>
 
   <ItemGroup>

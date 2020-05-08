@@ -1,11 +1,13 @@
-﻿using DFeBR.EmissorNFe.Utilidade;
+﻿using DFe.Classes.Flags;
+using DFe.Utils;
+using Shared.DFe.Utils;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Vip.Printer;
 using Vip.Printer.Enums;
 
-using NotaFiscal = DFeBR.EmissorNFe.Dominio.NotaFiscalEletronica.nfeProc;
+using NotaFiscal = NFe.Classes.nfeProc;
 
 
 namespace Gerene.DFe.EscPos
@@ -34,7 +36,7 @@ namespace Gerene.DFe.EscPos
 
         public void Imprimir(string xmlcontent)
         {
-            _NFCe = Utils.ConverterXMLParaClasse<NotaFiscal>(xmlcontent);
+            _NFCe = new NotaFiscal().CarregarDeXmlString(xmlcontent);
 
             _Printer = new Printer(NomeImpressora, TipoImpressora);
 
@@ -78,7 +80,7 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Homologação
-            if (_NFCe.NFe.infNFe.ide.tpAmb == DFeBR.EmissorNFe.Utilidade.Tipos.TipoAmbiente.Homologacao)
+            if (_NFCe.NFe.infNFe.ide.tpAmb == TipoAmbiente.Homologacao)
             {
                 _Printer.Separator();
                 _Printer.AlignCenter();
@@ -339,7 +341,7 @@ namespace Gerene.DFe.EscPos
             _Printer.CondensedMode(PrinterModeState.On);
 
             _Printer.Append("Protocolo de autorizacao");
-            _Printer.Append($"{_NFCe.protNFe.infProt.First().nProt} {_NFCe.protNFe.infProt.First().dhRecbto:@dd/MM/yyyy HH:mm:ss}");
+            _Printer.Append($"{_NFCe.protNFe.infProt.nProt} {_NFCe.protNFe.infProt.dhRecbto:@dd/MM/yyyy HH:mm:ss}");
 
             _Printer.CondensedMode(PrinterModeState.Off);
             #endregion
