@@ -9,7 +9,7 @@ Atualmente a biblioteca atende os documentos SAT e NFCe.
 Funcionamento:
 ----
 
-O projeto conta com um DEMO construído em WinForms para facilitar o entendimento.
+O projeto é construído em .Net Standard 2.0 e conta com dois demos (.Net Framework 4.6.2 e .Net Core 3.1).
 
 Exemplo de uso:
 ```
@@ -25,9 +25,6 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter();
 	_printer.Imprimir(string_com_o_conteudo_do_xml);
 }
 ```
-O projeto é construído em .Net Standard 2.0.
-
-O projeto conta com dois demos um em .Net Framework 4.6.2 e outro em .Net 3.1
 
 
 Implementando um novo tipo documento:
