@@ -33,21 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ACBr.Net.Core, Version=1.2.4.1, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
-      <HintPath>..\packages\ACBr.Net.Core.1.2.4.1\lib\net452\ACBr.Net.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="ACBr.Net.DFe.Core, Version=1.2.7.1, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
-      <HintPath>..\packages\ACBr.Net.DFe.Core.1.2.7.1\lib\net452\ACBr.Net.DFe.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="ACBr.Net.Integrador, Version=1.2.0.6, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
-      <HintPath>..\packages\ACBr.Net.Integrador.1.2.0.6\lib\net452\ACBr.Net.Integrador.dll</HintPath>
-    </Reference>
-    <Reference Include="ACBr.Net.Sat, Version=1.2.7.1, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
-      <HintPath>..\packages\ACBr.Net.Sat.1.2.7.1\lib\net452\ACBr.Net.Sat.dll</HintPath>
-    </Reference>
-    <Reference Include="DFeBR.EmissorNFe, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DFeBR.EmissorNFe.0.0.1\lib\netstandard2.0\DFeBR.EmissorNFe.dll</HintPath>
-    </Reference>
     <Reference Include="NetBarcode, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NetBarcode.1.0.7\lib\netstandard2.0\NetBarcode.dll</HintPath>
     </Reference>
