@@ -114,12 +114,11 @@ namespace Gerene.DFe.EscPos
             _Printer.CondensedMode(PrinterModeState.On);
             foreach (var det in _NFCe.NFe.infNFe.det)
             {
-                string textoE = string.Empty;
-
                 string codProd = det.prod.cProd;
                 if (UsarBarrasComoCodigo)
                     codProd = $"{(UsarBarrasComoCodigo && det.prod.cEAN.IsNotNull() ? det.prod.cEAN : det.prod.cProd).PadRight(13)}";
 
+                string textoE;
                 if (ProdutoDuasLinhas)
                     textoE = $"{ det.nItem:D3} | {codProd}";
                 else

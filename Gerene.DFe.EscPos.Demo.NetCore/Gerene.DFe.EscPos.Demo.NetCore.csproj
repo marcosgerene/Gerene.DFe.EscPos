@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Vip.Printer" Version="1.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Gerene.DFe.EscPos\Gerene.DFe.EscPos.csproj" />
   </ItemGroup>
 
