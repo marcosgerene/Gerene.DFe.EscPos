@@ -18,7 +18,8 @@ namespace Gerene.DFe.EscPos.Demo
         private enum ModeloDFe
         {
             NFCe,
-            SAT
+            SAT,
+            CancelamentoSat
         }
 
         public Form1()
@@ -96,6 +97,7 @@ namespace Gerene.DFe.EscPos.Demo
                         _printer = new NFCePrinter();
                         break;
                     case ModeloDFe.SAT:
+                    case ModeloDFe.CancelamentoSat:
                         _printer = new SatPrinter();
                         break;
                     default:
@@ -109,7 +111,10 @@ namespace Gerene.DFe.EscPos.Demo
                 _printer.UsarBarrasComoCodigo = ChbBarrasCodigo.Checked;
                 _printer.DocumentoCancelado = ChbDocumentoCancelado.Checked;
 
-                _printer.Imprimir(xml);
+                if ((ModeloDFe)ComboModeloDFe.SelectedItem == ModeloDFe.CancelamentoSat)
+                    (_printer as SatPrinter).ImprimirCancelamento(xml);
+                else
+                    _printer.Imprimir(xml);
             }
             catch (Exception ex)
             {
@@ -121,7 +126,6 @@ namespace Gerene.DFe.EscPos.Demo
                     _printer.Dispose();
             }
         }
-
 
     }
 }

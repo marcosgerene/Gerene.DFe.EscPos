@@ -32,6 +32,7 @@ namespace Gerene.DFe.EscPos
         private Printer _Printer { get; set; }
         private ACBrSat _ACBrSat { get; set; }
         private CFe _CFe { get; set; }
+        private CFeCanc _CFeCanc { get; set; }
 
         public void Imprimir(string xmlcontent)
         {
@@ -128,7 +129,7 @@ namespace Gerene.DFe.EscPos
             {
                 string textoE = string.Empty;
 
-                string codProd = det.Prod.CProd;                
+                string codProd = det.Prod.CProd;
                 if (UsarBarrasComoCodigo)
                     codProd = $"{(UsarBarrasComoCodigo && det.Prod.CEAN.IsNotNull() ? det.Prod.CEAN : det.Prod.CProd).PadRight(13)}";
 
@@ -140,7 +141,7 @@ namespace Gerene.DFe.EscPos
                 string textoR = $"{det.Prod.QCom:N3} {det.Prod.UCom} x {det.Prod.VUnCom:N2} = {det.Prod.VItem:N2}";
 
                 _Printer.Append(GereneHelpers.TextoEsquerda_Direita(textoE, textoR, _Printer.ColsCondensed));
-                
+
                 if (ProdutoDuasLinhas)
                     _Printer.Append(det.Prod.XProd.LimitarString(_Printer.ColsCondensed));
 
@@ -309,7 +310,162 @@ namespace Gerene.DFe.EscPos
             _Printer.PrintDocument();
         }
 
-        #endregion
+        public void ImprimirCancelamento(string xmlContent)
+        {
+            _CFeCanc = CFeCanc.Load(new MemoryStream(Encoding.UTF8.GetBytes(xmlContent)), Encoding.UTF8);
+
+            _Printer = new Printer(NomeImpressora, TipoImpressora);
+
+            #region Logotipo
+            if (Logotipo != null)
+            {
+                //Impressão do logotipo ainda não implementada
+            }
+            #endregion
+
+            #region Dados do Emitente
+            _Printer.AlignCenter();
+            _Printer.BoldMode(PrinterModeState.On);
+            _Printer.Append((_CFeCanc.InfCFe.Emit.XFant.IsNotNull() ? _CFeCanc.InfCFe.Emit.XFant : _CFeCanc.InfCFe.Emit.XNome).LimitarString(_Printer.ColsNomal).RemoveAccent());
+
+            _Printer.AlignLeft();
+            _Printer.BoldMode(PrinterModeState.Off);
+            _Printer.Append(_CFeCanc.InfCFe.Emit.XNome.LimitarString(_Printer.ColsNomal).RemoveAccent());
+
+            _Printer.CondensedMode(PrinterModeState.On);
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita($"Cnpj: {_CFeCanc.InfCFe.Emit.CNPJ.FormatoCpfCnpj()}", $"I.E.: {_CFeCanc.InfCFe.Emit.IE}", _Printer.ColsCondensed));
+
+            _Printer.AppendWithoutLf("End.: ");
+            _Printer.Append($"{_CFeCanc.InfCFe.Emit.EnderEmit.XLgr.RemoveAccent()},{_CFeCanc.InfCFe.Emit.EnderEmit.Nro.RemoveAccent()} {_CFeCanc.InfCFe.Emit.EnderEmit.XCpl.RemoveAccent()}");
+
+            _Printer.AppendWithoutLf("Bairro: ");
+            _Printer.Append($"{_CFeCanc.InfCFe.Emit.EnderEmit.XBairro.RemoveAccent()} - {_CFeCanc.InfCFe.Emit.EnderEmit.XMun.RemoveAccent()} - {_CFeCanc.InfCFe.Emit.EnderEmit.CEP.FormatoCep()}");
+
+            _Printer.CondensedMode(PrinterModeState.Off);
+            _Printer.Separator();
+            #endregion
+
+            #region Número do extrato
+            _Printer.AlignCenter();
+            _Printer.BoldMode(PrinterModeState.On);
+            _Printer.Append($"Extrato No. {_CFeCanc.InfCFe.Ide.NCFe:D6}");
+            _Printer.Append($"CUPOM FISCAL ELETRONICO SAT");
+            _Printer.Append($"CANCELAMENTO");
+            _Printer.BoldMode(PrinterModeState.Off);
+            #endregion
+
+            #region Homologação
+            /*
+             * if (_CFeCanc.InfCFe.Ide.TpAmb == ACBr.Net.DFe.Core.Common.DFeTipoAmbiente.Homologacao)
+            {
+                _Printer.Separator();
+                _Printer.AlignCenter();
+                _Printer.BoldMode(PrinterModeState.On);
+                _Printer.Append("AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL");
+                _Printer.BoldMode(PrinterModeState.Off);
+                _Printer.Separator();
+            }
+            */
+            #endregion
+
+            #region Dados do cupom cancelado
+            _Printer.Separator();
+
+            _Printer.AlignLeft();
+            _Printer.BoldMode("DADOS DO CUPOM FISCAL ELETRONICO CANCELADO");
+
+            _Printer.CondensedMode(PrinterModeState.On);
+
+            _Printer.AppendWithoutLf("CPF/CNPJ do Consumidor: ");
+            _Printer.Append(_CFeCanc.InfCFe.Dest?.CPF.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CPF.FormatoCpfCnpj() :
+                            _CFeCanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CNPJ.FormatoCpfCnpj() :
+                            "000.000.000-00");
+            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor total:", _CFeCanc.InfCFe.Total.VCFe.ToString("C2", _Cultura), _Printer.ColsCondensed));
+
+            _Printer.NewLine();
+
+            _Printer.CondensedMode(PrinterModeState.Off);
+            
+            _Printer.AlignCenter();
+            _Printer.Append($"SAT No. {_CFeCanc.InfCFe.Ide.NSerieSAT:D9}");
+            _Printer.Append($"Data e Hora {_CFeCanc.InfCFe.Ide.DEmi:dd/MM/yyyy} {_CFeCanc.InfCFe.Ide.HEmi:HH:mm:ss}");
+            _Printer.AlignLeft();
+
+            _Printer.CondensedMode(PrinterModeState.On);
+            #region Chave de Acesso
+            _Printer.NewLine();
+            _Printer.AlignCenter();
+            _Printer.BoldMode(Regex.Replace(_CFeCanc.InfCFe.ChCanc.OnlyNumber(), ".{4}", "$0 "));
+
+            _Printer.Code128(_CFeCanc.InfCFe.ChCanc.OnlyNumber().Substring(0, 22));
+            _Printer.Code128(_CFeCanc.InfCFe.ChCanc.OnlyNumber().Substring(22));
+
+            _Printer.NewLine();
+            #endregion
+
+            _Printer.CondensedMode(PrinterModeState.Off);
+
+            #region QrCode
+            _Printer.AlignCenter();
+            string _qrCode = $"{_CFeCanc.InfCFe.ChCanc.OnlyNumber()}|" +
+                             $"{_CFeCanc.InfCFe.Ide.DhEmissao:yyyyMMddHHmmss}|" +
+                             $"{_CFeCanc.InfCFe.Ide.DhEmissao:0.00}|" +
+                             $"{(_CFeCanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CNPJ : _CFeCanc.InfCFe.Dest.CPF)}|" +
+                             $"{_CFeCanc.InfCFe.Ide.AssinaturaQrcode}";
+
+            _Printer.QrCode(_qrCode, QrCodeSize.Size1);
+
+            _Printer.NewLine();
+            #endregion
+
+            #endregion
+
+            #region Dados do cupom cancelado
+            _Printer.Separator();
+
+            _Printer.AlignLeft();
+            _Printer.BoldMode("DADOS DO CUPOM FISCAL ELETRONICO DE CANCELAMENTO");
+
+            _Printer.AlignCenter();
+            _Printer.Append($"SAT No. {_CFeCanc.InfCFe.Ide.NSerieSAT:D9}");
+            _Printer.Append($"Data e Hora {_CFeCanc.InfCFe.Ide.DEmi:dd/MM/yyyy} {_CFeCanc.InfCFe.Ide.HEmi:HH:mm:ss}");
+
+            #region Chave de Acesso            
+            _Printer.AlignCenter();
+            _Printer.CondensedMode(PrinterModeState.On);
+            _Printer.BoldMode(Regex.Replace(_CFeCanc.InfCFe.Id.OnlyNumber(), ".{4}", "$0 "));
+
+            _Printer.Code128(_CFeCanc.InfCFe.Id.OnlyNumber().Substring(0, 22));
+            _Printer.Code128(_CFeCanc.InfCFe.Id.OnlyNumber().Substring(22));
+
+            _Printer.NewLine();
+            #endregion
+
+            _Printer.CondensedMode(PrinterModeState.Off);
+
+            #region QrCode
+            _Printer.AlignCenter();
+            string _qrCodeCancel = $"{_CFeCanc.InfCFe.Id.OnlyNumber()}|" +
+                             $"{_CFeCanc.InfCFe.Ide.DhEmissao:yyyyMMddHHmmss}|" +
+                             $"{_CFeCanc.InfCFe.Total.VCFe:0.00}|" +
+                             $"{(_CFeCanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CNPJ : _CFeCanc.InfCFe.Dest.CPF)}|" +
+                             $"{_CFeCanc.InfCFe.Ide.AssinaturaQrcode}";
+
+            _Printer.QrCode(_qrCode, QrCodeSize.Size1);
+
+            _Printer.NewLine();
+            #endregion
+
+            #endregion
+
+            _Printer.Separator();
+            #endregion
+
+            if (CortarPapel)
+                _Printer.PartialPaperCut();
+
+            _Printer.PrintDocument();
+        }
 
         #region IDisposable
         public void Dispose()
@@ -323,6 +479,11 @@ namespace Gerene.DFe.EscPos
             if (_CFe != null)
             {
                 _CFe = null;
+            }
+
+            if (_CFeCanc != null)
+            {
+                _CFeCanc = null;
             }
 
             if (_Printer != null)
