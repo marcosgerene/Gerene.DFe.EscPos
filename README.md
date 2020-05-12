@@ -54,7 +54,7 @@ Vip.Printer (motor de impressão) - https://github.com/leandrovip/Vip.Printer
 
 ACBr.Net.Sat (desserialização do xml do SAT) - https://github.com/ACBrNet/ACBr.Net.Sat
 
-DFeBR.Net (desserialização do xml da NFCe) - https://github.com/dfebr/dfebr-net
+DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DFe.NET
 
 ----
 
