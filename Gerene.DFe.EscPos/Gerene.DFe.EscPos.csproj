@@ -5,13 +5,13 @@
     <Company>Gerene Sistemas de Informação</Company>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/marcosgerene/Gerene.DFe.EscPos</PackageProjectUrl>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <PackageLicenseExpression></PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="ACBr.Net.Sat" Version="1.2.7.1" />
-    <PackageReference Include="Vip.Printer" Version="1.0.14" />
+    <PackageReference Include="Vip.Printer" Version="1.0.15" />
     <PackageReference Include="Zeus.Net.NFe.NFCe" Version="1.0.1.1007" />
   </ItemGroup>
 
