@@ -158,6 +158,8 @@ namespace Gerene.DFe.EscPos
             _Printer.BoldMode(PrinterModeState.On);
             _Printer.CondensedMode(PrinterModeState.On);
 
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Qtde. total de itens:", _CFe.InfCFe.Det.Count.ToString("N0", _Cultura), _Printer.ColsCondensed));
+
             _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Subtotal:", _CFe.InfCFe.Total.ICMSTot.VProd.ToString("C2", _Cultura), _Printer.ColsCondensed));
 
             if (_CFe.InfCFe.Total.ICMSTot.VOutro > 0)
