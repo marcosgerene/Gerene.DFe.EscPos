@@ -5,7 +5,7 @@
     <Company>Gerene Sistemas de Informação</Company>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/marcosgerene/Gerene.DFe.EscPos</PackageProjectUrl>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <PackageLicenseExpression></PackageLicenseExpression>
   </PropertyGroup>
 
