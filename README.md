@@ -2,7 +2,7 @@
 
 [![Nuget count](http://img.shields.io/nuget/v/Gerene.DFe.EscPos.svg)](https://www.nuget.org/packages/Gerene.DFe.EscPos)
 
-Impressão em ESC/POS e BemaPOS para DFes
+Impressão em EscPos, EscBema e EscDaruma para DFes
 
 Atualmente a biblioteca atende os documentos SAT e NFCe.
 
@@ -13,19 +13,21 @@ O projeto é construído em .Net Standard 2.0 e conta com dois demos (.Net Frame
 
 Exemplo de uso:
 ```
-using (var _printer = new SatPrinter()) //ou new NFCePrinter();
+using (var _printer = new SatPrinter()) //ou new NFCePrinter() para NFCe
 {
-	_printer.TipoImpressora = PrinterType.Epson; //Ou bematech para bemapos
+	_printer.TipoImpressora = PrinterType.Epson; //Epson para EscPos / Bematech para EscBema / Daruma para EscDaruma
 	_printer.NomeImpressora = "Nome da impressora";
 	_printer.CortarPapel = true;
 	_printer.ProdutoDuasLinhas = false;
 	_printer.UsarBarrasComoCodigo = false;
-	_printer.DocumentoCancelado = false;
+	_printer.DocumentoCancelado = false; //Exibe tarja "Documento cancelado na impressão"	
 
-	_printer.Imprimir(string_com_o_conteudo_do_xml);
+	_printer.Imprimir(string_com_o_conteudo_do_xml); //Imprime o documento fiscal
+	
+	// para impressão específica do XML de cancelamento de SAT CF-e use:
+        //_printer.ImprimirCancelamento(string_com_o_conteudo_do_xml_de_cancelamento);
 }
 ```
-
 
 Implementando um novo tipo documento:
 ----
