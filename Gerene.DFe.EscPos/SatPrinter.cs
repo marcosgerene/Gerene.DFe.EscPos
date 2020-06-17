@@ -24,10 +24,9 @@ namespace Gerene.DFe.EscPos
         public bool CortarPapel { get; set; }
         public bool ProdutoDuasLinhas { get; set; }
         public bool UsarBarrasComoCodigo { get; set; }
-        public bool DocumentoCancelado { get; set; }
+        public bool DocumentoCancelado { get; set; }       
         public byte[] Logotipo { get; set; }
-
-        private CultureInfo _Cultura => new CultureInfo("pt-Br");
+        public CultureInfo Cultura { get; set; } = new CultureInfo("pt-Br");
 
         private Printer _Printer { get; set; }
         private ACBrSat _ACBrSat { get; set; }
@@ -146,10 +145,10 @@ namespace Gerene.DFe.EscPos
                     _Printer.Append(det.Prod.XProd.LimitarString(_Printer.ColsCondensed));
 
                 if (det.Prod.VOutro > 0)
-                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", det.Prod.VDesc.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", det.Prod.VDesc.ToString("C2", Cultura), _Printer.ColsCondensed));
 
                 if (det.Prod.VDesc > 0)
-                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", det.Prod.VDesc.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", det.Prod.VDesc.ToString("C2", Cultura), _Printer.ColsCondensed));
             }
             _Printer.CondensedMode(PrinterModeState.Off);
             _Printer.Separator();
@@ -158,20 +157,20 @@ namespace Gerene.DFe.EscPos
             _Printer.BoldMode(PrinterModeState.On);
             _Printer.CondensedMode(PrinterModeState.On);
 
-            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Qtde. total de itens:", _CFe.InfCFe.Det.Count.ToString("N0", _Cultura), _Printer.ColsCondensed));
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Qtde. total de itens:", _CFe.InfCFe.Det.Count.ToString("N0", Cultura), _Printer.ColsCondensed));
 
-            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Subtotal:", _CFe.InfCFe.Total.ICMSTot.VProd.ToString("C2", _Cultura), _Printer.ColsCondensed));
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Subtotal:", _CFe.InfCFe.Total.ICMSTot.VProd.ToString("C2", Cultura), _Printer.ColsCondensed));
 
             if (_CFe.InfCFe.Total.ICMSTot.VOutro > 0)
-                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", _CFe.InfCFe.Total.ICMSTot.VOutro.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", _CFe.InfCFe.Total.ICMSTot.VOutro.ToString("C2", Cultura), _Printer.ColsCondensed));
 
             if (_CFe.InfCFe.Total.ICMSTot.VDesc > 0)
-                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", _CFe.InfCFe.Total.ICMSTot.VDesc.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", _CFe.InfCFe.Total.ICMSTot.VDesc.ToString("C2", Cultura), _Printer.ColsCondensed));
 
             _Printer.CondensedMode(PrinterModeState.Off);
 
 
-            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor TOTAL:", _CFe.InfCFe.Total.VCFe.ToString("C2", _Cultura), _Printer.ColsNomal));
+            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor TOTAL:", _CFe.InfCFe.Total.VCFe.ToString("C2", Cultura), _Printer.ColsNomal));
 
             _Printer.BoldMode(PrinterModeState.Off);
             #endregion
@@ -185,11 +184,11 @@ namespace Gerene.DFe.EscPos
             _Printer.CondensedMode(PrinterModeState.On);
 
             foreach (var _pagto in _CFe.InfCFe.Pagto.Pagamentos)
-                _Printer.Append(GereneHelpers.TextoEsquerda_Direita(_pagto.CMp.GetDescription().RemoveAccent(), _pagto.VMp.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita(_pagto.CMp.GetDescription().RemoveAccent(), _pagto.VMp.ToString("C2", Cultura), _Printer.ColsCondensed));
 
             _Printer.CondensedMode(PrinterModeState.Off);
 
-            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Troco:", _CFe.InfCFe.Pagto.VTroco.ToString("C2", _Cultura), _Printer.ColsNomal));
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Troco:", _CFe.InfCFe.Pagto.VTroco.ToString("C2", Cultura), _Printer.ColsNomal));
             _Printer.NewLine();
             #endregion
 
@@ -256,7 +255,7 @@ namespace Gerene.DFe.EscPos
             _Printer.BoldMode(PrinterModeState.Off);
             _Printer.CondensedMode(PrinterModeState.On);
 
-            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _CFe.InfCFe.Total.VCFeLei12741.ToString("C2", _Cultura), _Printer.ColsCondensed));
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _CFe.InfCFe.Total.VCFeLei12741.ToString("C2", Cultura), _Printer.ColsCondensed));
             _Printer.Append("(Conforme Lei Fed. 12.741/2012)");
             _Printer.CondensedMode(PrinterModeState.Off);
 
@@ -382,7 +381,7 @@ namespace Gerene.DFe.EscPos
             _Printer.Append(_CFeCanc.InfCFe.Dest?.CPF.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CPF.FormatoCpfCnpj() :
                             _CFeCanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CNPJ.FormatoCpfCnpj() :
                             "000.000.000-00");
-            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor total:", _CFeCanc.InfCFe.Total.VCFe.ToString("C2", _Cultura), _Printer.ColsCondensed));
+            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor total:", _CFeCanc.InfCFe.Total.VCFe.ToString("C2", Cultura), _Printer.ColsCondensed));
 
             _Printer.NewLine();
 

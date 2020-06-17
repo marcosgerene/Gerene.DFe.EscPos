@@ -1,5 +1,6 @@
 ﻿using DFe.Classes.Flags;
 using DFe.Utils;
+using NFe.Utils.NFe;
 using Shared.DFe.Utils;
 using System.Globalization;
 using System.Linq;
@@ -8,7 +9,6 @@ using Vip.Printer;
 using Vip.Printer.Enums;
 
 using NotaFiscal = NFe.Classes.nfeProc;
-
 
 namespace Gerene.DFe.EscPos
 {
@@ -29,14 +29,30 @@ namespace Gerene.DFe.EscPos
         public bool DocumentoCancelado { get; set; }
         public string NomeDaVia { get; set; }
         public byte[] Logotipo { get; set; }
+        public CultureInfo Cultura { get; set; } = new CultureInfo("pt-Br");
 
-        private CultureInfo _Cultura => new CultureInfo("pt-Br");
         private Printer _Printer { get; set; }
         private NotaFiscal _NFCe { get; set; }
 
         public void Imprimir(string xmlcontent)
         {
-            _NFCe = new NotaFiscal().CarregarDeXmlString(xmlcontent);
+            bool isOffline = false;
+
+            //Fora do estado de SP pode haver a impressão de NFCe offline, ou seja, sem a tag NFeProc
+            if (xmlcontent.ToLower().Contains("<nfeproc"))
+                _NFCe = new NotaFiscal().CarregarDeXmlString(xmlcontent);
+            else
+            {
+                _NFCe = new NotaFiscal()
+                {
+                    NFe = new NFe.Classes.NFe().CarregarDeXmlString(xmlcontent),
+                    protNFe = new NFe.Classes.Protocolo.protNFe()
+                };
+
+                _NFCe.versao = _NFCe.NFe.infNFe.versao;
+
+                isOffline = true;
+            }
 
             _Printer = new Printer(NomeImpressora, TipoImpressora);
 
@@ -77,6 +93,15 @@ namespace Gerene.DFe.EscPos
             _Printer.CondensedMode(PrinterModeState.On);
             _Printer.BoldMode("Documento Auxiliar da Nota Fiscal de Consumidor Eletronica");
             _Printer.CondensedMode(PrinterModeState.Off);
+            #endregion
+
+            #region Impressão Offline
+            if (isOffline)
+            {
+                _Printer.Separator();
+                _Printer.AlignCenter();
+                _Printer.BoldMode("*** DOCUMENTO EMITIDO OFFLINE ***");
+            }
             #endregion
 
             #region Homologação
@@ -132,10 +157,10 @@ namespace Gerene.DFe.EscPos
                     _Printer.Append(det.prod.xProd.LimitarString(_Printer.ColsCondensed));
 
                 if (det.prod.vOutro.HasValue && det.prod.vOutro.Value > 0)
-                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", det.prod.vOutro.Value.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", det.prod.vOutro.Value.ToString("C2", Cultura), _Printer.ColsCondensed));
 
                 if (det.prod.vDesc.HasValue && det.prod.vDesc.Value > 0)
-                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", det.prod.vDesc.Value.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", det.prod.vDesc.Value.ToString("C2", Cultura), _Printer.ColsCondensed));
             }
             _Printer.CondensedMode(PrinterModeState.Off);
             _Printer.Separator();
@@ -144,29 +169,29 @@ namespace Gerene.DFe.EscPos
             _Printer.BoldMode(PrinterModeState.On);
             _Printer.CondensedMode(PrinterModeState.On);
 
-            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Qtde. total de itens:", _NFCe.NFe.infNFe.det.Count.ToString("N0", _Cultura), _Printer.ColsCondensed));
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Qtde. total de itens:", _NFCe.NFe.infNFe.det.Count.ToString("N0", Cultura), _Printer.ColsCondensed));
 
-            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Subtotal:", _NFCe.NFe.infNFe.total.ICMSTot.vProd.ToString("C2", _Cultura), _Printer.ColsCondensed));
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Subtotal:", _NFCe.NFe.infNFe.total.ICMSTot.vProd.ToString("C2", Cultura), _Printer.ColsCondensed));
 
             if (_NFCe.NFe.infNFe.total.ICMSTot.vOutro > 0)
-                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", _NFCe.NFe.infNFe.total.ICMSTot.vOutro.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", _NFCe.NFe.infNFe.total.ICMSTot.vOutro.ToString("C2", Cultura), _Printer.ColsCondensed));
 
             if (_NFCe.NFe.infNFe.total.ICMSTot.vDesc > 0)
-                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", _NFCe.NFe.infNFe.total.ICMSTot.vDesc.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", _NFCe.NFe.infNFe.total.ICMSTot.vDesc.ToString("C2", Cultura), _Printer.ColsCondensed));
 
             if (_NFCe.NFe.infNFe.total.ICMSTot.vFrete > 0)
-                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Frete:", _NFCe.NFe.infNFe.total.ICMSTot.vFrete.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Frete:", _NFCe.NFe.infNFe.total.ICMSTot.vFrete.ToString("C2", Cultura), _Printer.ColsCondensed));
 
             if (_NFCe.NFe.infNFe.total.ICMSTot.vSeg > 0)
-                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Seguro:", _NFCe.NFe.infNFe.total.ICMSTot.vSeg.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Seguro:", _NFCe.NFe.infNFe.total.ICMSTot.vSeg.ToString("C2", Cultura), _Printer.ColsCondensed));
 
             if (_NFCe.NFe.infNFe.total.ICMSTot.vDesc > 0)
-                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", _NFCe.NFe.infNFe.total.ICMSTot.vDesc.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Descontos:", _NFCe.NFe.infNFe.total.ICMSTot.vDesc.ToString("C2", Cultura), _Printer.ColsCondensed));
 
 
             _Printer.CondensedMode(PrinterModeState.Off);
 
-            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor TOTAL:", _NFCe.NFe.infNFe.total.ICMSTot.vNF.ToString("C2", _Cultura), _Printer.ColsNomal));
+            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor TOTAL:", _NFCe.NFe.infNFe.total.ICMSTot.vNF.ToString("C2", Cultura), _Printer.ColsNomal));
 
             _Printer.BoldMode(PrinterModeState.Off);
             #endregion
@@ -184,19 +209,19 @@ namespace Gerene.DFe.EscPos
                 _Printer.CondensedMode(PrinterModeState.On);
 
                 foreach (var _detpagto in _pagto.detPag)
-                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita(_detpagto.tPag.Descricao().RemoverAcentos(), _detpagto.vPag.ToString("C2", _Cultura), _Printer.ColsCondensed));
+                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita(_detpagto.tPag.Descricao().RemoverAcentos(), _detpagto.vPag.ToString("C2", Cultura), _Printer.ColsCondensed));
 
                 _Printer.CondensedMode(PrinterModeState.Off);
 
                 if (_pagto.vTroco.HasValue && _pagto.vTroco.Value > 0)
                 {
                     imprimiutroco = true;
-                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Troco:", _pagto.vTroco.Value.ToString("C2", _Cultura), _Printer.ColsNomal));
+                    _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Troco:", _pagto.vTroco.Value.ToString("C2", Cultura), _Printer.ColsNomal));
                 }
             }
 
             if (!imprimiutroco)
-                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Troco:", 0.ToString("C2", _Cultura), _Printer.ColsNomal));
+                _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Troco:", 0.ToString("C2", Cultura), _Printer.ColsNomal));
 
             _Printer.NewLine();
             #endregion
@@ -267,7 +292,7 @@ namespace Gerene.DFe.EscPos
             _Printer.BoldMode(PrinterModeState.Off);
             _Printer.CondensedMode(PrinterModeState.On);
 
-            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.ToString("C2", _Cultura), _Printer.ColsCondensed));
+            _Printer.Append(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.ToString("C2", Cultura), _Printer.ColsCondensed));
             _Printer.Append("(Conforme Lei Fed. 12.741/2012)");
 
             _Printer.CondensedMode(PrinterModeState.Off);

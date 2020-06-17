@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gerene.DFe.EscPos", "Gerene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerene.DFe.EscPos.Demo", "Gerene.DFe.EscPos.Demo\Gerene.DFe.EscPos.Demo.csproj", "{0D1DB199-4101-47A7-A9F5-A4E1F0300236}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerene.DFe.EscPos.Demo.NetCore", "Gerene.DFe.EscPos.Demo.NetCore\Gerene.DFe.EscPos.Demo.NetCore.csproj", "{6C0AC498-6D10-4DFA-A88A-F66B690D68C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gerene.DFe.EscPos.Demo.NetCore", "Gerene.DFe.EscPos.Demo.NetCore\Gerene.DFe.EscPos.Demo.NetCore.csproj", "{6C0AC498-6D10-4DFA-A88A-F66B690D68C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
