@@ -104,6 +104,9 @@ namespace Gerene.DFe.EscPos.Demo
                         throw new NotImplementedException();
                 }
 
+                if (pictureBox1.Image != null)
+                    _printer.Logotipo = ImageToByteArray(pictureBox1.Image);
+
                 _printer.TipoImpressora = (PrinterType)ComboTipoImpressora.SelectedItem;
                 _printer.NomeImpressora = ComboImpressoras.Text;
                 _printer.CortarPapel = ChbCortar.Checked;
@@ -124,6 +127,36 @@ namespace Gerene.DFe.EscPos.Demo
             {
                 if (_printer != null)
                     _printer.Dispose();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = null;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //https://www.c-sharpcorner.com/UploadFile/mirfan00/uploaddisplay-image-in-picture-box-using-C-Sharp/
+
+            // open file dialog   
+            OpenFileDialog open = new OpenFileDialog();
+            // image filters  
+            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                // display image in picture box  
+                pictureBox1.Image = new Bitmap(open.FileName);
+            }
+        }
+
+        //https://stackoverflow.com/questions/3801275/how-to-convert-image-to-byte-array
+        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, imageIn.RawFormat);
+                return ms.ToArray();
             }
         }
 
