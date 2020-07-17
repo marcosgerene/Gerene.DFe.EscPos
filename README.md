@@ -20,7 +20,8 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter() para NFCe
 	_printer.CortarPapel = true;
 	_printer.ProdutoDuasLinhas = false;
 	_printer.UsarBarrasComoCodigo = false;
-	_printer.DocumentoCancelado = false; //Exibe tarja "Documento cancelado na impressão"	
+	_printer.DocumentoCancelado = false; //Exibe tarja "Documento cancelado na impressão"
+	_printer.Logotipo = logotipo_em_bytes; //Impressão do logotipo, não obrigatório
 
 	_printer.Imprimir(string_com_o_conteudo_do_xml); //Imprime o documento fiscal
 	
