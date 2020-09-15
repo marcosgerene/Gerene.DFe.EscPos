@@ -14,6 +14,10 @@ namespace Gerene.DFe.EscPos
         bool DocumentoCancelado { get; set; }
         byte[] Logotipo { get; set; }
         CultureInfo Cultura { get; set; }
+        /// <summary>
+        /// Informar texto completo, ex: "Desenvolvido por: ABC Sistemas"
+        /// </summary>
+        string Desenvolvedor { get; set; }
 
         void Imprimir(string xmlcontent);
     }

@@ -1,10 +1,12 @@
-﻿using DFe.Classes.Flags;
+﻿using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+using DFe.Classes.Flags;
 using DFe.Utils;
 using NFe.Utils.NFe;
 using Shared.DFe.Utils;
-using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
+
 using Vip.Printer;
 using Vip.Printer.Enums;
 
@@ -30,6 +32,7 @@ namespace Gerene.DFe.EscPos
         public string NomeDaVia { get; set; }
         public byte[] Logotipo { get; set; }
         public CultureInfo Cultura { get; set; } = new CultureInfo("pt-Br");
+        public string Desenvolvedor { get; set; }
 
         private Printer _Printer { get; set; }
         private NotaFiscal _NFCe { get; set; }
@@ -371,6 +374,16 @@ namespace Gerene.DFe.EscPos
             _Printer.WriteLine($"{_NFCe.protNFe.infProt.nProt} {_NFCe.protNFe.infProt.dhRecbto:@dd/MM/yyyy HH:mm:ss}");
 
             _Printer.CondensedMode(PrinterModeState.Off);
+            #endregion
+
+            #region Desenvolvedor
+            if (Desenvolvedor.IsNotNull())
+            {
+                _Printer.AlignRight();
+                _Printer.CondensedMode(PrinterModeState.On);
+                _Printer.CondensedMode(Desenvolvedor);
+                _Printer.CondensedMode(PrinterModeState.Off);
+            }
             #endregion
 
             if (CortarPapel)

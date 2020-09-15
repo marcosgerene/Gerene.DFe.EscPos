@@ -27,6 +27,7 @@ namespace Gerene.DFe.EscPos
         public bool DocumentoCancelado { get; set; }       
         public byte[] Logotipo { get; set; }
         public CultureInfo Cultura { get; set; } = new CultureInfo("pt-Br");
+        public string Desenvolvedor { get; set; }
 
         private Printer _Printer { get; set; }
         private ACBrSat _ACBrSat { get; set; }
@@ -453,7 +454,7 @@ namespace Gerene.DFe.EscPos
                              $"{(_CFeCanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CNPJ : _CFeCanc.InfCFe.Dest.CPF)}|" +
                              $"{_CFeCanc.InfCFe.Ide.AssinaturaQrcode}";
 
-            _Printer.QrCode(_qrCode, QrCodeSize.Size1);
+            _Printer.QrCode(_qrCodeCancel, QrCodeSize.Size1);
 
             _Printer.NewLine();
             #endregion
@@ -461,6 +462,16 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             _Printer.Separator();
+            #endregion
+
+            #region Desenvolvedor
+            if (Desenvolvedor.IsNotNull())
+            {
+                _Printer.AlignRight();
+                _Printer.CondensedMode(PrinterModeState.On);
+                _Printer.CondensedMode(Desenvolvedor);
+                _Printer.CondensedMode(PrinterModeState.Off);
+            }
             #endregion
 
             if (CortarPapel)
