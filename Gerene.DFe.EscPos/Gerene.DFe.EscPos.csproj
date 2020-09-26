@@ -19,7 +19,7 @@ Atualmente a biblioteca atende os documentos SAT e NFCe.</Description>
   <ItemGroup>
     <PackageReference Include="ACBr.Net.Sat" Version="1.2.7.1" />
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
-    <PackageReference Include="Vip.Printer" Version="1.0.17" />
+    <PackageReference Include="Vip.Printer" Version="1.0.19" />
     <PackageReference Include="Zeus.Net.NFe.NFCe" Version="1.0.1.1031" />
   </ItemGroup>
 
