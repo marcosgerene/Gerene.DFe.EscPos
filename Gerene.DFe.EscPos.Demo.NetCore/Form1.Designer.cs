@@ -47,6 +47,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.ComboTipoPapel = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +67,7 @@
             // 
             this.BtnCarregar.FlatAppearance.BorderSize = 0;
             this.BtnCarregar.Location = new System.Drawing.Point(430, 34);
-            this.BtnCarregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnCarregar.Margin = new System.Windows.Forms.Padding(4);
             this.BtnCarregar.Name = "BtnCarregar";
             this.BtnCarregar.Size = new System.Drawing.Size(43, 28);
             this.BtnCarregar.TabIndex = 13;
@@ -77,7 +79,7 @@
             // 
             this.TextArquivoXml.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TextArquivoXml.Location = new System.Drawing.Point(14, 34);
-            this.TextArquivoXml.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TextArquivoXml.Margin = new System.Windows.Forms.Padding(4);
             this.TextArquivoXml.Name = "TextArquivoXml";
             this.TextArquivoXml.Size = new System.Drawing.Size(409, 22);
             this.TextArquivoXml.TabIndex = 12;
@@ -97,7 +99,7 @@
             // 
             this.BtnListarImpressoras.FlatAppearance.BorderSize = 0;
             this.BtnListarImpressoras.Location = new System.Drawing.Point(430, 94);
-            this.BtnListarImpressoras.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnListarImpressoras.Margin = new System.Windows.Forms.Padding(4);
             this.BtnListarImpressoras.Name = "BtnListarImpressoras";
             this.BtnListarImpressoras.Size = new System.Drawing.Size(43, 32);
             this.BtnListarImpressoras.TabIndex = 17;
@@ -122,7 +124,7 @@
             this.ComboModeloDFe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ComboModeloDFe.FormattingEnabled = true;
             this.ComboModeloDFe.Location = new System.Drawing.Point(14, 159);
-            this.ComboModeloDFe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ComboModeloDFe.Margin = new System.Windows.Forms.Padding(4);
             this.ComboModeloDFe.Name = "ComboModeloDFe";
             this.ComboModeloDFe.Size = new System.Drawing.Size(152, 23);
             this.ComboModeloDFe.TabIndex = 19;
@@ -132,8 +134,8 @@
             this.ComboTipoImpressora.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboTipoImpressora.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ComboTipoImpressora.FormattingEnabled = true;
-            this.ComboTipoImpressora.Location = new System.Drawing.Point(179, 159);
-            this.ComboTipoImpressora.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ComboTipoImpressora.Location = new System.Drawing.Point(177, 159);
+            this.ComboTipoImpressora.Margin = new System.Windows.Forms.Padding(4);
             this.ComboTipoImpressora.Name = "ComboTipoImpressora";
             this.ComboTipoImpressora.Size = new System.Drawing.Size(143, 23);
             this.ComboTipoImpressora.TabIndex = 21;
@@ -142,7 +144,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(176, 135);
+            this.label4.Location = new System.Drawing.Point(174, 135);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(125, 16);
@@ -153,8 +155,8 @@
             // 
             this.BtnImprimir.FlatAppearance.BorderSize = 0;
             this.BtnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BtnImprimir.Location = new System.Drawing.Point(336, 135);
-            this.BtnImprimir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnImprimir.Location = new System.Drawing.Point(14, 291);
+            this.BtnImprimir.Margin = new System.Windows.Forms.Padding(4);
             this.BtnImprimir.Name = "BtnImprimir";
             this.BtnImprimir.Size = new System.Drawing.Size(137, 51);
             this.BtnImprimir.TabIndex = 22;
@@ -167,7 +169,7 @@
             this.ComboImpressoras.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ComboImpressoras.FormattingEnabled = true;
             this.ComboImpressoras.Location = new System.Drawing.Point(14, 97);
-            this.ComboImpressoras.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ComboImpressoras.Margin = new System.Windows.Forms.Padding(4);
             this.ComboImpressoras.Name = "ComboImpressoras";
             this.ComboImpressoras.Size = new System.Drawing.Size(409, 24);
             this.ComboImpressoras.TabIndex = 23;
@@ -179,7 +181,7 @@
             this.ChbCortar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChbCortar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ChbCortar.Location = new System.Drawing.Point(14, 193);
-            this.ChbCortar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChbCortar.Margin = new System.Windows.Forms.Padding(4);
             this.ChbCortar.Name = "ChbCortar";
             this.ChbCortar.Size = new System.Drawing.Size(123, 20);
             this.ChbCortar.TabIndex = 24;
@@ -192,8 +194,8 @@
             this.ChbDuasLinhas.Checked = true;
             this.ChbDuasLinhas.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChbDuasLinhas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ChbDuasLinhas.Location = new System.Drawing.Point(14, 221);
-            this.ChbDuasLinhas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChbDuasLinhas.Location = new System.Drawing.Point(14, 215);
+            this.ChbDuasLinhas.Margin = new System.Windows.Forms.Padding(4);
             this.ChbDuasLinhas.Name = "ChbDuasLinhas";
             this.ChbDuasLinhas.Size = new System.Drawing.Size(188, 20);
             this.ChbDuasLinhas.TabIndex = 25;
@@ -204,8 +206,8 @@
             // 
             this.ChbBarrasCodigo.AutoSize = true;
             this.ChbBarrasCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ChbBarrasCodigo.Location = new System.Drawing.Point(14, 247);
-            this.ChbBarrasCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChbBarrasCodigo.Location = new System.Drawing.Point(14, 237);
+            this.ChbBarrasCodigo.Margin = new System.Windows.Forms.Padding(4);
             this.ChbBarrasCodigo.Name = "ChbBarrasCodigo";
             this.ChbBarrasCodigo.Size = new System.Drawing.Size(166, 20);
             this.ChbBarrasCodigo.TabIndex = 26;
@@ -216,8 +218,8 @@
             // 
             this.ChbDocumentoCancelado.AutoSize = true;
             this.ChbDocumentoCancelado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ChbDocumentoCancelado.Location = new System.Drawing.Point(14, 272);
-            this.ChbDocumentoCancelado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChbDocumentoCancelado.Location = new System.Drawing.Point(14, 257);
+            this.ChbDocumentoCancelado.Margin = new System.Windows.Forms.Padding(4);
             this.ChbDocumentoCancelado.Name = "ChbDocumentoCancelado";
             this.ChbDocumentoCancelado.Size = new System.Drawing.Size(181, 20);
             this.ChbDocumentoCancelado.TabIndex = 27;
@@ -229,7 +231,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.Location = new System.Drawing.Point(219, 320);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(112, 22);
             this.button1.TabIndex = 22;
@@ -242,7 +244,7 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button2.Location = new System.Drawing.Point(338, 320);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(112, 22);
             this.button2.TabIndex = 22;
@@ -253,7 +255,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(220, 206);
+            this.pictureBox1.Location = new System.Drawing.Point(212, 206);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(253, 108);
@@ -272,11 +274,35 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Logotipo";
             // 
+            // ComboTipoPapel
+            // 
+            this.ComboTipoPapel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboTipoPapel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ComboTipoPapel.FormattingEnabled = true;
+            this.ComboTipoPapel.Location = new System.Drawing.Point(330, 159);
+            this.ComboTipoPapel.Margin = new System.Windows.Forms.Padding(4);
+            this.ComboTipoPapel.Name = "ComboTipoPapel";
+            this.ComboTipoPapel.Size = new System.Drawing.Size(143, 23);
+            this.ComboTipoPapel.TabIndex = 21;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(327, 135);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 16);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Tipo de Papel";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 352);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.ComboTipoPapel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
@@ -296,7 +322,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnCarregar);
             this.Controls.Add(this.TextArquivoXml);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -326,6 +352,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox ComboTipoPapel;
+        private System.Windows.Forms.Label label6;
     }
 }
 

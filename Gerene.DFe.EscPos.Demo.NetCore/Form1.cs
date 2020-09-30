@@ -4,6 +4,7 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+
 using Vip.Printer.Enums;
 
 namespace Gerene.DFe.EscPos.Demo.NetCore
@@ -31,6 +32,9 @@ namespace Gerene.DFe.EscPos.Demo.NetCore
             //https://stackoverflow.com/questions/906899/binding-an-enum-to-a-winforms-combo-box-and-then-setting-it
             ComboModeloDFe.DataSource = Enum.GetValues(typeof(ModeloDFe));
             ComboTipoImpressora.DataSource = Enum.GetValues(typeof(PrinterType));
+            ComboTipoPapel.DataSource = Enum.GetValues(typeof(TipoPapel));
+
+            ComboTipoPapel.SelectedItem = TipoPapel.Tp80mm;
         }
 
         private void BtnListarImpressoras_Click(object sender, EventArgs e)
@@ -79,7 +83,7 @@ namespace Gerene.DFe.EscPos.Demo.NetCore
 
         private void BtnImprimir_Click(object sender, EventArgs e)
         {
-            IDfePrinter _printer = null;
+            DfePrinter _printer = null;
             try
             {
                 if (!File.Exists(TextArquivoXml.Text))
@@ -112,6 +116,7 @@ namespace Gerene.DFe.EscPos.Demo.NetCore
                 _printer.ProdutoDuasLinhas = ChbDuasLinhas.Checked;
                 _printer.UsarBarrasComoCodigo = ChbBarrasCodigo.Checked;
                 _printer.DocumentoCancelado = ChbDocumentoCancelado.Checked;
+                _printer.TipoPapel = (TipoPapel)ComboTipoPapel.SelectedItem;
 
                 if ((ModeloDFe)ComboModeloDFe.SelectedItem == ModeloDFe.CancelamentoSat)
                     (_printer as SatPrinter).ImprimirCancelamento(xml);

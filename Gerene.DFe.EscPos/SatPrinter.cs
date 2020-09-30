@@ -1,44 +1,61 @@
-﻿using ACBr.Net.Core.Extensions;
-using ACBr.Net.Sat;
-using System.Globalization;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+
+using ACBr.Net.Core.Extensions;
+using ACBr.Net.Sat;
+
 using Vip.Printer;
 using Vip.Printer.Enums;
 
 namespace Gerene.DFe.EscPos
 {
-    public class SatPrinter : IDfePrinter
+    public class SatPrinter : DfePrinter
     {
+        #region Construtor
         public SatPrinter()
         {
             _ACBrSat = new ACBrSat();
             _CFe = new CFe();
+            _CFeCanc = new CFeCanc();
         }
+        #endregion
 
-        #region IDfe
-        public string NomeImpressora { get; set; }
-        public PrinterType TipoImpressora { get; set; }
-        public bool CortarPapel { get; set; }
-        public bool ProdutoDuasLinhas { get; set; }
-        public bool UsarBarrasComoCodigo { get; set; }
-        public bool DocumentoCancelado { get; set; }       
-        public byte[] Logotipo { get; set; }
-        public CultureInfo Cultura { get; set; } = new CultureInfo("pt-Br");
-        public string Desenvolvedor { get; set; }
-
-        private Printer _Printer { get; set; }
+        #region Atributos       
         private ACBrSat _ACBrSat { get; set; }
         private CFe _CFe { get; set; }
         private CFeCanc _CFeCanc { get; set; }
+        #endregion
 
-        public void Imprimir(string xmlcontent)
+        #region IDisposable
+        public override void Dispose()
         {
-            _CFe = CFe.Load(new MemoryStream(Encoding.UTF8.GetBytes(xmlcontent)), Encoding.UTF8);
+            base.Dispose();
 
-            _Printer = new Printer(NomeImpressora, TipoImpressora);
+            if (_ACBrSat != null)
+            {
+                _ACBrSat.Dispose();
+                _ACBrSat = null;
+            }
+
+            if (_CFe != null)
+            {
+                _CFe = null;
+            }
+
+            if (_CFeCanc != null)
+            {
+                _CFeCanc = null;
+            }
+        }
+        #endregion
+
+        public override void Imprimir(string xmlcontent)
+        {
+            base.Imprimir(xmlcontent);
+
+            _CFe = CFe.Load(new MemoryStream(Encoding.UTF8.GetBytes(xmlcontent)), Encoding.UTF8);
 
             #region Cabeçalho
 
@@ -53,14 +70,14 @@ namespace Gerene.DFe.EscPos
             #region Dados do Emitente
             _Printer.AlignCenter();
             _Printer.BoldMode(PrinterModeState.On);
-            _Printer.WriteLine(_CFe.InfCFe.Emit.XFant.LimitarString(_Printer.ColsNomal).RemoveAccent());
+            _Printer.WriteLine(_CFe.InfCFe.Emit.XFant.LimitarString(ColunasNormal).RemoveAccent());
 
             _Printer.AlignLeft();
             _Printer.BoldMode(PrinterModeState.Off);
-            _Printer.WriteLine(_CFe.InfCFe.Emit.XNome.LimitarString(_Printer.ColsNomal).RemoveAccent());
+            _Printer.WriteLine(_CFe.InfCFe.Emit.XNome.LimitarString(ColunasNormal).RemoveAccent());
 
             _Printer.CondensedMode(PrinterModeState.On);
-            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita($"Cnpj: {_CFe.InfCFe.Emit.CNPJ.FormatoCpfCnpj()}", $"I.E.: {_CFe.InfCFe.Emit.IE}", _Printer.ColsCondensed));
+            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita($"Cnpj: {_CFe.InfCFe.Emit.CNPJ.FormatoCpfCnpj()}", $"I.E.: {_CFe.InfCFe.Emit.IE}", ColunasCondensadas));
 
             _Printer.Write("End.: ");
             _Printer.WriteLine($"{_CFe.InfCFe.Emit.EnderEmit.XLgr.RemoveAccent()},{_CFe.InfCFe.Emit.EnderEmit.Nro.RemoveAccent()} {_CFe.InfCFe.Emit.EnderEmit.XCpl.RemoveAccent()}");
@@ -69,7 +86,7 @@ namespace Gerene.DFe.EscPos
             _Printer.WriteLine($"{_CFe.InfCFe.Emit.EnderEmit.XBairro.RemoveAccent()} - {_CFe.InfCFe.Emit.EnderEmit.XMun.RemoveAccent()} - {_CFe.InfCFe.Emit.EnderEmit.CEP.FormatoCep()}");
 
             _Printer.CondensedMode(PrinterModeState.Off);
-            _Printer.Separator();
+            _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
             #endregion
 
             #region Número do extrato
@@ -82,24 +99,24 @@ namespace Gerene.DFe.EscPos
             #region Homologação
             if (_CFe.InfCFe.Ide.TpAmb == ACBr.Net.DFe.Core.Common.DFeTipoAmbiente.Homologacao)
             {
-                _Printer.Separator();
+                _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
                 _Printer.AlignCenter();
                 _Printer.BoldMode(PrinterModeState.On);
                 _Printer.WriteLine("AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL");
                 _Printer.BoldMode(PrinterModeState.Off);
-                _Printer.Separator();
+                _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
             }
             #endregion
 
             #region Documento Cancelado
             if (DocumentoCancelado)
             {
-                _Printer.Separator();
+                _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
                 _Printer.AlignCenter();
                 _Printer.BoldMode(PrinterModeState.On);
                 _Printer.WriteLine("*** DOCUMENTO CANCELADO ***");
                 _Printer.BoldMode(PrinterModeState.Off);
-                _Printer.Separator();
+                _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
             }
             #endregion
 
@@ -111,17 +128,17 @@ namespace Gerene.DFe.EscPos
                             _CFe.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFe.InfCFe.Dest.CNPJ.FormatoCpfCnpj() :
                             "000.000.000-00");
             _Printer.Write("Razao Social/Nome: ");
-            _Printer.WriteLine((_CFe.InfCFe.Dest?.Nome ?? "CONSUMIDOR").LimitarString(_Printer.ColsCondensed));
+            _Printer.WriteLine((_CFe.InfCFe.Dest?.Nome ?? "CONSUMIDOR").LimitarString(ColunasCondensadas));
             _Printer.CondensedMode(PrinterModeState.Off);
             #endregion
 
-            _Printer.Separator();
+            _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
             #endregion
 
             #region Detalhes
             _Printer.AlignCenter();
             _Printer.BoldMode("#|COD|DESC|QTD|UN|VL UN|DESC|VL ITEM");
-            _Printer.Separator();
+            _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
 
             #region Produtos
             _Printer.AlignLeft();
@@ -141,38 +158,38 @@ namespace Gerene.DFe.EscPos
 
                 string textoR = $"{det.Prod.QCom:N3} {det.Prod.UCom} x {det.Prod.VUnCom:N2} = {det.Prod.VItem:N2}";
 
-                _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita(textoE, textoR, _Printer.ColsCondensed));
+                _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita(textoE, textoR, ColunasCondensadas));
 
                 if (ProdutoDuasLinhas)
-                    _Printer.WriteLine(det.Prod.XProd.LimitarString(_Printer.ColsCondensed));
+                    _Printer.WriteLine(det.Prod.XProd.LimitarString(ColunasCondensadas));
 
                 if (det.Prod.VOutro > 0)
-                    _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", det.Prod.VDesc.ToString("C2", Cultura), _Printer.ColsCondensed));
+                    _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", det.Prod.VDesc.ToString("C2", Cultura), ColunasCondensadas));
 
                 if (det.Prod.VDesc > 0)
-                    _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Descontos:", det.Prod.VDesc.ToString("C2", Cultura), _Printer.ColsCondensed));
+                    _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Descontos:", det.Prod.VDesc.ToString("C2", Cultura), ColunasCondensadas));
             }
             _Printer.CondensedMode(PrinterModeState.Off);
-            _Printer.Separator();
+            _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
 
             #region Totais
             _Printer.BoldMode(PrinterModeState.On);
             _Printer.CondensedMode(PrinterModeState.On);
 
-            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Qtde. total de itens:", _CFe.InfCFe.Det.Count.ToString("N0", Cultura), _Printer.ColsCondensed));
+            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Qtde. total de itens:", _CFe.InfCFe.Det.Count.ToString("N0", Cultura), ColunasCondensadas));
 
-            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Subtotal:", _CFe.InfCFe.Total.ICMSTot.VProd.ToString("C2", Cultura), _Printer.ColsCondensed));
+            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Subtotal:", _CFe.InfCFe.Total.ICMSTot.VProd.ToString("C2", Cultura), ColunasCondensadas));
 
             if (_CFe.InfCFe.Total.ICMSTot.VOutro > 0)
-                _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", _CFe.InfCFe.Total.ICMSTot.VOutro.ToString("C2", Cultura), _Printer.ColsCondensed));
+                _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Acrescimos:", _CFe.InfCFe.Total.ICMSTot.VOutro.ToString("C2", Cultura), ColunasCondensadas));
 
             if (_CFe.InfCFe.Total.ICMSTot.VDesc > 0)
-                _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Descontos:", _CFe.InfCFe.Total.ICMSTot.VDesc.ToString("C2", Cultura), _Printer.ColsCondensed));
+                _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Descontos:", _CFe.InfCFe.Total.ICMSTot.VDesc.ToString("C2", Cultura), ColunasCondensadas));
 
             _Printer.CondensedMode(PrinterModeState.Off);
 
 
-            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor TOTAL:", _CFe.InfCFe.Total.VCFe.ToString("C2", Cultura), _Printer.ColsNomal));
+            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor TOTAL:", _CFe.InfCFe.Total.VCFe.ToString("C2", Cultura), ColunasNormal));
 
             _Printer.BoldMode(PrinterModeState.Off);
             #endregion
@@ -186,11 +203,11 @@ namespace Gerene.DFe.EscPos
             _Printer.CondensedMode(PrinterModeState.On);
 
             foreach (var _pagto in _CFe.InfCFe.Pagto.Pagamentos)
-                _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita(_pagto.CMp.GetDescription().RemoveAccent(), _pagto.VMp.ToString("C2", Cultura), _Printer.ColsCondensed));
+                _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita(_pagto.CMp.GetDescription().RemoveAccent(), _pagto.VMp.ToString("C2", Cultura), ColunasCondensadas));
 
             _Printer.CondensedMode(PrinterModeState.Off);
 
-            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Troco:", _CFe.InfCFe.Pagto.VTroco.ToString("C2", Cultura), _Printer.ColsNomal));
+            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Troco:", _CFe.InfCFe.Pagto.VTroco.ToString("C2", Cultura), ColunasNormal));
             _Printer.NewLine();
             #endregion
 
@@ -211,7 +228,7 @@ namespace Gerene.DFe.EscPos
                 _Printer.WriteLine($"{_CFe.InfCFe.Entrega.XBairro.RemoveAccent()} - {_CFe.InfCFe.Entrega.XMun.RemoveAccent()}/{_CFe.InfCFe.Entrega.UF}");
                 _Printer.CondensedMode(PrinterModeState.Off);
 
-                _Printer.Separator();
+                _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
             }
             #endregion
 
@@ -257,11 +274,11 @@ namespace Gerene.DFe.EscPos
             _Printer.BoldMode(PrinterModeState.Off);
             _Printer.CondensedMode(PrinterModeState.On);
 
-            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _CFe.InfCFe.Total.VCFeLei12741.ToString("C2", Cultura), _Printer.ColsCondensed));
+            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _CFe.InfCFe.Total.VCFeLei12741.ToString("C2", Cultura), ColunasCondensadas));
             _Printer.WriteLine("(Conforme Lei Fed. 12.741/2012)");
             _Printer.CondensedMode(PrinterModeState.Off);
 
-            _Printer.Separator();
+            _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
             #endregion
 
             #region Número do extrato
@@ -315,28 +332,29 @@ namespace Gerene.DFe.EscPos
 
         public void ImprimirCancelamento(string xmlContent)
         {
-            _CFeCanc = CFeCanc.Load(new MemoryStream(Encoding.UTF8.GetBytes(xmlContent)), Encoding.UTF8);
+            base.Imprimir(xmlContent);
 
-            _Printer = new Printer(NomeImpressora, TipoImpressora);
+            _CFeCanc = CFeCanc.Load(new MemoryStream(Encoding.UTF8.GetBytes(xmlContent)), Encoding.UTF8);
 
             #region Logotipo
             if (Logotipo != null)
             {
-                //Impressão do logotipo ainda não implementada
+                _Printer.AlignCenter();
+                _Printer.Image(Logotipo);
             }
             #endregion
 
             #region Dados do Emitente
             _Printer.AlignCenter();
             _Printer.BoldMode(PrinterModeState.On);
-            _Printer.WriteLine((_CFeCanc.InfCFe.Emit.XFant.IsNotNull() ? _CFeCanc.InfCFe.Emit.XFant : _CFeCanc.InfCFe.Emit.XNome).LimitarString(_Printer.ColsNomal).RemoveAccent());
+            _Printer.WriteLine((_CFeCanc.InfCFe.Emit.XFant.IsNotNull() ? _CFeCanc.InfCFe.Emit.XFant : _CFeCanc.InfCFe.Emit.XNome).LimitarString(ColunasNormal).RemoveAccent());
 
             _Printer.AlignLeft();
             _Printer.BoldMode(PrinterModeState.Off);
-            _Printer.WriteLine(_CFeCanc.InfCFe.Emit.XNome.LimitarString(_Printer.ColsNomal).RemoveAccent());
+            _Printer.WriteLine(_CFeCanc.InfCFe.Emit.XNome.LimitarString(ColunasNormal).RemoveAccent());
 
             _Printer.CondensedMode(PrinterModeState.On);
-            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita($"Cnpj: {_CFeCanc.InfCFe.Emit.CNPJ.FormatoCpfCnpj()}", $"I.E.: {_CFeCanc.InfCFe.Emit.IE}", _Printer.ColsCondensed));
+            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita($"Cnpj: {_CFeCanc.InfCFe.Emit.CNPJ.FormatoCpfCnpj()}", $"I.E.: {_CFeCanc.InfCFe.Emit.IE}", ColunasCondensadas));
 
             _Printer.Write("End.: ");
             _Printer.WriteLine($"{_CFeCanc.InfCFe.Emit.EnderEmit.XLgr.RemoveAccent()},{_CFeCanc.InfCFe.Emit.EnderEmit.Nro.RemoveAccent()} {_CFeCanc.InfCFe.Emit.EnderEmit.XCpl.RemoveAccent()}");
@@ -345,7 +363,7 @@ namespace Gerene.DFe.EscPos
             _Printer.WriteLine($"{_CFeCanc.InfCFe.Emit.EnderEmit.XBairro.RemoveAccent()} - {_CFeCanc.InfCFe.Emit.EnderEmit.XMun.RemoveAccent()} - {_CFeCanc.InfCFe.Emit.EnderEmit.CEP.FormatoCep()}");
 
             _Printer.CondensedMode(PrinterModeState.Off);
-            _Printer.Separator();
+            _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
             #endregion
 
             #region Número do extrato
@@ -361,18 +379,18 @@ namespace Gerene.DFe.EscPos
             /*
              * if (_CFeCanc.InfCFe.Ide.TpAmb == ACBr.Net.DFe.Core.Common.DFeTipoAmbiente.Homologacao)
             {
-                _Printer.Separator();
+                _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
                 _Printer.AlignCenter();
                 _Printer.BoldMode(PrinterModeState.On);
                 _Printer.WriteLine("AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL");
                 _Printer.BoldMode(PrinterModeState.Off);
-                _Printer.Separator();
+                _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
             }
             */
             #endregion
 
             #region Dados do cupom cancelado
-            _Printer.Separator();
+            _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
 
             _Printer.AlignLeft();
             _Printer.BoldMode("DADOS DO CUPOM FISCAL ELETRONICO CANCELADO");
@@ -383,7 +401,7 @@ namespace Gerene.DFe.EscPos
             _Printer.WriteLine(_CFeCanc.InfCFe.Dest?.CPF.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CPF.FormatoCpfCnpj() :
                             _CFeCanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CNPJ.FormatoCpfCnpj() :
                             "000.000.000-00");
-            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor total:", _CFeCanc.InfCFe.Total.VCFe.ToString("C2", Cultura), _Printer.ColsCondensed));
+            _Printer.BoldMode(GereneHelpers.TextoEsquerda_Direita("Valor total:", _CFeCanc.InfCFe.Total.VCFe.ToString("C2", Cultura), ColunasCondensadas));
 
             _Printer.NewLine();
 
@@ -424,7 +442,7 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Dados do cupom cancelado
-            _Printer.Separator();
+            _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
 
             _Printer.AlignLeft();
             _Printer.BoldMode("DADOS DO CUPOM FISCAL ELETRONICO DE CANCELAMENTO");
@@ -461,8 +479,7 @@ namespace Gerene.DFe.EscPos
 
             #endregion
 
-            _Printer.Separator();
-            #endregion
+            _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));            
 
             #region Desenvolvedor
             if (Desenvolvedor.IsNotNull())
@@ -480,31 +497,5 @@ namespace Gerene.DFe.EscPos
             _Printer.PrintDocument();
         }
 
-        #region IDisposable
-        public void Dispose()
-        {
-            if (_ACBrSat != null)
-            {
-                _ACBrSat.Dispose();
-                _ACBrSat = null;
-            }
-
-            if (_CFe != null)
-            {
-                _CFe = null;
-            }
-
-            if (_CFeCanc != null)
-            {
-                _CFeCanc = null;
-            }
-
-            if (_Printer != null)
-            {
-                _Printer.Clear();
-                _Printer = null;
-            }
-        }
-        #endregion
     }
 }
