@@ -4,7 +4,7 @@
 
 Impressão em EscPos, EscBema e EscDaruma para DFes
 
-Atualmente a biblioteca atende os documentos SAT e NFCe (80 e 50mm).
+Atualmente a biblioteca atende os documentos SAT e NFCe (80 e 58mm).
 
 Funcionamento:
 ----
