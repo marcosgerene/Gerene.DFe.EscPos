@@ -301,7 +301,7 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Observações do Fisco         
-            if (_NFCe.NFe.infNFe.infAdic.obsFisco.Any() || _NFCe.NFe.infNFe.infAdic.infAdFisco.IsNotNull())
+            if (_NFCe.NFe.infNFe.infAdic != null && (_NFCe.NFe.infNFe.infAdic.obsFisco.Any() || _NFCe.NFe.infNFe.infAdic.infAdFisco.IsNotNull()))
             {
                 if (TipoPapel == TipoPapel.Tp80mm)
                     _Printer.AlignLeft();
@@ -334,7 +334,7 @@ namespace Gerene.DFe.EscPos
             _Printer.CondensedMode(PrinterModeState.On);
             _Printer.BoldMode("Observacoes do Contribuinte");
 
-            if (_NFCe.NFe.infNFe.infAdic.infCpl.IsNotNull())
+            if (_NFCe.NFe.infNFe.infAdic != null && _NFCe.NFe.infNFe.infAdic.infCpl.IsNotNull())
                 foreach (var txt in _NFCe.NFe.infNFe.infAdic.infCpl.Split(40))
                     _Printer.WriteLine(txt.RemoverAcentos());
 
@@ -370,6 +370,8 @@ namespace Gerene.DFe.EscPos
                                 _NFCe.NFe.infNFe.dest?.CNPJ.IsNotNull() == true ? _NFCe.NFe.infNFe.dest.CNPJ.FormatoCpfCnpj() :
                                 "000.000.000-00");
                 _Printer.Write("Razao Social/Nome: ");
+
+
                 _Printer.WriteLine((_NFCe.NFe.infNFe.dest?.xNome ?? "CONSUMIDOR").LimitarString(ColunasCondensadas));
                 _Printer.CondensedMode(PrinterModeState.Off);
             }
