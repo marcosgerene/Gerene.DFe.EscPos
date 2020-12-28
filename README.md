@@ -4,7 +4,7 @@
 
 Impressão em EscPos, EscBema e EscDaruma para DFes
 
-Atualmente a biblioteca atende os documentos SAT e NFCe.
+Atualmente a biblioteca atende os documentos SAT e NFCe (80 e 58mm).
 
 Funcionamento:
 ----
@@ -22,6 +22,7 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter() para NFCe
 	_printer.UsarBarrasComoCodigo = false;
 	_printer.DocumentoCancelado = false; //Exibe tarja "Documento cancelado na impressão"
 	_printer.Logotipo = logotipo_em_bytes; //Impressão do logotipo, não obrigatório
+	_printer.TipoPapel = TipoPapel.Tp80mm; //ou TipoPapel.Tp58mm
 
 	_printer.Imprimir(string_com_o_conteudo_do_xml); //Imprime o documento fiscal
 	
@@ -33,22 +34,7 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter() para NFCe
 Implementando um novo tipo documento:
 ----
 
-Para ajudar e implementar um novo tipo de documento basta implementar a interface IDFe
-
-```
-public interface IDfePrinter : IDisposable
-{
-	string NomeImpressora { get; set; }
-	PrinterType TipoImpressora { get; set; }
-	bool CortarPapel { get; set; }
-	bool ProdutoDuasLinhas { get; set; }
-	bool UsarBarrasComoCodigo { get; set; }
-	bool DocumentoCancelado {get; set; }
-	byte[] Logotipo { get; set; }
-
-	void Imprimir(string xmlcontent);
-}
-```
+Para ajudar e implementar um novo tipo de documento basta estender a classe abstrata **DfePrinter**
 
 Dependências:
 ----
@@ -60,6 +46,22 @@ ACBr.Net.Sat (desserialização do xml do SAT) - https://github.com/ACBrNet/ACBr
 DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DFe.NET
 
 ----
+
+Change log:
+----
+
+1.0.9 - Impressão em 58mm
+
+1.0.8 - Adiciona a impressão do logotipo
+
+1.0.7 - Adiciona Qtde. total de itens"
+
+1.0.6 - Impressão para cancelamento do SAT
+
+1.0.0 a 1.0.5 - Ajustes definições de motores terceiros
+
+----
+
 
 
 A licença do projeto é MIT, o seu uso é livre.
