@@ -52,8 +52,8 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Vip.Printer, Version=1.0.19.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vip.Printer.1.0.19\lib\net45\Vip.Printer.dll</HintPath>
+    <Reference Include="Vip.Printer, Version=1.0.21.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vip.Printer.1.0.21\lib\net45\Vip.Printer.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
