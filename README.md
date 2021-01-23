@@ -49,6 +49,7 @@ DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DF
 
 Change log:
 ----
+1.0.10 - Não era possível imprimir NFCe sem a tag infAdic (issue #6)
 
 1.0.9 - Impressão em 58mm
 
