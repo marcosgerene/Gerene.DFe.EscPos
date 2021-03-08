@@ -313,7 +313,7 @@ namespace Gerene.DFe.EscPos
                 {
                     string texto = $"{fisco.xCampo} - {fisco.xTexto}";
 
-                    foreach (var txt in texto.Split(40))
+                    foreach (var txt in texto.WrapText(ColunasCondensadas))
                         _Printer.WriteLine(txt.RemoverAcentos());
                 }
 
@@ -335,7 +335,7 @@ namespace Gerene.DFe.EscPos
             _Printer.BoldMode("Observacoes do Contribuinte");
 
             if (_NFCe.NFe.infNFe.infAdic != null && _NFCe.NFe.infNFe.infAdic.infCpl.IsNotNull())
-                foreach (var txt in _NFCe.NFe.infNFe.infAdic.infCpl.Split(40))
+                foreach (var txt in _NFCe.NFe.infNFe.infAdic.infCpl.WrapText(ColunasCondensadas))
                     _Printer.WriteLine(txt.RemoverAcentos());
 
             _Printer.NewLine();

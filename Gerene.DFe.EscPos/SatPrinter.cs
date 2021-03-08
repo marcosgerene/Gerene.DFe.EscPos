@@ -286,7 +286,7 @@ namespace Gerene.DFe.EscPos
                 {
                     string texto = $"{fisco.XCampo} - {fisco.XTexto}";
 
-                    foreach (var txt in texto.Split(40))
+                    foreach (var txt in texto.WrapText(ColunasCondensadas))
                         _Printer.WriteLine(txt.RemoveAccent());
                 }
 
@@ -305,7 +305,7 @@ namespace Gerene.DFe.EscPos
             _Printer.BoldMode("Observacoes do Contribuinte");
 
             if (!_CFe.InfCFe.InfAdic.InfCpl.IsNull())
-                foreach (var txt in _CFe.InfCFe.InfAdic.InfCpl.Split(40))
+                foreach (var txt in _CFe.InfCFe.InfAdic.InfCpl.WrapText(ColunasCondensadas))
                     _Printer.WriteLine(txt.RemoveAccent());
 
             _Printer.NewLine();

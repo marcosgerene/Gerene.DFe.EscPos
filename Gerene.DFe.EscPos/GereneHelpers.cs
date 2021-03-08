@@ -41,13 +41,20 @@ namespace Gerene.DFe.EscPos
             return result;
         }
 
-        public static IEnumerable<string> Split(this string str, int chunkSize)
+        public static string[] WrapText(this string text, int max)
         {
-            if (str.IsNull())
-                return null;
+            if (string.IsNullOrEmpty(text))
+                return new string[] { text };
 
-            return Enumerable.Range(0, str.Length / chunkSize)
-                .Select(i => str.Substring(i * chunkSize, chunkSize));
+            if (max == 0)
+                return new string[] { text };
+
+            var charCount = 0;
+            var lines = text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            return lines.GroupBy(w => (charCount += (((charCount % max) + w.Length + 1 >= max)
+                            ? max - (charCount % max) : 0) + w.Length + 1) / max)
+                        .Select(g => string.Join(" ", g.ToArray()))
+                        .ToArray();
         }
 
         #region Formatação
