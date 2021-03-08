@@ -5,12 +5,13 @@
     <Company>Gerene Sistemas de Informação</Company>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/marcosgerene/Gerene.DFe.EscPos</PackageProjectUrl>
-    <Version>1.0.12</Version>
+    <Version>1.0.13</Version>
     <PackageLicenseExpression></PackageLicenseExpression>
     <Description>Impressão em EscPos, EscBema e EscDaruma para DFes
 
 Atualmente a biblioteca atende os documentos SAT e NFCe.</Description>
-    <PackageReleaseNotes>1.0.12 - SAT quebrava se o XFant de emitente estivesse nulo
+    <PackageReleaseNotes>1.0.13 - Melhora na impressão da observação do contribuinte
+1.0.12 - SAT quebrava se o XFant de emitente estivesse nulo
 1.0.11 - Opção de ocultar tag "De olho no imposto"
 1.0.10 - Não era possível imprimir sem a tag infAdic (issue #6)
 1.0.9 - Impressão em 58mm
@@ -18,8 +19,8 @@ Atualmente a biblioteca atende os documentos SAT e NFCe.</Description>
 1.0.7 - Adiciona Qtde. total de itens"
 1.0.6 - Impressão para cancelamento do SAT
 1.0.0 a 1.0.5 - Ajustes definições de motores terceiros</PackageReleaseNotes>
-    <AssemblyVersion>1.0.12.0</AssemblyVersion>
-    <FileVersion>1.0.12.0</FileVersion>
+    <AssemblyVersion>1.0.13.0</AssemblyVersion>
+    <FileVersion>1.0.13.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
