@@ -74,7 +74,10 @@ namespace Gerene.DFe.EscPos
                 _Printer.AlignCenter();
 
             _Printer.BoldMode(PrinterModeState.On);
-            _Printer.WriteLine(_CFe.InfCFe.Emit.XFant.LimitarString(ColunasNormal).RemoveAccent());
+            if (_CFe.InfCFe.Emit.XFant.IsNotNull())
+                _Printer.WriteLine(_CFe.InfCFe.Emit.XFant.LimitarString(ColunasNormal).RemoveAccent());
+            else
+                _Printer.WriteLine(_CFe.InfCFe.Emit.XNome.LimitarString(ColunasNormal).RemoveAccent());
 
             if (TipoPapel == TipoPapel.Tp80mm)
                 _Printer.AlignLeft();

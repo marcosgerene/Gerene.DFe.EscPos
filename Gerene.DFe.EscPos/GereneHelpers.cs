@@ -104,6 +104,9 @@ namespace Gerene.DFe.EscPos
 
         public static string LimitarString(this string txt, int length)
         {
+            if (txt.IsNull())
+                return string.Empty;
+
             if (txt.Length < length)
                 return txt;
 
