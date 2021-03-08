@@ -37,6 +37,12 @@ namespace Gerene.DFe.EscPos
         /// </summary>
         public string Desenvolvedor { get; set; }
 
+        /// <summary>
+        /// Alguns softwares mandam a estrutura de olho no imposto nas observações, neste caso,
+        /// essa opção permite ocultar a informação "automatizada" proposta pela biblioteca
+        /// </summary>
+        public bool ImprimirDeOlhoNoImposto { get; set; }
+
         protected int ColunasNormal => TipoPapel == TipoPapel.Tp80mm ? _Printer.ColsNomal : 34;
         protected int ColunasCondensadas => TipoPapel == TipoPapel.Tp80mm ? _Printer.ColsCondensed : 46;
         protected int ColunasExtendida => TipoPapel == TipoPapel.Tp80mm ? _Printer.ColsExpanded : 17;
@@ -52,6 +58,7 @@ namespace Gerene.DFe.EscPos
             DocumentoCancelado = false;
             NomeDaVia = "Via do Consumidor";
             Cultura = new CultureInfo("pt-Br");
+            ImprimirDeOlhoNoImposto = true;
         }
 
         public virtual void Dispose()

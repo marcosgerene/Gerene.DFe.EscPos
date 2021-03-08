@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Vip.Printer" Version="1.0.21" />
+    <PackageReference Include="Vip.Printer" Version="1.0.22" />
   </ItemGroup>
 
   <ItemGroup>

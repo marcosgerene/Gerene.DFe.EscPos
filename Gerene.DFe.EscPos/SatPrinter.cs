@@ -312,17 +312,20 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Tributos
-            if (TipoPapel == TipoPapel.Tp80mm)
-                _Printer.AlignLeft();
+            if (ImprimirDeOlhoNoImposto)
+            {
+                if (TipoPapel == TipoPapel.Tp80mm)
+                    _Printer.AlignLeft();
 
-            _Printer.BoldMode(PrinterModeState.Off);
-            _Printer.CondensedMode(PrinterModeState.On);
+                _Printer.BoldMode(PrinterModeState.Off);
+                _Printer.CondensedMode(PrinterModeState.On);
 
-            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _CFe.InfCFe.Total.VCFeLei12741.ToString("C2", Cultura), ColunasCondensadas));
-            _Printer.WriteLine("(Conforme Lei Fed. 12.741/2012)");
-            _Printer.CondensedMode(PrinterModeState.Off);
+                _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _CFe.InfCFe.Total.VCFeLei12741.ToString("C2", Cultura), ColunasCondensadas));
+                _Printer.WriteLine("(Conforme Lei Fed. 12.741/2012)");
+                _Printer.CondensedMode(PrinterModeState.Off);
 
-            _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
+                _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
+            }
             #endregion
 
             #region Número do extrato

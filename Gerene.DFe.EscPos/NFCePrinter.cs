@@ -345,16 +345,19 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Tributos
-            if (TipoPapel == TipoPapel.Tp80mm)
-                _Printer.AlignLeft();
+            if (ImprimirDeOlhoNoImposto)
+            {
+                if (TipoPapel == TipoPapel.Tp80mm)
+                    _Printer.AlignLeft();
 
-            _Printer.BoldMode(PrinterModeState.Off);
-            _Printer.CondensedMode(PrinterModeState.On);
+                _Printer.BoldMode(PrinterModeState.Off);
+                _Printer.CondensedMode(PrinterModeState.On);
 
-            _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.ToString("C2", Cultura), ColunasCondensadas));
-            _Printer.WriteLine("(Conforme Lei Fed. 12.741/2012)");
+                _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.ToString("C2", Cultura), ColunasCondensadas));
+                _Printer.WriteLine("(Conforme Lei Fed. 12.741/2012)");
 
-            _Printer.CondensedMode(PrinterModeState.Off);
+                _Printer.CondensedMode(PrinterModeState.Off);
+            }
             #endregion
 
             #region Consumidor
