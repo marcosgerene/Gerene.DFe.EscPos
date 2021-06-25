@@ -29,8 +29,9 @@ namespace Gerene.DFe.EscPos
         public TipoPapel TipoPapel { get; set; }
         public bool DocumentoCancelado { get; set; }
         public string NomeDaVia { get; set; }
-        public byte[] Logotipo { get; set; }
+        public byte[] Logotipo { get; set; }        
         public CultureInfo Cultura { get; set; }
+        public int CasasDecimaisQuantidade { get; set; }
 
         /// <summary>
         /// Informar texto completo, ex: "Desenvolvido por: ABC Sistemas"
@@ -59,6 +60,7 @@ namespace Gerene.DFe.EscPos
             NomeDaVia = "Via do Consumidor";
             Cultura = new CultureInfo("pt-Br");
             ImprimirDeOlhoNoImposto = true;
+            CasasDecimaisQuantidade = 3;
         }
 
         public virtual void Dispose()

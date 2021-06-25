@@ -197,7 +197,7 @@ namespace Gerene.DFe.EscPos
                 else
                     textoE = $"{ det.nItem:D3} | {codProd} {det.prod.xProd}";
 
-                string textoR = $"{det.prod.qCom:N3} {det.prod.uCom} x {det.prod.vUnCom:N2} = {det.prod.vProd:N2}";
+                string textoR = $"{det.prod.qCom.ToString($"N{CasasDecimaisQuantidade}")} {det.prod.uCom} x {det.prod.vUnCom:N2} = {det.prod.vProd:N2}";
 
                 _Printer.WriteLine(GereneHelpers.TextoEsquerda_Direita(textoE, textoR, ColunasCondensadas));
 
