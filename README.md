@@ -67,8 +67,6 @@ Change log:
 
 1.0.6 - Impressão para cancelamento do SAT
 
-1.0.0 a 1.0.5 - Ajustes definições de motores terceiros
-
 ----
 
 
