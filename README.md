@@ -41,7 +41,7 @@ Dependências:
 
 Vip.Printer (motor de impressão) - https://github.com/leandrovip/Vip.Printer
 
-ACBr.Net.Sat (desserialização do xml do SAT) - https://github.com/ACBrNet/ACBr.Net.Sat
+OpenAC.Net.Sat (desserialização do xml do SAT) - https://github.com/OpenAC-Net/OpenAC.Net.Sat
 
 DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DFe.NET
 
@@ -49,6 +49,8 @@ DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DF
 
 Change log:
 ----
+1.0.15 - Migrando para OpenAC.Net.Sat
+
 1.0.14 - Opção de alterar casas decimais da quantidade
 
 1.0.13 - Melhora na impressão da observação do contribuinte
