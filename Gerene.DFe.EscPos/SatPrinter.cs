@@ -3,8 +3,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-using ACBr.Net.Core.Extensions;
-using ACBr.Net.Sat;
+using OpenAC.Net.Core.Extensions;
+using OpenAC.Net.Sat;
 
 using Vip.Printer;
 using Vip.Printer.Enums;
@@ -16,14 +16,14 @@ namespace Gerene.DFe.EscPos
         #region Construtor
         public SatPrinter()
         {
-            _ACBrSat = new ACBrSat();
+            _OpenACSat = new OpenSat();
             _CFe = new CFe();
             _CFeCanc = new CFeCanc();
         }
         #endregion
 
         #region Atributos       
-        private ACBrSat _ACBrSat { get; set; }
+        private OpenSat _OpenACSat { get; set; }
         private CFe _CFe { get; set; }
         private CFeCanc _CFeCanc { get; set; }
         #endregion
@@ -33,10 +33,10 @@ namespace Gerene.DFe.EscPos
         {
             base.Dispose();
 
-            if (_ACBrSat != null)
+            if (_OpenACSat != null)
             {
-                _ACBrSat.Dispose();
-                _ACBrSat = null;
+                _OpenACSat.Dispose();
+                _OpenACSat = null;
             }
 
             if (_CFe != null)
@@ -108,7 +108,7 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Homologação
-            if (_CFe.InfCFe.Ide.TpAmb == ACBr.Net.DFe.Core.Common.DFeTipoAmbiente.Homologacao)
+            if (_CFe.InfCFe.Ide.TpAmb == OpenAC.Net.DFe.Core.Common.DFeTipoAmbiente.Homologacao)
             {
                 _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
 
@@ -465,7 +465,7 @@ namespace Gerene.DFe.EscPos
 
             #region Homologação
             /*
-             * if (_CFeCanc.InfCFe.Ide.TpAmb == ACBr.Net.DFe.Core.Common.DFeTipoAmbiente.Homologacao)
+             * if (_CFeCanc.InfCFe.Ide.TpAmb == OpenAC.Net.DFe.Core.Common.DFeTipoAmbiente.Homologacao)
             {
                 _Printer.CondensedMode(string.Empty.PadLeft(ColunasCondensadas, '-'));
                 
