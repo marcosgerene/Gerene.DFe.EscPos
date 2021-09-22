@@ -49,6 +49,8 @@ DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DF
 
 Change log:
 ----
+1.0.14 - Opção de alterar casas decimais da quantidade
+
 1.0.13 - Melhora na impressão da observação do contribuinte
 
 1.0.12 - SAT quebrava se o XFant de emitente estivesse nulo
@@ -64,8 +66,6 @@ Change log:
 1.0.7 - Adiciona Qtde. total de itens"
 
 1.0.6 - Impressão para cancelamento do SAT
-
-1.0.0 a 1.0.5 - Ajustes definições de motores terceiros
 
 ----
 
