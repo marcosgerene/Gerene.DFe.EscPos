@@ -452,7 +452,7 @@ namespace Gerene.DFe.EscPos
             _Printer.CondensedMode(PrinterModeState.On);
 
             _Printer.WriteLine("Protocolo de autorizacao");
-            _Printer.WriteLine($"{_NFCe.protNFe.infProt.nProt} {_NFCe.protNFe.infProt.dhRecbto:@dd/MM/yyyy HH:mm:ss}");
+            _Printer.WriteLine($"{_NFCe.protNFe.infProt.nProt} {_NFCe.protNFe.infProt.dhRecbto:dd/MM/yyyy HH:mm:ss}");
 
             _Printer.CondensedMode(PrinterModeState.Off);
             #endregion
