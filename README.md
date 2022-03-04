@@ -49,6 +49,8 @@ DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DF
 
 Change log:
 ----
+1.0.16 - Remove o @ que aparecia no meio do protocolo no NFCe
+
 1.0.15 - Migrando para OpenAC.Net.Sat
 
 1.0.14 - Opção de alterar casas decimais da quantidade
