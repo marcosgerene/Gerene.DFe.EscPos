@@ -4,12 +4,12 @@
 
 Impressão em EscPos, EscBema e EscDaruma para DFes
 
-Atualmente a biblioteca atende os documentos SAT e NFCe (80 e 58mm).
+Atualmente a biblioteca atende os documentos SAT e NFCe nos formatos 58 e 80mm.
 
 Funcionamento:
 ----
 
-O projeto é construído em .Net Standard 2.0 e conta com dois demos (.Net Framework 4.6.2 e .Net Core 3.1).
+O projeto é construído em .Net Standard 2.0 e conta com dois demos (.Net Framework 4.6.2 e .Net 6).
 
 Exemplo de uso:
 ```
@@ -30,11 +30,6 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter() para NFCe
         //_printer.ImprimirCancelamento(string_com_o_conteudo_do_xml_de_cancelamento);
 }
 ```
-
-Implementando um novo tipo documento:
-----
-
-Para ajudar e implementar um novo tipo de documento basta estender a classe abstrata **DfePrinter**
 
 Dependências:
 ----
