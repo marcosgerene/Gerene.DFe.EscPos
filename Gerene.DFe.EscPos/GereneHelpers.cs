@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Shared.DFe.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Vip.Printer;
 
 namespace Gerene.DFe.EscPos
 {
@@ -57,6 +57,8 @@ namespace Gerene.DFe.EscPos
                         .ToArray();
         }
 
+        internal static bool _RemoverAcento = false;
+        public static string TratarAcento(this string text) => _RemoverAcento ? text.RemoverAcentos() : text;
         #region Formatação
         public static string FormatoCep(this string cep)
         {
@@ -119,7 +121,6 @@ namespace Gerene.DFe.EscPos
 
             return txt.Substring(0, length);
         }
-
         #endregion
     }
 }

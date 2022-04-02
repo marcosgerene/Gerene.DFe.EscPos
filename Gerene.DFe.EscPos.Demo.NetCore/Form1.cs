@@ -1,13 +1,12 @@
-﻿using System;
+﻿using OpenAC.Net.EscPos.Commom;
+using System;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-using Vip.Printer.Enums;
-
-namespace Gerene.DFe.EscPos.Demo.NetCore
+namespace Gerene.DFe.EscPos.Demo.Net6
 {
     public partial class Form1 : Form
     {
@@ -31,7 +30,7 @@ namespace Gerene.DFe.EscPos.Demo.NetCore
 
             //https://stackoverflow.com/questions/906899/binding-an-enum-to-a-winforms-combo-box-and-then-setting-it
             ComboModeloDFe.DataSource = Enum.GetValues(typeof(ModeloDFe));
-            ComboTipoImpressora.DataSource = Enum.GetValues(typeof(PrinterType));
+            ComboProtocolo.DataSource = Enum.GetValues(typeof(ProtocoloEscPos));
             ComboTipoPapel.DataSource = Enum.GetValues(typeof(TipoPapel));
 
             ComboTipoPapel.SelectedItem = TipoPapel.Tp80mm;
@@ -110,13 +109,14 @@ namespace Gerene.DFe.EscPos.Demo.NetCore
                 if (pictureBox1.Image != null)
                     _printer.Logotipo = ImageToByteArray(pictureBox1.Image);
 
-                _printer.TipoImpressora = (PrinterType)ComboTipoImpressora.SelectedItem;
-                _printer.NomeImpressora = ComboImpressoras.Text;
+                _printer.Protocolo = (ProtocoloEscPos)ComboProtocolo.SelectedItem;
+                _printer.Impressora = ComboImpressoras.Text;
                 _printer.CortarPapel = ChbCortar.Checked;
                 _printer.ProdutoDuasLinhas = ChbDuasLinhas.Checked;
                 _printer.UsarBarrasComoCodigo = ChbBarrasCodigo.Checked;
                 _printer.DocumentoCancelado = ChbDocumentoCancelado.Checked;
                 _printer.TipoPapel = (TipoPapel)ComboTipoPapel.SelectedItem;
+                _printer.RemoverAcentos = ChbRemoverAcentos.Checked;
 
                 if ((ModeloDFe)ComboModeloDFe.SelectedItem == ModeloDFe.CancelamentoSat)
                     (_printer as SatPrinter).ImprimirCancelamento(xml);

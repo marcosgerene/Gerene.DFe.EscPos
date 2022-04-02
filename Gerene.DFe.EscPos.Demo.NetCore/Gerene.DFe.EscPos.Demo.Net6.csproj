@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Vip.Printer" Version="1.0.22" />
+    <PackageReference Include="OpenAC.Net.EscPos" Version="1.0.0-beta.8" />
   </ItemGroup>
 
   <ItemGroup>

@@ -35,7 +35,7 @@
             this.BtnListarImpressoras = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.ComboModeloDFe = new System.Windows.Forms.ComboBox();
-            this.ComboTipoImpressora = new System.Windows.Forms.ComboBox();
+            this.ComboProtocolo = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.BtnImprimir = new System.Windows.Forms.Button();
             this.ComboImpressoras = new System.Windows.Forms.ComboBox();
@@ -49,6 +49,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.ComboTipoPapel = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.ChbRemoverAcentos = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(9, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 16);
+            this.label1.Size = new System.Drawing.Size(78, 16);
             this.label1.TabIndex = 14;
             this.label1.Text = "Arquivo Xml";
             // 
@@ -87,7 +88,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(9, 61);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 16);
+            this.label2.Size = new System.Drawing.Size(75, 16);
             this.label2.TabIndex = 16;
             this.label2.Text = "Impressora";
             // 
@@ -108,7 +109,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(9, 117);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 16);
+            this.label3.Size = new System.Drawing.Size(82, 16);
             this.label3.TabIndex = 18;
             this.label3.Text = "Modelo DFe";
             // 
@@ -122,15 +123,15 @@
             this.ComboModeloDFe.Size = new System.Drawing.Size(131, 23);
             this.ComboModeloDFe.TabIndex = 19;
             // 
-            // ComboTipoImpressora
+            // ComboProtocolo
             // 
-            this.ComboTipoImpressora.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboTipoImpressora.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ComboTipoImpressora.FormattingEnabled = true;
-            this.ComboTipoImpressora.Location = new System.Drawing.Point(152, 138);
-            this.ComboTipoImpressora.Name = "ComboTipoImpressora";
-            this.ComboTipoImpressora.Size = new System.Drawing.Size(123, 23);
-            this.ComboTipoImpressora.TabIndex = 21;
+            this.ComboProtocolo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboProtocolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboProtocolo.FormattingEnabled = true;
+            this.ComboProtocolo.Location = new System.Drawing.Point(152, 138);
+            this.ComboProtocolo.Name = "ComboProtocolo";
+            this.ComboProtocolo.Size = new System.Drawing.Size(123, 23);
+            this.ComboProtocolo.TabIndex = 21;
             // 
             // label4
             // 
@@ -138,15 +139,15 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(149, 117);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(126, 16);
+            this.label4.Size = new System.Drawing.Size(65, 16);
             this.label4.TabIndex = 20;
-            this.label4.Text = "Tipo de Impressora";
+            this.label4.Text = "Protocolo";
             // 
             // BtnImprimir
             // 
             this.BtnImprimir.FlatAppearance.BorderSize = 0;
             this.BtnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnImprimir.Location = new System.Drawing.Point(12, 276);
+            this.BtnImprimir.Location = new System.Drawing.Point(12, 281);
             this.BtnImprimir.Name = "BtnImprimir";
             this.BtnImprimir.Size = new System.Drawing.Size(118, 44);
             this.BtnImprimir.TabIndex = 22;
@@ -171,7 +172,7 @@
             this.ChbCortar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChbCortar.Location = new System.Drawing.Point(12, 167);
             this.ChbCortar.Name = "ChbCortar";
-            this.ChbCortar.Size = new System.Drawing.Size(124, 20);
+            this.ChbCortar.Size = new System.Drawing.Size(123, 20);
             this.ChbCortar.TabIndex = 24;
             this.ChbCortar.Text = "Cortar ao final";
             this.ChbCortar.UseVisualStyleBackColor = true;
@@ -184,7 +185,7 @@
             this.ChbDuasLinhas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChbDuasLinhas.Location = new System.Drawing.Point(12, 192);
             this.ChbDuasLinhas.Name = "ChbDuasLinhas";
-            this.ChbDuasLinhas.Size = new System.Drawing.Size(189, 20);
+            this.ChbDuasLinhas.Size = new System.Drawing.Size(188, 20);
             this.ChbDuasLinhas.TabIndex = 25;
             this.ChbDuasLinhas.Text = "Produto em duas linhas";
             this.ChbDuasLinhas.UseVisualStyleBackColor = true;
@@ -195,7 +196,7 @@
             this.ChbBarrasCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChbBarrasCodigo.Location = new System.Drawing.Point(12, 214);
             this.ChbBarrasCodigo.Name = "ChbBarrasCodigo";
-            this.ChbBarrasCodigo.Size = new System.Drawing.Size(167, 20);
+            this.ChbBarrasCodigo.Size = new System.Drawing.Size(166, 20);
             this.ChbBarrasCodigo.TabIndex = 26;
             this.ChbBarrasCodigo.Text = "Barras como código";
             this.ChbBarrasCodigo.UseVisualStyleBackColor = true;
@@ -206,7 +207,7 @@
             this.ChbDocumentoCancelado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChbDocumentoCancelado.Location = new System.Drawing.Point(12, 236);
             this.ChbDocumentoCancelado.Name = "ChbDocumentoCancelado";
-            this.ChbDocumentoCancelado.Size = new System.Drawing.Size(182, 20);
+            this.ChbDocumentoCancelado.Size = new System.Drawing.Size(181, 20);
             this.ChbDocumentoCancelado.TabIndex = 27;
             this.ChbDocumentoCancelado.Text = "Documento cancelado";
             this.ChbDocumentoCancelado.UseVisualStyleBackColor = true;
@@ -216,14 +217,14 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(207, 184);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(199, 107);
+            this.pictureBox1.Size = new System.Drawing.Size(199, 114);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 28;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(207, 297);
+            this.button1.Location = new System.Drawing.Point(207, 302);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 29;
@@ -233,7 +234,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(286, 297);
+            this.button2.Location = new System.Drawing.Point(286, 302);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 30;
@@ -247,7 +248,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(204, 163);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 16);
+            this.label5.Size = new System.Drawing.Size(60, 16);
             this.label5.TabIndex = 31;
             this.label5.Text = "Logotipo";
             // 
@@ -267,15 +268,29 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(280, 117);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(112, 16);
+            this.label6.Size = new System.Drawing.Size(111, 16);
             this.label6.TabIndex = 32;
             this.label6.Text = "Modelo de Papel";
+            // 
+            // ChbRemoverAcentos
+            // 
+            this.ChbRemoverAcentos.AutoSize = true;
+            this.ChbRemoverAcentos.Checked = true;
+            this.ChbRemoverAcentos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChbRemoverAcentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChbRemoverAcentos.Location = new System.Drawing.Point(12, 257);
+            this.ChbRemoverAcentos.Name = "ChbRemoverAcentos";
+            this.ChbRemoverAcentos.Size = new System.Drawing.Size(148, 20);
+            this.ChbRemoverAcentos.TabIndex = 34;
+            this.ChbRemoverAcentos.Text = "Remover acentos";
+            this.ChbRemoverAcentos.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 326);
+            this.ClientSize = new System.Drawing.Size(415, 333);
+            this.Controls.Add(this.ChbRemoverAcentos);
             this.Controls.Add(this.ComboTipoPapel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -288,7 +303,7 @@
             this.Controls.Add(this.ChbCortar);
             this.Controls.Add(this.ComboImpressoras);
             this.Controls.Add(this.BtnImprimir);
-            this.Controls.Add(this.ComboTipoImpressora);
+            this.Controls.Add(this.ComboProtocolo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ComboModeloDFe);
             this.Controls.Add(this.label3);
@@ -314,7 +329,7 @@
         private System.Windows.Forms.Button BtnListarImpressoras;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox ComboModeloDFe;
-        private System.Windows.Forms.ComboBox ComboTipoImpressora;
+        private System.Windows.Forms.ComboBox ComboProtocolo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button BtnImprimir;
         private System.Windows.Forms.ComboBox ComboImpressoras;
@@ -328,6 +343,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox ComboTipoPapel;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox ChbRemoverAcentos;
     }
 }
 

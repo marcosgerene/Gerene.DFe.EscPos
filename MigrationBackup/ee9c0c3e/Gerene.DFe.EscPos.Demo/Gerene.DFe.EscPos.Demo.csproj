@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OpenAC.Net.Core, Version=1.5.0.0, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenAC.Net.Core.1.5.0-preview.2\lib\net452\OpenAC.Net.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenAC.Net.Devices, Version=1.5.0.0, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenAC.Net.Devices.1.5.0-preview.3\lib\net452\OpenAC.Net.Devices.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenAC.Net.EscPos, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d3bb9130f8b775a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenAC.Net.EscPos.1.0.0-beta.6\lib\net452\OpenAC.Net.EscPos.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -74,6 +83,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,17 +102,6 @@
       <Project>{eaed4963-3a41-46d5-a073-62259ddbf5e4}</Project>
       <Name>Gerene.DFe.EscPos</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="OpenAC.Net.Core">
-      <Version>1.5.0-preview.2</Version>
-    </PackageReference>
-    <PackageReference Include="OpenAC.Net.Devices">
-      <Version>1.5.0-preview.4</Version>
-    </PackageReference>
-    <PackageReference Include="OpenAC.Net.EscPos">
-      <Version>1.0.0-beta.8</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
