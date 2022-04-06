@@ -105,4 +105,4 @@ Agradecimentos:
 
 O projeto Vip.Printer (https://github.com/leandrovip/Vip.Printer) serviu de motor de impressão entre as versões 1.0.0 e 1.0.16 de forma gratuíta e com qualidade, permitindo o funcionamento dessa biblioteca por quase dois anos com um nível muito baixo de manutenção.
 
-Entretanto, em busca de evolução a troca de motor foi necessária na versão 1.0.17 para novos protocolos e para nos alinharmos ainda mais com o grupo OpenAC que vem fazendo um trabalho incrível com diversos componentes para automação comercial. Conheça mais em: https://github.com/OpenAC-Net
+Em busca de evolução a troca de motor foi necessária na versão 1.0.17. Essa mudança permitiu novos protocolos e o uma parceria ainda mais estreita com o grupo OpenAC que vem fazendo um trabalho incrível com diversos componentes para automação comercial. Conheça mais em: https://github.com/OpenAC-Net
