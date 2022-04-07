@@ -247,7 +247,7 @@ namespace Gerene.DFe.EscPos
 
             #region Número do extrato
             _Printer.ImprimirTexto($"SAT No. {_CFe.InfCFe.Ide.NSerieSAT:D9}", CentralizadoSeTp80mm);
-            _Printer.ImprimirTexto($"Data e Hora {_CFe.InfCFe.Ide.DEmi:dd/MM/yyyy} {_CFe.InfCFe.Ide.HEmi:HH:mm:ss}", OpenTamanhoFonte.Condensada);
+            _Printer.ImprimirTexto($"Data e Hora {_CFe.InfCFe.Ide.DEmi:dd/MM/yyyy} {_CFe.InfCFe.Ide.HEmi:HH:mm:ss}", OpenTamanhoFonte.Condensada, CentralizadoSeTp80mm);
             #endregion
 
             #region Chave de Acesso

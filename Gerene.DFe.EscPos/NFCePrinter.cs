@@ -292,7 +292,7 @@ namespace Gerene.DFe.EscPos
 
             #region Número e série do documento
             _Printer.ImprimirTexto($"No.: {_NFCe.NFe.infNFe.ide.nNF:D9} Serie: {_NFCe.NFe.infNFe.ide.serie:D3}", CentralizadoSeTp80mm);
-            _Printer.ImprimirTexto($"Emissão: {_NFCe.NFe.infNFe.ide.dhEmi:dd/MM/yyyy HH:mm:ss}".TratarAcento(), CentralizadoSeTp80mm);
+            _Printer.ImprimirTexto($"Emissão: {_NFCe.NFe.infNFe.ide.dhEmi:dd/MM/yyyy HH:mm:ss}".TratarAcento(), OpenTamanhoFonte.Condensada, CentralizadoSeTp80mm);
 
             ImprimirSeparador();
             #endregion
