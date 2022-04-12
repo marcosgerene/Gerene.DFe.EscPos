@@ -101,7 +101,7 @@
       <Version>1.5.0-preview.4</Version>
     </PackageReference>
     <PackageReference Include="OpenAC.Net.EscPos">
-      <Version>1.0.0-beta.8</Version>
+      <Version>1.0.0-beta.10</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

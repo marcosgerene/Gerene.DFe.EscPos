@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenAC.Net.EscPos" Version="1.0.0-beta.8" />
+    <PackageReference Include="OpenAC.Net.EscPos" Version="1.0.0-beta.10" />
   </ItemGroup>
 
   <ItemGroup>
