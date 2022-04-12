@@ -204,6 +204,7 @@ namespace Gerene.DFe.EscPos
                     throw new ArgumentOutOfRangeException();
             }
 
+            _Printer.Protocolo = Protocolo;
             _Printer.Conectar();
         }
 
