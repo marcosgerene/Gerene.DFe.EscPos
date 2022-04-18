@@ -97,13 +97,18 @@ namespace Gerene.DFe.EscPos
             {
                 ImprimirSeparador();
 
-                if (TipoPapel == TipoPapel.Tp80mm)
-                    _Printer.ImprimirTexto("AMBIENTE DE HOMOLOGAÇÃO - SEM VALOR FISCAL".TratarAcento(), OpenAlinhamento.Centro, OpenEstiloFonte.Negrito);
-                else
-                {
-                    _Printer.ImprimirTexto("AMBIENTE DE HOMOLOGAÇÃO".TratarAcento(), OpenEstiloFonte.Negrito);
-                    _Printer.ImprimirTexto("SEM VALOR FISCAL", OpenEstiloFonte.Negrito);
-                }
+                //if (TipoPapel == TipoPapel.Tp80mm)
+                //    _Printer.ImprimirTexto("AMBIENTE DE HOMOLOGAÇÃO - SEM VALOR FISCAL".TratarAcento(), OpenAlinhamento.Centro, OpenEstiloFonte.Negrito);
+                //else
+                //{
+                //    _Printer.ImprimirTexto("AMBIENTE DE HOMOLOGAÇÃO".TratarAcento(), OpenEstiloFonte.Negrito);
+                //    _Printer.ImprimirTexto("SEM VALOR FISCAL", OpenEstiloFonte.Negrito);
+                //}
+
+                _Printer.ImprimirTexto(" =  T E S T E  = ".TratarAcento(), CentralizadoSeTp80mm, OpenEstiloFonte.Negrito);                
+                _Printer.ImprimirTexto(">".PadLeft(ColunasNormal, '>'));
+                _Printer.ImprimirTexto(">".PadLeft(ColunasNormal, '>'));
+                _Printer.ImprimirTexto(">".PadLeft(ColunasNormal, '>'));
 
                 ImprimirSeparador();
             }
@@ -389,7 +394,7 @@ namespace Gerene.DFe.EscPos
             string chave = Regex.Replace(_CFeCanc.InfCFe.ChCanc.OnlyNumber(), ".{4}", "$0 ");
 
             if (TipoPapel == TipoPapel.Tp80mm)
-                _Printer.ImprimirTexto(chave, OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
+                _Printer.ImprimirTexto(chave,  OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro, OpenEstiloFonte.Negrito);
             else
             {
                 _Printer.ImprimirTexto(chave.Substring(0, 24).Trim(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
@@ -448,8 +453,8 @@ namespace Gerene.DFe.EscPos
                 _Printer.ImprimirTexto(chave2, OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro, OpenEstiloFonte.Negrito);
             else
             {
-                _Printer.ImprimirTexto(chave2.Substring(0, 22).Trim(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
-                _Printer.ImprimirTexto(chave2.Substring(22).Trim(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
+                _Printer.ImprimirTexto(chave2.Substring(0, 24).Trim(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
+                _Printer.ImprimirTexto(chave2.Substring(24).Trim(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
             }
 
             if (TipoPapel == TipoPapel.Tp80mm)

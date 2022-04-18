@@ -5,7 +5,7 @@
     <Company>Gerene Sistemas de Informação</Company>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/marcosgerene/Gerene.DFe.EscPos</PackageProjectUrl>
-    <Version>1.0.17-rc</Version>
+    <Version>1.0.17-rc2</Version>
     <PackageLicenseExpression></PackageLicenseExpression>
     <Description>Impressão em impressora termica para DFes via EscPos e derivados (EscBema, EscDaruma, EscElgin, entre outros) nativo em .NET.
 
@@ -30,7 +30,7 @@ Permite comunicação via RAW (USB), TCP e Serial.</Description>
 
   <ItemGroup>
     <PackageReference Include="OpenAC.Net.EscPos" Version="1.0.0-beta.10" />
-    <PackageReference Include="OpenAC.Net.Sat" Version="1.5.0-preview.1" />
+    <PackageReference Include="OpenAC.Net.Sat" Version="1.5.0-preview.3" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Include="Zeus.Net.NFe.NFCe" Version="1.0.1.1159" />
   </ItemGroup>
