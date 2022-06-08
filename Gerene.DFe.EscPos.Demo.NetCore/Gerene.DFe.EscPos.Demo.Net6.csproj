@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenAC.Net.EscPos" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Gerene.DFe.EscPos\Gerene.DFe.EscPos.csproj" />
   </ItemGroup>
 
