@@ -12,6 +12,8 @@ using OpenTamanhoFonte = OpenAC.Net.EscPos.Commom.CmdTamanhoFonte;
 using OpenAlinhamento = OpenAC.Net.EscPos.Commom.CmdAlinhamento;
 using OpenBarcode = OpenAC.Net.EscPos.Commom.CmdBarcode;
 using OpenQrCodeModSize = OpenAC.Net.EscPos.Commom.QrCodeModSize;
+using NFe.Classes;
+using OpenAC.Net.EscPos.Commom;
 
 namespace Gerene.DFe.EscPos
 {
@@ -61,6 +63,18 @@ namespace Gerene.DFe.EscPos
 
             _CFe = CFe.Load(new MemoryStream(Encoding.UTF8.GetBytes(xmlcontent)), Encoding.UTF8);
 
+            string cpfcnpj = _CFe.InfCFe.Dest?.CPF.IsNotNull() == true ? _CFe.InfCFe.Dest.CPF.FormatoCpfCnpj() :
+                           _CFe.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFe.InfCFe.Dest.CNPJ.FormatoCpfCnpj() :
+                           "000.000.000-00";
+
+            string chave = Regex.Replace(_CFe.InfCFe.Id.OnlyNumber(), ".{4}", "$0 ");
+
+            string _qrCode = $"{_CFe.InfCFe.Id.OnlyNumber()}|" +
+                 $"{_CFe.InfCFe.Ide.DhEmissao:yyyyMMddHHmmss}|" +
+                 $"{_CFe.InfCFe.Total.VCFe:0.00}|" +
+                 $"{(_CFe.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFe.InfCFe.Dest.CNPJ : _CFe.InfCFe.Dest.CPF)}|" +
+                 $"{_CFe.InfCFe.Ide.AssinaturaQrcode}";
+
             #region Cabeçalho
 
             #region Logotipo
@@ -88,8 +102,14 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Número do extrato
-            _Printer.ImprimirTexto($"Extrato No. {_CFe.InfCFe.Ide.NCFe:D6}".TratarAcento(), CentralizadoSeTp80mm, OpenEstiloFonte.Negrito);
-            _Printer.ImprimirTexto($"CUPOM FISCAL ELETRÔNICO SAT".TratarAcento(), CentralizadoSeTp80mm, OpenEstiloFonte.Negrito);
+            if (!QrCodeLateral)
+            {
+                _Printer.ImprimirTexto($"Extrato No. {_CFe.InfCFe.Ide.NCFe:D6}".TratarAcento(), CentralizadoSeTp80mm, OpenEstiloFonte.Negrito);
+                _Printer.ImprimirTexto($"CUPOM FISCAL ELETRÔNICO SAT".TratarAcento(), CentralizadoSeTp80mm, OpenEstiloFonte.Negrito);
+            }
+
+            else
+                _Printer.ImprimirTexto($"CUPOM FISCAL ELETRÔNICO SAT".TratarAcento(), CentralizadoSeTp80mm, OpenEstiloFonte.Negrito);
             #endregion
 
             #region Homologação
@@ -105,7 +125,7 @@ namespace Gerene.DFe.EscPos
                 //    _Printer.ImprimirTexto("SEM VALOR FISCAL", OpenEstiloFonte.Negrito);
                 //}
 
-                _Printer.ImprimirTexto(" =  T E S T E  = ".TratarAcento(), CentralizadoSeTp80mm, OpenEstiloFonte.Negrito);                
+                _Printer.ImprimirTexto(" =  T E S T E  = ".TratarAcento(), CentralizadoSeTp80mm, OpenEstiloFonte.Negrito);
                 _Printer.ImprimirTexto(">".PadLeft(ColunasNormal, '>'));
                 _Printer.ImprimirTexto(">".PadLeft(ColunasNormal, '>'));
                 _Printer.ImprimirTexto(">".PadLeft(ColunasNormal, '>'));
@@ -126,15 +146,15 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Consumidor
-            string cpfcnpj = _CFe.InfCFe.Dest?.CPF.IsNotNull() == true ? _CFe.InfCFe.Dest.CPF.FormatoCpfCnpj() :
-                            _CFe.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFe.InfCFe.Dest.CNPJ.FormatoCpfCnpj() :
-                            "000.000.000-00";
+            if (!QrCodeLateral)
+            {
+                _Printer.ImprimirTexto($"CPF/CNPJ do Consumidor: {cpfcnpj}", OpenTamanhoFonte.Condensada);
+                _Printer.ImprimirTexto($"Razão Social/Nome: {(_CFe.InfCFe.Dest?.Nome ?? "CONSUMIDOR")}".TratarAcento().LimitarString(ColunasCondensado), OpenTamanhoFonte.Condensada);
 
-            _Printer.ImprimirTexto($"CPF/CNPJ do Consumidor: {cpfcnpj}", OpenTamanhoFonte.Condensada);
-            _Printer.ImprimirTexto($"Razão Social/Nome: {(_CFe.InfCFe.Dest?.Nome ?? "CONSUMIDOR")}".TratarAcento().LimitarString(ColunasCondensado), OpenTamanhoFonte.Condensada);
+                ImprimirSeparador();
+            }
             #endregion
 
-            ImprimirSeparador();
             #endregion
 
             #region Detalhes
@@ -142,8 +162,6 @@ namespace Gerene.DFe.EscPos
                 _Printer.ImprimirTexto("#|COD|DESC|QTD|UN|VL UN|DESC|VL ITEM", OpenAlinhamento.Centro, OpenEstiloFonte.Negrito);
             else
                 _Printer.ImprimirTexto("COD|DESC|QTD|UN|VL UN|DESC|VL ITEM", OpenEstiloFonte.Negrito);
-
-            ImprimirSeparador();
 
             #region Produtos
             foreach (var det in _CFe.InfCFe.Det)
@@ -155,9 +173,9 @@ namespace Gerene.DFe.EscPos
                     codProd = $"{(UsarBarrasComoCodigo && det.Prod.CEAN.IsNotNull() ? det.Prod.CEAN : det.Prod.CProd).PadRight(13)}";
 
                 if (ProdutoDuasLinhas)
-                    textoE = $"{ det.NItem:D3} | {codProd}";
+                    textoE = $"{det.NItem:D3} | {codProd}";
                 else
-                    textoE = $"{ det.NItem:D3} | {codProd} {det.Prod.XProd}";
+                    textoE = $"{det.NItem:D3} | {codProd} {det.Prod.XProd}";
 
                 string textoR = $"{det.Prod.QCom.ToString($"N{CasasDecimaisQuantidade}")} {det.Prod.UCom} x {det.Prod.VUnCom:N2} = {det.Prod.VItem:N2}";
 
@@ -229,96 +247,129 @@ namespace Gerene.DFe.EscPos
             }
             #endregion
 
-            #region Observações do Contribuinte          
-            _Printer.ImprimirTexto("Observações do Contribuinte".TratarAcento(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
-
-            if (!_CFe.InfCFe.InfAdic.InfCpl.IsNull())
-                foreach (var txt in _CFe.InfCFe.InfAdic.InfCpl.WrapText(ColunasCondensado))
-                    _Printer.ImprimirTexto(txt.TratarAcento(), OpenTamanhoFonte.Condensada);
-
-            _Printer.PularLinhas(1);
-
-            #endregion
-
-            #region Tributos
-            if (ImprimirDeOlhoNoImposto)
+            #region Observações do Contribuinte
+            if (_CFe.InfCFe.InfAdic.InfCpl.IsNotNull())
             {
-                _Printer.ImprimirTexto(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _CFe.InfCFe.Total.VCFeLei12741.ToString("C2", Cultura), ColunasCondensado).TratarAcento(), OpenTamanhoFonte.Condensada);
-                _Printer.ImprimirTexto("(Conforme Lei Fed. 12.741/2012)".TratarAcento(), OpenTamanhoFonte.Condensada);
+                _Printer.ImprimirTexto("Observações do Contribuinte".TratarAcento(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
 
-                ImprimirSeparador();
+                if (!_CFe.InfCFe.InfAdic.InfCpl.IsNull())
+                    foreach (var txt in _CFe.InfCFe.InfAdic.InfCpl.WrapText(ColunasCondensado))
+                        _Printer.ImprimirTexto(txt.TratarAcento(), OpenTamanhoFonte.Condensada);
+
+                _Printer.PularLinhas(1);
             }
             #endregion
 
-            #region Número do extrato
-            _Printer.ImprimirTexto($"SAT No. {_CFe.InfCFe.Ide.NSerieSAT:D9}", CentralizadoSeTp80mm);
-            _Printer.ImprimirTexto($"Data e Hora {_CFe.InfCFe.Ide.DEmi:dd/MM/yyyy} {_CFe.InfCFe.Ide.HEmi:HH:mm:ss}", OpenTamanhoFonte.Condensada, CentralizadoSeTp80mm);
-            #endregion
+           
 
-            #region Chave de Acesso
-            string chave = Regex.Replace(_CFe.InfCFe.Id.OnlyNumber(), ".{4}", "$0 ");
-
-            if (TipoPapel == TipoPapel.Tp80mm)
+            if (QrCodeLateral)
+            {
+                #region Chave de Acesso
+                _Printer.ImprimirTexto("Consulte pela chave de acsso", OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro);
                 _Printer.ImprimirTexto(chave, OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro, OpenEstiloFonte.Negrito);
-            else
-            {
-                _Printer.ImprimirTexto(chave.Substring(0, 24).Trim(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
-                _Printer.ImprimirTexto(chave.Substring(24).Trim(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
-            }
-
-            if (TipoPapel == TipoPapel.Tp80mm)
-            {
                 _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(0, 22), OpenBarcode.CODE128c, OpenAlinhamento.Centro);
                 _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(22), OpenBarcode.CODE128c, OpenAlinhamento.Centro);
+                _Printer.PularLinhas(1);
+                #endregion
+
+                var pagina = _Printer.IniciarModoPagina();
+
+                #region QRCode
+                var regiao = pagina.NovaRegiao(0, 0, 240, 500);
+                regiao.Direcao = CmdPosDirecao.EsquerdaParaDireita;
+                regiao.ImprimirQrCode(_qrCode, tamanho: OpenQrCodeModSize.Pequeno);
+                #endregion
+
+                #region Outros dados
+                regiao = pagina.NovaRegiao(240, 0, 300, 500);
+                regiao.Direcao = CmdPosDirecao.EsquerdaParaDireita;
+
+                regiao.ImprimirTexto($"Extrato No. {_CFe.InfCFe.Ide.NCFe:D6}".TratarAcento(), OpenTamanhoFonte.Condensada);
+                regiao.ImprimirTexto($"CPF/CNPJ: {cpfcnpj}", OpenTamanhoFonte.Condensada);
+                regiao.ImprimirTexto($"Razão Social/Nome: {_CFe.InfCFe.Dest?.Nome ?? "CONSUMIDOR"}".TratarAcento().LimitarString(ColunasCondensado), OpenTamanhoFonte.Condensada);
+                regiao.ImprimirTexto($"SAT No. {_CFe.InfCFe.Ide.NSerieSAT:D9}", OpenTamanhoFonte.Condensada);
+                regiao.ImprimirTexto($"Data e Hora {_CFe.InfCFe.Ide.DEmi:dd/MM/yyyy} {_CFe.InfCFe.Ide.HEmi:HH:mm:ss}", OpenTamanhoFonte.Condensada);
+                
+                #region Tributos
+                if (ImprimirDeOlhoNoImposto)
+                    regiao.ImprimirTexto($"Trib. aprox. {_CFe.InfCFe.Total.VCFeLei12741.ToString("C2", Cultura)} conforme lei fed. 12.741/2012", OpenTamanhoFonte.Condensada);
+                #endregion
+
+                #endregion
+
+                #region App
+                _Printer.ImprimirTexto("Consulte o QR Code pelo aplicativo \"De olho na nota\" disponível na AppStore (Apple) e PlayStore (Android)".TratarAcento(), OpenTamanhoFonte.Condensada);
+                #endregion
             }
             else
             {
-                _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(0, 11), OpenBarcode.CODE128c);
-                _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(11, 11), OpenBarcode.CODE128c);
-                _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(22, 11), OpenBarcode.CODE128c);
-                _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(33), OpenBarcode.CODE128c);
+                #region Tributos
+                if (ImprimirDeOlhoNoImposto)
+                {
+                    _Printer.ImprimirTexto(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom", _CFe.InfCFe.Total.VCFeLei12741.ToString("C2", Cultura), ColunasCondensado).TratarAcento(), OpenTamanhoFonte.Condensada);
+                    _Printer.ImprimirTexto("(Conforme Lei Fed. 12.741/2012)".TratarAcento(), OpenTamanhoFonte.Condensada);
+
+                    ImprimirSeparador();
+                }
+                #endregion
+
+                #region Número do extrato
+                _Printer.ImprimirTexto($"SAT No. {_CFe.InfCFe.Ide.NSerieSAT:D9}", CentralizadoSeTp80mm);
+                _Printer.ImprimirTexto($"Data e Hora {_CFe.InfCFe.Ide.DEmi:dd/MM/yyyy} {_CFe.InfCFe.Ide.HEmi:HH:mm:ss}", OpenTamanhoFonte.Condensada, CentralizadoSeTp80mm);
+                #endregion
+
+                #region Chave de Acesso
+                if (TipoPapel == TipoPapel.Tp80mm)
+                    _Printer.ImprimirTexto(chave, OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro, OpenEstiloFonte.Negrito);
+                else
+                {
+                    _Printer.ImprimirTexto(chave.Substring(0, 24).Trim(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
+                    _Printer.ImprimirTexto(chave.Substring(24).Trim(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
+                }
+
+                if (TipoPapel == TipoPapel.Tp80mm)
+                {
+                    _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(0, 22), OpenBarcode.CODE128c, OpenAlinhamento.Centro);
+                    _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(22), OpenBarcode.CODE128c, OpenAlinhamento.Centro);
+                }
+                else
+                {
+                    _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(0, 11), OpenBarcode.CODE128c);
+                    _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(11, 11), OpenBarcode.CODE128c);
+                    _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(22, 11), OpenBarcode.CODE128c);
+                    _Printer.ImprimirBarcode(_CFe.InfCFe.Id.OnlyNumber().Substring(33), OpenBarcode.CODE128c);
+                }
+
+                if (TipoPapel == TipoPapel.Tp80mm)
+                    _Printer.PularLinhas(1);
+                #endregion
+
+                #region QrCode
+                _Printer.ImprimirQrCode(_qrCode, aAlinhamento: CentralizadoSeTp80mm, tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal : OpenQrCodeModSize.Pequeno);
+
+                if (TipoPapel == TipoPapel.Tp80mm)
+                    _Printer.PularLinhas(1);
+                #endregion
+
+                #region App
+                if (TipoPapel == TipoPapel.Tp80mm)
+                {
+                    _Printer.ImprimirTexto("Consulte o QR Code pelo aplicativo \"De olho na nota\"".TratarAcento(), OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro);
+                    _Printer.ImprimirTexto("disponível na AppStore (Apple) e PlayStore (Android)".TratarAcento(), OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro);
+                }
+                else
+                {
+                    _Printer.ImprimirTexto("Consulte o QR Code pelo aplicativo".TratarAcento(), OpenTamanhoFonte.Condensada);
+                    _Printer.ImprimirTexto("\"De olho na nota\" disponível na".TratarAcento(), OpenTamanhoFonte.Condensada);
+                    _Printer.ImprimirTexto("AppStore (Apple) e PlayStore (Android)".TratarAcento(), OpenTamanhoFonte.Condensada);
+                }
+                #endregion
+
+                #region Desenvolvedor
+                if (Desenvolvedor.IsNotNull())
+                    _Printer.ImprimirTexto(Desenvolvedor, TipoPapel == TipoPapel.Tp80mm ? OpenAlinhamento.Direita : OpenAlinhamento.Esquerda);
+                #endregion
             }
-
-            if (TipoPapel == TipoPapel.Tp80mm)
-                _Printer.PularLinhas(1);
-            #endregion
-
-            #region QrCode
-            string _qrCode = $"{_CFe.InfCFe.Id.OnlyNumber()}|" +
-                             $"{_CFe.InfCFe.Ide.DhEmissao:yyyyMMddHHmmss}|" +
-                             $"{_CFe.InfCFe.Total.VCFe:0.00}|" +
-                             $"{(_CFe.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFe.InfCFe.Dest.CNPJ : _CFe.InfCFe.Dest.CPF)}|" +
-                             $"{_CFe.InfCFe.Ide.AssinaturaQrcode}";
-
-            _Printer.ImprimirQrCode(_qrCode, aAlinhamento: CentralizadoSeTp80mm, tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal : OpenQrCodeModSize.Pequeno);
-
-            if (TipoPapel == TipoPapel.Tp80mm)
-                _Printer.PularLinhas(1);
-            #endregion
-
-            #region App
-            if (TipoPapel == TipoPapel.Tp80mm)
-            {
-                _Printer.ImprimirTexto("Consulte o QR Code pelo aplicativo \"De olho na nota\"".TratarAcento(), OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro);
-                _Printer.ImprimirTexto("disponível na AppStore (Apple) e PlayStore (Android)".TratarAcento(), OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro);
-            }
-            else
-            {
-                _Printer.ImprimirTexto("Consulte o QR Code pelo aplicativo".TratarAcento(), OpenTamanhoFonte.Condensada);
-                _Printer.ImprimirTexto("\"De olho na nota\" disponível na".TratarAcento(), OpenTamanhoFonte.Condensada);
-                _Printer.ImprimirTexto("AppStore (Apple) e PlayStore (Android)".TratarAcento(), OpenTamanhoFonte.Condensada);
-            }
-            #endregion
-
-            #region Desenvolvedor
-            if (Desenvolvedor.IsNotNull())
-            {
-                _Printer.PularLinhas(1);
-                _Printer.ImprimirTexto(Desenvolvedor, TipoPapel == TipoPapel.Tp80mm ? OpenAlinhamento.Direita : OpenAlinhamento.Esquerda);
-                _Printer.PularLinhas(1);
-            }
-            #endregion
-
             #endregion
 
             if (CortarPapel)
@@ -394,7 +445,7 @@ namespace Gerene.DFe.EscPos
             string chave = Regex.Replace(_CFeCanc.InfCFe.ChCanc.OnlyNumber(), ".{4}", "$0 ");
 
             if (TipoPapel == TipoPapel.Tp80mm)
-                _Printer.ImprimirTexto(chave,  OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro, OpenEstiloFonte.Negrito);
+                _Printer.ImprimirTexto(chave, OpenTamanhoFonte.Condensada, OpenAlinhamento.Centro, OpenEstiloFonte.Negrito);
             else
             {
                 _Printer.ImprimirTexto(chave.Substring(0, 24).Trim(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
@@ -481,7 +532,7 @@ namespace Gerene.DFe.EscPos
                              $"{(_CFeCanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CNPJ : _CFeCanc.InfCFe.Dest.CPF)}|" +
                              $"{_CFeCanc.InfCFe.Ide.AssinaturaQrcode}";
 
-            _Printer.ImprimirQrCode(_qrCodeCancel, aAlinhamento: CentralizadoSeTp80mm, tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal: OpenQrCodeModSize.Pequeno);
+            _Printer.ImprimirQrCode(_qrCodeCancel, aAlinhamento: CentralizadoSeTp80mm, tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal : OpenQrCodeModSize.Pequeno);
 
             _Printer.PularLinhas(1);
             #endregion
