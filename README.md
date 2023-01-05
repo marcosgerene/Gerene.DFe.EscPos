@@ -50,6 +50,8 @@ DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DF
 
 Change log:
 ----
+1.0.19 - QR Code lateral
+
 1.0.18 - Atualizando referencias ao Zeus (remoção dos projetos shared)
 
 1.0.17 - Altera o motor de impressão, adicionando os protcolos TCP e Serial e novos recursos como impressão de caracteres acentuados.
