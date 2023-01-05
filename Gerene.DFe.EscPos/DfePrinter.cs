@@ -73,6 +73,7 @@ namespace Gerene.DFe.EscPos
         public byte[] Logotipo { get; set; }
         public CultureInfo Cultura { get; set; }
         public int CasasDecimaisQuantidade { get; set; }
+        public bool QrCodeLateral { get; set; }
 
         /// <summary>
         /// Informar texto completo, ex: "Desenvolvido por: ABC Sistemas"
@@ -147,6 +148,7 @@ namespace Gerene.DFe.EscPos
             Cultura = new CultureInfo("pt-Br");
             ImprimirDeOlhoNoImposto = true;
             CasasDecimaisQuantidade = 3;
+            QrCodeLateral = true;
 
             RemoverAcentos = true;
 
@@ -174,8 +176,14 @@ namespace Gerene.DFe.EscPos
 
         public virtual void Imprimir(string xmlcontent)
         {           
-            if (TipoPapel == TipoPapel.Tp58mm && !ProdutoDuasLinhas)
-                throw new ArgumentException("Não é possível usar produto em lina única para 58mm");
+            if (TipoPapel == TipoPapel.Tp58mm)
+            {
+                if (!ProdutoDuasLinhas)
+                    throw new ArgumentException("Não é possível usar produto em lina única para 58mm");
+
+                if (QrCodeLateral)
+                    throw new ArgumentException("Não é possível usar QRCode lateral para 58mm");
+            }
 
             switch (TipoConexao)
             {
@@ -206,6 +214,12 @@ namespace Gerene.DFe.EscPos
 
             _Printer.Protocolo = Protocolo;
             _Printer.Conectar();
+
+            if (QrCodeLateral)
+            {
+                if (!_Printer.SuportaModoPagina)
+                    throw new InvalidOperationException("A impressora não suporta modo página");
+            }
         }
 
         protected void EnviarDados()

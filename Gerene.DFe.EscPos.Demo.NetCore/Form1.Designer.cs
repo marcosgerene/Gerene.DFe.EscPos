@@ -50,6 +50,9 @@
             this.ComboTipoPapel = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.ChbRemoverAcentos = new System.Windows.Forms.CheckBox();
+            this.ChbQRCodeLateral = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TextDesenvolvedor = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -156,7 +159,7 @@
             // 
             this.BtnImprimir.FlatAppearance.BorderSize = 0;
             this.BtnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BtnImprimir.Location = new System.Drawing.Point(14, 302);
+            this.BtnImprimir.Location = new System.Drawing.Point(10, 377);
             this.BtnImprimir.Margin = new System.Windows.Forms.Padding(4);
             this.BtnImprimir.Name = "BtnImprimir";
             this.BtnImprimir.Size = new System.Drawing.Size(137, 51);
@@ -231,7 +234,7 @@
             // 
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(219, 331);
+            this.button1.Location = new System.Drawing.Point(228, 405);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(112, 22);
@@ -244,7 +247,7 @@
             // 
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(338, 331);
+            this.button2.Location = new System.Drawing.Point(347, 405);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(112, 22);
@@ -256,10 +259,10 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(212, 206);
+            this.pictureBox1.Location = new System.Drawing.Point(219, 212);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(253, 117);
+            this.pictureBox1.Size = new System.Drawing.Size(253, 182);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 28;
             this.pictureBox1.TabStop = false;
@@ -268,7 +271,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(220, 186);
+            this.label5.Location = new System.Drawing.Point(219, 193);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 16);
@@ -311,11 +314,49 @@
             this.ChbRemoverAcentos.Text = "Remover Acentos";
             this.ChbRemoverAcentos.UseVisualStyleBackColor = true;
             // 
+            // ChbQRCodeLateral
+            // 
+            this.ChbQRCodeLateral.AutoSize = true;
+            this.ChbQRCodeLateral.Checked = true;
+            this.ChbQRCodeLateral.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChbQRCodeLateral.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ChbQRCodeLateral.Location = new System.Drawing.Point(14, 303);
+            this.ChbQRCodeLateral.Margin = new System.Windows.Forms.Padding(4);
+            this.ChbQRCodeLateral.Name = "ChbQRCodeLateral";
+            this.ChbQRCodeLateral.Size = new System.Drawing.Size(141, 20);
+            this.ChbQRCodeLateral.TabIndex = 30;
+            this.ChbQRCodeLateral.Text = "QR Code Lateral";
+            this.ChbQRCodeLateral.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(14, 327);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 16);
+            this.label7.TabIndex = 31;
+            this.label7.Text = "Desenvolvedor";
+            // 
+            // TextDesenvolvedor
+            // 
+            this.TextDesenvolvedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TextDesenvolvedor.Location = new System.Drawing.Point(14, 347);
+            this.TextDesenvolvedor.Margin = new System.Windows.Forms.Padding(4);
+            this.TextDesenvolvedor.Name = "TextDesenvolvedor";
+            this.TextDesenvolvedor.Size = new System.Drawing.Size(195, 22);
+            this.TextDesenvolvedor.TabIndex = 32;
+            this.TextDesenvolvedor.Text = "Desenvolvido por XXX";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 364);
+            this.ClientSize = new System.Drawing.Size(484, 435);
+            this.Controls.Add(this.TextDesenvolvedor);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.ChbQRCodeLateral);
             this.Controls.Add(this.ChbRemoverAcentos);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.ComboTipoPapel);
@@ -371,6 +412,9 @@
         private System.Windows.Forms.ComboBox ComboTipoPapel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox ChbRemoverAcentos;
+        private System.Windows.Forms.CheckBox ChbQRCodeLateral;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox TextDesenvolvedor;
     }
 }
 

@@ -117,6 +117,8 @@ namespace Gerene.DFe.EscPos.Demo.Net6
                 _printer.DocumentoCancelado = ChbDocumentoCancelado.Checked;
                 _printer.TipoPapel = (TipoPapel)ComboTipoPapel.SelectedItem;
                 _printer.RemoverAcentos = ChbRemoverAcentos.Checked;
+                _printer.QrCodeLateral = ChbQRCodeLateral.Checked;
+                _printer.Desenvolvedor = TextDesenvolvedor.Text;
 
                 if ((ModeloDFe)ComboModeloDFe.SelectedItem == ModeloDFe.CancelamentoSat)
                     (_printer as SatPrinter).ImprimirCancelamento(xml);
