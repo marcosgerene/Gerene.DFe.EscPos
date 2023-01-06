@@ -148,7 +148,7 @@ namespace Gerene.DFe.EscPos
             Cultura = new CultureInfo("pt-Br");
             ImprimirDeOlhoNoImposto = true;
             CasasDecimaisQuantidade = 3;
-            QrCodeLateral = true;
+            QrCodeLateral = false;
 
             RemoverAcentos = true;
 
@@ -179,7 +179,7 @@ namespace Gerene.DFe.EscPos
             if (TipoPapel == TipoPapel.Tp58mm)
             {
                 if (!ProdutoDuasLinhas)
-                    throw new ArgumentException("Não é possível usar produto em lina única para 58mm");
+                    throw new ArgumentException("Não é possível usar produto em duas linhas para 58mm");
 
                 if (QrCodeLateral)
                     throw new ArgumentException("Não é possível usar QRCode lateral para 58mm");
@@ -218,7 +218,7 @@ namespace Gerene.DFe.EscPos
             if (QrCodeLateral)
             {
                 if (!_Printer.SuportaModoPagina)
-                    throw new InvalidOperationException("A impressora não suporta modo página");
+                    throw new InvalidOperationException("A impressora não suporta modo página, não é possível usar o QRCode lateral");
             }
         }
 
