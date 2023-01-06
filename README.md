@@ -26,6 +26,7 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter() para NFCe
 	_printer.DocumentoCancelado = false; //Exibe tarja "Documento cancelado na impressão"
 	_printer.Logotipo = logotipo_em_bytes; //Impressão do logotipo, não obrigatório
 	_printer.TipoPapel = TipoPapel.Tp80mm; //ou TipoPapel.Tp58mm
+	_printer.QrCodeLateral = true; //Padrão false. Exige Tp80mm e exige modo pagina na impressora.
 	
 	_printer.TipoConexao = TipoConexao.RAW; //padrão RAW, não obrigatório para conexão USB
 	_printer.RemoverAcentos = true; //padrão true, não obrigatório
