@@ -51,6 +51,8 @@ DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DF
 
 Change log:
 ----
+1.0.20 - Opção de customizar o tamanho das colunas (número de caracteres na linha)
+
 1.0.19 - QR Code lateral
 
 1.0.18 - Atualizando referencias ao Zeus (remoção dos projetos shared)
