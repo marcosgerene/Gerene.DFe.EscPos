@@ -85,13 +85,14 @@ namespace Gerene.DFe.EscPos
         /// essa opção permite ocultar a informação "automatizada" proposta pela biblioteca
         /// </summary>
         public bool ImprimirDeOlhoNoImposto { get; set; }
-        
-        public bool RemoverAcentos 
+
+        public bool RemoverAcentos
         {
             get => GereneHelpers._RemoverAcento;
             set => GereneHelpers._RemoverAcento = value;
         }
-        private int _ColunasNormalDefault
+
+        private int _Colunas80mmNormal
         {
             get
             {
@@ -102,7 +103,7 @@ namespace Gerene.DFe.EscPos
                 }
             }
         }
-        private int _ColunasCondensadoDefault
+        private int _Colunas80mmCondensado
         {
             get
             {
@@ -114,7 +115,7 @@ namespace Gerene.DFe.EscPos
                 }
             }
         }
-        private int _ColunasExtendidoDefault
+        private int _Colunas80mmExtendido
         {
             get
             {
@@ -127,9 +128,39 @@ namespace Gerene.DFe.EscPos
             }
         }
 
-        protected int ColunasNormal => TipoPapel == TipoPapel.Tp80mm ? _ColunasNormalDefault : 34;
-        protected int ColunasCondensado => TipoPapel == TipoPapel.Tp80mm ? _ColunasCondensadoDefault : 46;
-        protected int ColunasExtendido => TipoPapel == TipoPapel.Tp80mm ? _ColunasExtendidoDefault : 17;
+        private int _Colunas58mmNormal => 34;
+        private int _Colunas58mmCondensado => 46;
+        private int _Colunas58mmExtendido => 17;
+
+        private int? _ColunasNormal;
+        /// <summary>
+        /// Colunas para fonte normal. Não preencher para usar valores padrões.
+        /// </summary>
+        public int ColunasNormal
+        {
+            get => _ColunasNormal ?? (TipoPapel == TipoPapel.Tp80mm ? _Colunas80mmNormal : _Colunas58mmNormal);
+            set => _ColunasNormal = value;
+        }
+
+        private int? _ColunasCondensado;
+        /// <summary>
+        /// Colunas para fonte condensada. Não preencher para usar valores padrões.
+        /// </summary>
+        public int ColunasCondensado
+        {
+            get => _ColunasCondensado ?? (TipoPapel == TipoPapel.Tp80mm ? _Colunas80mmCondensado : _Colunas58mmCondensado);
+            set => _ColunasCondensado = value;
+        }
+
+        private int? _ColunasExtendido;
+        /// <summary>
+        /// Colunas para fonte extendida. Não preencher para usar valores padrões.
+        /// </summary>
+        public int ColunasExtendido
+        {
+            get => _ColunasExtendido ?? (TipoPapel == TipoPapel.Tp80mm ? _Colunas80mmExtendido : _Colunas58mmExtendido);
+            set => _ColunasExtendido = value;
+        }
 
         protected EscPosPrinter _Printer { get; set; }
 
@@ -175,7 +206,7 @@ namespace Gerene.DFe.EscPos
         }
 
         public virtual void Imprimir(string xmlcontent)
-        {           
+        {
             if (TipoPapel == TipoPapel.Tp58mm)
             {
                 if (!ProdutoDuasLinhas)
