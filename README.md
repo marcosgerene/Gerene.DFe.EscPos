@@ -38,6 +38,26 @@ using (var _printer = new SatPrinter()) //ou new NFCePrinter() para NFCe
 }
 ```
 
+QrCode como imagem:
+----
+
+A partir da versão 1.0.21 é possível não gerar o QrCode via comando e sim imprimir como imagem. Este processo foi realizado para que impressoras sem suporte a QRCode (como a Gprinter GP-58L) fossem capaz de imprimir o SAT/NFCe.
+
+Caso o atributo ```QrCodeImagem``` não seja informado (padrão) a aplicação continuará enviando o QrCode via comando (o que é indicado para impressoras com suporte!).
+
+Exemplo de uso do ```QrCodeImagem``` usando o projeto QRCoder:
+
+```
+string qrcode = _printer.QRCodeTexto(xml);
+
+Bitmap qrCodeImage;
+using (var qrGenerator = new QRCoder.QRCodeGenerator())
+using (var qrCodeData = qrGenerator.CreateQrCode(qrcode, QRCoder.QRCodeGenerator.ECCLevel.H))
+using (var qrCode = new QRCoder.QRCode(qrCodeData))
+	qrCodeImage = qrCode.GetGraphic(3);
+
+_printer.QrCodeImagem = qrCodeImage;
+```
 
 Dependências:
 ----
@@ -51,6 +71,8 @@ DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DF
 
 Change log:
 ----
+1.0.21 - Permite imprimir o QrCode como imagem, util para impressoras sem suporte a QrCode
+
 1.0.20 - Opção de customizar o tamanho das colunas (número de caracteres na linha)
 
 1.0.19 - QR Code lateral
