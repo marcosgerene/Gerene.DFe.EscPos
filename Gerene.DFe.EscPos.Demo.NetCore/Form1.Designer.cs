@@ -28,365 +28,378 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.BtnCarregar = new System.Windows.Forms.Button();
-            this.TextArquivoXml = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.BtnListarImpressoras = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ComboModeloDFe = new System.Windows.Forms.ComboBox();
-            this.ComboProtocolo = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.BtnImprimir = new System.Windows.Forms.Button();
-            this.ComboImpressoras = new System.Windows.Forms.ComboBox();
-            this.ChbCortar = new System.Windows.Forms.CheckBox();
-            this.ChbDuasLinhas = new System.Windows.Forms.CheckBox();
-            this.ChbBarrasCodigo = new System.Windows.Forms.CheckBox();
-            this.ChbDocumentoCancelado = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.ComboTipoPapel = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.ChbRemoverAcentos = new System.Windows.Forms.CheckBox();
-            this.ChbQRCodeLateral = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.TextDesenvolvedor = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            BtnCarregar = new System.Windows.Forms.Button();
+            TextArquivoXml = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            BtnListarImpressoras = new System.Windows.Forms.Button();
+            label3 = new System.Windows.Forms.Label();
+            ComboModeloDFe = new System.Windows.Forms.ComboBox();
+            ComboProtocolo = new System.Windows.Forms.ComboBox();
+            label4 = new System.Windows.Forms.Label();
+            BtnImprimir = new System.Windows.Forms.Button();
+            ComboImpressoras = new System.Windows.Forms.ComboBox();
+            ChbCortar = new System.Windows.Forms.CheckBox();
+            ChbDuasLinhas = new System.Windows.Forms.CheckBox();
+            ChbBarrasCodigo = new System.Windows.Forms.CheckBox();
+            ChbDocumentoCancelado = new System.Windows.Forms.CheckBox();
+            button1 = new System.Windows.Forms.Button();
+            button2 = new System.Windows.Forms.Button();
+            pictureBox1 = new System.Windows.Forms.PictureBox();
+            label5 = new System.Windows.Forms.Label();
+            ComboTipoPapel = new System.Windows.Forms.ComboBox();
+            label6 = new System.Windows.Forms.Label();
+            ChbRemoverAcentos = new System.Windows.Forms.CheckBox();
+            ChbQRCodeLateral = new System.Windows.Forms.CheckBox();
+            label7 = new System.Windows.Forms.Label();
+            TextDesenvolvedor = new System.Windows.Forms.TextBox();
+            ChbQrCodeImagem = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(10, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 16);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Arquivo Xml";
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label1.Location = new System.Drawing.Point(10, 9);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(78, 16);
+            label1.TabIndex = 14;
+            label1.Text = "Arquivo Xml";
             // 
             // BtnCarregar
             // 
-            this.BtnCarregar.FlatAppearance.BorderSize = 0;
-            this.BtnCarregar.Location = new System.Drawing.Point(430, 34);
-            this.BtnCarregar.Margin = new System.Windows.Forms.Padding(4);
-            this.BtnCarregar.Name = "BtnCarregar";
-            this.BtnCarregar.Size = new System.Drawing.Size(43, 28);
-            this.BtnCarregar.TabIndex = 13;
-            this.BtnCarregar.Text = "...";
-            this.BtnCarregar.UseVisualStyleBackColor = true;
-            this.BtnCarregar.Click += new System.EventHandler(this.BtnCarregar_Click);
+            BtnCarregar.FlatAppearance.BorderSize = 0;
+            BtnCarregar.Location = new System.Drawing.Point(430, 34);
+            BtnCarregar.Margin = new System.Windows.Forms.Padding(4);
+            BtnCarregar.Name = "BtnCarregar";
+            BtnCarregar.Size = new System.Drawing.Size(43, 28);
+            BtnCarregar.TabIndex = 13;
+            BtnCarregar.Text = "...";
+            BtnCarregar.UseVisualStyleBackColor = true;
+            BtnCarregar.Click += BtnCarregar_Click;
             // 
             // TextArquivoXml
             // 
-            this.TextArquivoXml.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextArquivoXml.Location = new System.Drawing.Point(14, 34);
-            this.TextArquivoXml.Margin = new System.Windows.Forms.Padding(4);
-            this.TextArquivoXml.Name = "TextArquivoXml";
-            this.TextArquivoXml.Size = new System.Drawing.Size(409, 22);
-            this.TextArquivoXml.TabIndex = 12;
+            TextArquivoXml.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            TextArquivoXml.Location = new System.Drawing.Point(14, 34);
+            TextArquivoXml.Margin = new System.Windows.Forms.Padding(4);
+            TextArquivoXml.Name = "TextArquivoXml";
+            TextArquivoXml.Size = new System.Drawing.Size(409, 22);
+            TextArquivoXml.TabIndex = 12;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(10, 70);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 16);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Impressora";
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label2.Location = new System.Drawing.Point(10, 70);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(75, 16);
+            label2.TabIndex = 16;
+            label2.Text = "Impressora";
             // 
             // BtnListarImpressoras
             // 
-            this.BtnListarImpressoras.FlatAppearance.BorderSize = 0;
-            this.BtnListarImpressoras.Location = new System.Drawing.Point(430, 94);
-            this.BtnListarImpressoras.Margin = new System.Windows.Forms.Padding(4);
-            this.BtnListarImpressoras.Name = "BtnListarImpressoras";
-            this.BtnListarImpressoras.Size = new System.Drawing.Size(43, 32);
-            this.BtnListarImpressoras.TabIndex = 17;
-            this.BtnListarImpressoras.Text = "...";
-            this.BtnListarImpressoras.UseVisualStyleBackColor = true;
-            this.BtnListarImpressoras.Click += new System.EventHandler(this.BtnListarImpressoras_Click);
+            BtnListarImpressoras.FlatAppearance.BorderSize = 0;
+            BtnListarImpressoras.Location = new System.Drawing.Point(430, 94);
+            BtnListarImpressoras.Margin = new System.Windows.Forms.Padding(4);
+            BtnListarImpressoras.Name = "BtnListarImpressoras";
+            BtnListarImpressoras.Size = new System.Drawing.Size(43, 32);
+            BtnListarImpressoras.TabIndex = 17;
+            BtnListarImpressoras.Text = "...";
+            BtnListarImpressoras.UseVisualStyleBackColor = true;
+            BtnListarImpressoras.Click += BtnListarImpressoras_Click;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(10, 135);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 16);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Modelo DFe";
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label3.Location = new System.Drawing.Point(10, 135);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(82, 16);
+            label3.TabIndex = 18;
+            label3.Text = "Modelo DFe";
             // 
             // ComboModeloDFe
             // 
-            this.ComboModeloDFe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboModeloDFe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ComboModeloDFe.FormattingEnabled = true;
-            this.ComboModeloDFe.Location = new System.Drawing.Point(14, 159);
-            this.ComboModeloDFe.Margin = new System.Windows.Forms.Padding(4);
-            this.ComboModeloDFe.Name = "ComboModeloDFe";
-            this.ComboModeloDFe.Size = new System.Drawing.Size(152, 23);
-            this.ComboModeloDFe.TabIndex = 19;
+            ComboModeloDFe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            ComboModeloDFe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ComboModeloDFe.FormattingEnabled = true;
+            ComboModeloDFe.Location = new System.Drawing.Point(14, 159);
+            ComboModeloDFe.Margin = new System.Windows.Forms.Padding(4);
+            ComboModeloDFe.Name = "ComboModeloDFe";
+            ComboModeloDFe.Size = new System.Drawing.Size(152, 23);
+            ComboModeloDFe.TabIndex = 19;
             // 
             // ComboProtocolo
             // 
-            this.ComboProtocolo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboProtocolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ComboProtocolo.FormattingEnabled = true;
-            this.ComboProtocolo.Location = new System.Drawing.Point(177, 159);
-            this.ComboProtocolo.Margin = new System.Windows.Forms.Padding(4);
-            this.ComboProtocolo.Name = "ComboProtocolo";
-            this.ComboProtocolo.Size = new System.Drawing.Size(143, 23);
-            this.ComboProtocolo.TabIndex = 21;
+            ComboProtocolo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            ComboProtocolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ComboProtocolo.FormattingEnabled = true;
+            ComboProtocolo.Location = new System.Drawing.Point(177, 159);
+            ComboProtocolo.Margin = new System.Windows.Forms.Padding(4);
+            ComboProtocolo.Name = "ComboProtocolo";
+            ComboProtocolo.Size = new System.Drawing.Size(143, 23);
+            ComboProtocolo.TabIndex = 21;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(174, 135);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 16);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Protocolo";
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label4.Location = new System.Drawing.Point(174, 135);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(65, 16);
+            label4.TabIndex = 20;
+            label4.Text = "Protocolo";
             // 
             // BtnImprimir
             // 
-            this.BtnImprimir.FlatAppearance.BorderSize = 0;
-            this.BtnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BtnImprimir.Location = new System.Drawing.Point(10, 377);
-            this.BtnImprimir.Margin = new System.Windows.Forms.Padding(4);
-            this.BtnImprimir.Name = "BtnImprimir";
-            this.BtnImprimir.Size = new System.Drawing.Size(137, 51);
-            this.BtnImprimir.TabIndex = 22;
-            this.BtnImprimir.Text = "Imprimir";
-            this.BtnImprimir.UseVisualStyleBackColor = true;
-            this.BtnImprimir.Click += new System.EventHandler(this.BtnImprimir_Click);
+            BtnImprimir.FlatAppearance.BorderSize = 0;
+            BtnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            BtnImprimir.Location = new System.Drawing.Point(10, 406);
+            BtnImprimir.Margin = new System.Windows.Forms.Padding(4);
+            BtnImprimir.Name = "BtnImprimir";
+            BtnImprimir.Size = new System.Drawing.Size(137, 51);
+            BtnImprimir.TabIndex = 22;
+            BtnImprimir.Text = "Imprimir";
+            BtnImprimir.UseVisualStyleBackColor = true;
+            BtnImprimir.Click += BtnImprimir_Click;
             // 
             // ComboImpressoras
             // 
-            this.ComboImpressoras.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ComboImpressoras.FormattingEnabled = true;
-            this.ComboImpressoras.Location = new System.Drawing.Point(14, 97);
-            this.ComboImpressoras.Margin = new System.Windows.Forms.Padding(4);
-            this.ComboImpressoras.Name = "ComboImpressoras";
-            this.ComboImpressoras.Size = new System.Drawing.Size(409, 24);
-            this.ComboImpressoras.TabIndex = 23;
+            ComboImpressoras.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ComboImpressoras.FormattingEnabled = true;
+            ComboImpressoras.Location = new System.Drawing.Point(14, 97);
+            ComboImpressoras.Margin = new System.Windows.Forms.Padding(4);
+            ComboImpressoras.Name = "ComboImpressoras";
+            ComboImpressoras.Size = new System.Drawing.Size(409, 24);
+            ComboImpressoras.TabIndex = 23;
             // 
             // ChbCortar
             // 
-            this.ChbCortar.AutoSize = true;
-            this.ChbCortar.Checked = true;
-            this.ChbCortar.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChbCortar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ChbCortar.Location = new System.Drawing.Point(14, 193);
-            this.ChbCortar.Margin = new System.Windows.Forms.Padding(4);
-            this.ChbCortar.Name = "ChbCortar";
-            this.ChbCortar.Size = new System.Drawing.Size(123, 20);
-            this.ChbCortar.TabIndex = 24;
-            this.ChbCortar.Text = "Cortar ao final";
-            this.ChbCortar.UseVisualStyleBackColor = true;
+            ChbCortar.AutoSize = true;
+            ChbCortar.Checked = true;
+            ChbCortar.CheckState = System.Windows.Forms.CheckState.Checked;
+            ChbCortar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            ChbCortar.Location = new System.Drawing.Point(14, 193);
+            ChbCortar.Margin = new System.Windows.Forms.Padding(4);
+            ChbCortar.Name = "ChbCortar";
+            ChbCortar.Size = new System.Drawing.Size(123, 20);
+            ChbCortar.TabIndex = 24;
+            ChbCortar.Text = "Cortar ao final";
+            ChbCortar.UseVisualStyleBackColor = true;
             // 
             // ChbDuasLinhas
             // 
-            this.ChbDuasLinhas.AutoSize = true;
-            this.ChbDuasLinhas.Checked = true;
-            this.ChbDuasLinhas.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChbDuasLinhas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ChbDuasLinhas.Location = new System.Drawing.Point(14, 215);
-            this.ChbDuasLinhas.Margin = new System.Windows.Forms.Padding(4);
-            this.ChbDuasLinhas.Name = "ChbDuasLinhas";
-            this.ChbDuasLinhas.Size = new System.Drawing.Size(188, 20);
-            this.ChbDuasLinhas.TabIndex = 25;
-            this.ChbDuasLinhas.Text = "Produto em duas linhas";
-            this.ChbDuasLinhas.UseVisualStyleBackColor = true;
+            ChbDuasLinhas.AutoSize = true;
+            ChbDuasLinhas.Checked = true;
+            ChbDuasLinhas.CheckState = System.Windows.Forms.CheckState.Checked;
+            ChbDuasLinhas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            ChbDuasLinhas.Location = new System.Drawing.Point(14, 215);
+            ChbDuasLinhas.Margin = new System.Windows.Forms.Padding(4);
+            ChbDuasLinhas.Name = "ChbDuasLinhas";
+            ChbDuasLinhas.Size = new System.Drawing.Size(188, 20);
+            ChbDuasLinhas.TabIndex = 25;
+            ChbDuasLinhas.Text = "Produto em duas linhas";
+            ChbDuasLinhas.UseVisualStyleBackColor = true;
             // 
             // ChbBarrasCodigo
             // 
-            this.ChbBarrasCodigo.AutoSize = true;
-            this.ChbBarrasCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ChbBarrasCodigo.Location = new System.Drawing.Point(14, 237);
-            this.ChbBarrasCodigo.Margin = new System.Windows.Forms.Padding(4);
-            this.ChbBarrasCodigo.Name = "ChbBarrasCodigo";
-            this.ChbBarrasCodigo.Size = new System.Drawing.Size(166, 20);
-            this.ChbBarrasCodigo.TabIndex = 26;
-            this.ChbBarrasCodigo.Text = "Barras como código";
-            this.ChbBarrasCodigo.UseVisualStyleBackColor = true;
+            ChbBarrasCodigo.AutoSize = true;
+            ChbBarrasCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            ChbBarrasCodigo.Location = new System.Drawing.Point(14, 237);
+            ChbBarrasCodigo.Margin = new System.Windows.Forms.Padding(4);
+            ChbBarrasCodigo.Name = "ChbBarrasCodigo";
+            ChbBarrasCodigo.Size = new System.Drawing.Size(166, 20);
+            ChbBarrasCodigo.TabIndex = 26;
+            ChbBarrasCodigo.Text = "Barras como código";
+            ChbBarrasCodigo.UseVisualStyleBackColor = true;
             // 
             // ChbDocumentoCancelado
             // 
-            this.ChbDocumentoCancelado.AutoSize = true;
-            this.ChbDocumentoCancelado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ChbDocumentoCancelado.Location = new System.Drawing.Point(14, 257);
-            this.ChbDocumentoCancelado.Margin = new System.Windows.Forms.Padding(4);
-            this.ChbDocumentoCancelado.Name = "ChbDocumentoCancelado";
-            this.ChbDocumentoCancelado.Size = new System.Drawing.Size(181, 20);
-            this.ChbDocumentoCancelado.TabIndex = 27;
-            this.ChbDocumentoCancelado.Text = "Documento cancelado";
-            this.ChbDocumentoCancelado.UseVisualStyleBackColor = true;
+            ChbDocumentoCancelado.AutoSize = true;
+            ChbDocumentoCancelado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            ChbDocumentoCancelado.Location = new System.Drawing.Point(14, 257);
+            ChbDocumentoCancelado.Margin = new System.Windows.Forms.Padding(4);
+            ChbDocumentoCancelado.Name = "ChbDocumentoCancelado";
+            ChbDocumentoCancelado.Size = new System.Drawing.Size(181, 20);
+            ChbDocumentoCancelado.TabIndex = 27;
+            ChbDocumentoCancelado.Text = "Documento cancelado";
+            ChbDocumentoCancelado.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(228, 405);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 22);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "Carregar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.FlatAppearance.BorderSize = 0;
+            button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            button1.Location = new System.Drawing.Point(228, 430);
+            button1.Margin = new System.Windows.Forms.Padding(4);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(112, 22);
+            button1.TabIndex = 22;
+            button1.Text = "Carregar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(347, 405);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 22);
-            this.button2.TabIndex = 22;
-            this.button2.Text = "Limpar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.FlatAppearance.BorderSize = 0;
+            button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            button2.Location = new System.Drawing.Point(347, 430);
+            button2.Margin = new System.Windows.Forms.Padding(4);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(112, 22);
+            button2.TabIndex = 22;
+            button2.Text = "Limpar";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(219, 212);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(253, 182);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 28;
-            this.pictureBox1.TabStop = false;
+            pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pictureBox1.Location = new System.Drawing.Point(219, 212);
+            pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new System.Drawing.Size(253, 211);
+            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 28;
+            pictureBox1.TabStop = false;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(219, 193);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 16);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Logotipo";
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label5.Location = new System.Drawing.Point(219, 193);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(60, 16);
+            label5.TabIndex = 18;
+            label5.Text = "Logotipo";
             // 
             // ComboTipoPapel
             // 
-            this.ComboTipoPapel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboTipoPapel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ComboTipoPapel.FormattingEnabled = true;
-            this.ComboTipoPapel.Location = new System.Drawing.Point(330, 159);
-            this.ComboTipoPapel.Margin = new System.Windows.Forms.Padding(4);
-            this.ComboTipoPapel.Name = "ComboTipoPapel";
-            this.ComboTipoPapel.Size = new System.Drawing.Size(143, 23);
-            this.ComboTipoPapel.TabIndex = 21;
+            ComboTipoPapel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            ComboTipoPapel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ComboTipoPapel.FormattingEnabled = true;
+            ComboTipoPapel.Location = new System.Drawing.Point(330, 159);
+            ComboTipoPapel.Margin = new System.Windows.Forms.Padding(4);
+            ComboTipoPapel.Name = "ComboTipoPapel";
+            ComboTipoPapel.Size = new System.Drawing.Size(143, 23);
+            ComboTipoPapel.TabIndex = 21;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(327, 135);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(93, 16);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Tipo de Papel";
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label6.Location = new System.Drawing.Point(327, 135);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(93, 16);
+            label6.TabIndex = 20;
+            label6.Text = "Tipo de Papel";
             // 
             // ChbRemoverAcentos
             // 
-            this.ChbRemoverAcentos.AutoSize = true;
-            this.ChbRemoverAcentos.Checked = true;
-            this.ChbRemoverAcentos.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChbRemoverAcentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ChbRemoverAcentos.Location = new System.Drawing.Point(14, 279);
-            this.ChbRemoverAcentos.Margin = new System.Windows.Forms.Padding(4);
-            this.ChbRemoverAcentos.Name = "ChbRemoverAcentos";
-            this.ChbRemoverAcentos.Size = new System.Drawing.Size(149, 20);
-            this.ChbRemoverAcentos.TabIndex = 29;
-            this.ChbRemoverAcentos.Text = "Remover Acentos";
-            this.ChbRemoverAcentos.UseVisualStyleBackColor = true;
+            ChbRemoverAcentos.AutoSize = true;
+            ChbRemoverAcentos.Checked = true;
+            ChbRemoverAcentos.CheckState = System.Windows.Forms.CheckState.Checked;
+            ChbRemoverAcentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            ChbRemoverAcentos.Location = new System.Drawing.Point(14, 279);
+            ChbRemoverAcentos.Margin = new System.Windows.Forms.Padding(4);
+            ChbRemoverAcentos.Name = "ChbRemoverAcentos";
+            ChbRemoverAcentos.Size = new System.Drawing.Size(149, 20);
+            ChbRemoverAcentos.TabIndex = 29;
+            ChbRemoverAcentos.Text = "Remover Acentos";
+            ChbRemoverAcentos.UseVisualStyleBackColor = true;
             // 
             // ChbQRCodeLateral
             // 
-            this.ChbQRCodeLateral.AutoSize = true;
-            this.ChbQRCodeLateral.Checked = true;
-            this.ChbQRCodeLateral.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChbQRCodeLateral.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ChbQRCodeLateral.Location = new System.Drawing.Point(14, 303);
-            this.ChbQRCodeLateral.Margin = new System.Windows.Forms.Padding(4);
-            this.ChbQRCodeLateral.Name = "ChbQRCodeLateral";
-            this.ChbQRCodeLateral.Size = new System.Drawing.Size(141, 20);
-            this.ChbQRCodeLateral.TabIndex = 30;
-            this.ChbQRCodeLateral.Text = "QR Code Lateral";
-            this.ChbQRCodeLateral.UseVisualStyleBackColor = true;
+            ChbQRCodeLateral.AutoSize = true;
+            ChbQRCodeLateral.Checked = true;
+            ChbQRCodeLateral.CheckState = System.Windows.Forms.CheckState.Checked;
+            ChbQRCodeLateral.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            ChbQRCodeLateral.Location = new System.Drawing.Point(14, 303);
+            ChbQRCodeLateral.Margin = new System.Windows.Forms.Padding(4);
+            ChbQRCodeLateral.Name = "ChbQRCodeLateral";
+            ChbQRCodeLateral.Size = new System.Drawing.Size(141, 20);
+            ChbQRCodeLateral.TabIndex = 30;
+            ChbQRCodeLateral.Text = "QR Code Lateral";
+            ChbQRCodeLateral.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(14, 327);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 16);
-            this.label7.TabIndex = 31;
-            this.label7.Text = "Desenvolvedor";
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label7.Location = new System.Drawing.Point(14, 351);
+            label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(100, 16);
+            label7.TabIndex = 31;
+            label7.Text = "Desenvolvedor";
             // 
             // TextDesenvolvedor
             // 
-            this.TextDesenvolvedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextDesenvolvedor.Location = new System.Drawing.Point(14, 347);
-            this.TextDesenvolvedor.Margin = new System.Windows.Forms.Padding(4);
-            this.TextDesenvolvedor.Name = "TextDesenvolvedor";
-            this.TextDesenvolvedor.Size = new System.Drawing.Size(195, 22);
-            this.TextDesenvolvedor.TabIndex = 32;
-            this.TextDesenvolvedor.Text = "Desenvolvido por XXX";
+            TextDesenvolvedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            TextDesenvolvedor.Location = new System.Drawing.Point(14, 371);
+            TextDesenvolvedor.Margin = new System.Windows.Forms.Padding(4);
+            TextDesenvolvedor.Name = "TextDesenvolvedor";
+            TextDesenvolvedor.Size = new System.Drawing.Size(195, 22);
+            TextDesenvolvedor.TabIndex = 32;
+            TextDesenvolvedor.Text = "Desenvolvido por XXX";
+            // 
+            // ChbQrCodeImagem
+            // 
+            ChbQrCodeImagem.AutoSize = true;
+            ChbQrCodeImagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            ChbQrCodeImagem.Location = new System.Drawing.Point(14, 326);
+            ChbQrCodeImagem.Margin = new System.Windows.Forms.Padding(4);
+            ChbQrCodeImagem.Name = "ChbQrCodeImagem";
+            ChbQrCodeImagem.Size = new System.Drawing.Size(190, 20);
+            ChbQrCodeImagem.TabIndex = 33;
+            ChbQrCodeImagem.Text = "QR Code como imagem";
+            ChbQrCodeImagem.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 435);
-            this.Controls.Add(this.TextDesenvolvedor);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.ChbQRCodeLateral);
-            this.Controls.Add(this.ChbRemoverAcentos);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.ComboTipoPapel);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.ChbDocumentoCancelado);
-            this.Controls.Add(this.ChbBarrasCodigo);
-            this.Controls.Add(this.ChbDuasLinhas);
-            this.Controls.Add(this.ChbCortar);
-            this.Controls.Add(this.ComboImpressoras);
-            this.Controls.Add(this.BtnImprimir);
-            this.Controls.Add(this.ComboProtocolo);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.ComboModeloDFe);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.BtnListarImpressoras);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.BtnCarregar);
-            this.Controls.Add(this.TextArquivoXml);
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(484, 466);
+            Controls.Add(ChbQrCodeImagem);
+            Controls.Add(TextDesenvolvedor);
+            Controls.Add(label7);
+            Controls.Add(ChbQRCodeLateral);
+            Controls.Add(ChbRemoverAcentos);
+            Controls.Add(label6);
+            Controls.Add(ComboTipoPapel);
+            Controls.Add(label5);
+            Controls.Add(pictureBox1);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(ChbDocumentoCancelado);
+            Controls.Add(ChbBarrasCodigo);
+            Controls.Add(ChbDuasLinhas);
+            Controls.Add(ChbCortar);
+            Controls.Add(ComboImpressoras);
+            Controls.Add(BtnImprimir);
+            Controls.Add(ComboProtocolo);
+            Controls.Add(label4);
+            Controls.Add(ComboModeloDFe);
+            Controls.Add(label3);
+            Controls.Add(BtnListarImpressoras);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(BtnCarregar);
+            Controls.Add(TextArquivoXml);
+            Margin = new System.Windows.Forms.Padding(4);
+            Name = "Form1";
+            Text = "Form1";
+            Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -415,6 +428,7 @@
         private System.Windows.Forms.CheckBox ChbQRCodeLateral;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox TextDesenvolvedor;
+        private System.Windows.Forms.CheckBox ChbQrCodeImagem;
     }
 }
 

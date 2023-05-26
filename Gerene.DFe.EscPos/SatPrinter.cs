@@ -57,6 +57,53 @@ namespace Gerene.DFe.EscPos
         }
         #endregion
 
+        public override string QRCodeTexto(string xmlcontent)
+        {
+            if (xmlcontent.ToLower().Contains("<CFeCanc"))
+            {
+                var cfecanc = CFeCanc.Load(new MemoryStream(Encoding.UTF8.GetBytes(xmlcontent)), Encoding.UTF8);
+                return QRCodeTexto(cfecanc);
+            }
+            else
+            {
+                var cfe = CFe.Load(new MemoryStream(Encoding.UTF8.GetBytes(xmlcontent)), Encoding.UTF8);
+                return QRCodeTexto(cfe);
+            }
+        }
+
+        private string QRCodeTexto(CFe cfe)
+        {
+            return $"{cfe.InfCFe.Id.OnlyNumber()}|" +
+                $"{cfe.InfCFe.Ide.DhEmissao:yyyyMMddHHmmss}|" +
+                $"{cfe.InfCFe.Total.VCFe:0.00}|" +
+                $"{(cfe.InfCFe.Dest?.CNPJ.IsNotNull() == true ? cfe.InfCFe.Dest.CNPJ : cfe.InfCFe.Dest.CPF)}|" +
+                $"{cfe.InfCFe.Ide.AssinaturaQrcode}";
+        }
+
+        private string QRCodeTexto(CFeCanc cfecanc)
+        {
+            return $"{cfecanc.InfCFe.ChCanc.OnlyNumber()}|" +
+                    $"{cfecanc.InfCFe.Ide.DhEmissao:yyyyMMddHHmmss}|" +
+                    $"{cfecanc.InfCFe.Ide.DhEmissao:0.00}|" +
+                    $"{(cfecanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? cfecanc.InfCFe.Dest.CNPJ : cfecanc.InfCFe.Dest.CPF)}|" +
+                    $"{cfecanc.InfCFe.Ide.AssinaturaQrcode}";
+        }
+
+        public override string QRCodeTextoCanc(string xmlcontent)
+        {
+            var cfecanc = CFeCanc.Load(new MemoryStream(Encoding.UTF8.GetBytes(xmlcontent)), Encoding.UTF8);
+            return QrCodeTextCanc(cfecanc);
+        }
+
+        private string QrCodeTextCanc(CFeCanc cfecanc)
+        {
+            return $"{cfecanc.InfCFe.Id.OnlyNumber()}|" +
+                    $"{cfecanc.InfCFe.Ide.DhEmissao:yyyyMMddHHmmss}|" +
+                    $"{cfecanc.InfCFe.Total.VCFe:0.00}|" +
+                    $"{(cfecanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? cfecanc.InfCFe.Dest.CNPJ : cfecanc.InfCFe.Dest.CPF)}|" +
+                    $"{cfecanc.InfCFe.Ide.AssinaturaQrcode}";
+        }
+
         public override void Imprimir(string xmlcontent)
         {
             base.Imprimir(xmlcontent);
@@ -68,13 +115,6 @@ namespace Gerene.DFe.EscPos
                            "000.000.000-00";
 
             string chave = Regex.Replace(_CFe.InfCFe.Id.OnlyNumber(), ".{4}", "$0 ");
-
-            string _qrCode = $"{_CFe.InfCFe.Id.OnlyNumber()}|" +
-                 $"{_CFe.InfCFe.Ide.DhEmissao:yyyyMMddHHmmss}|" +
-                 $"{_CFe.InfCFe.Total.VCFe:0.00}|" +
-                 $"{(_CFe.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFe.InfCFe.Dest.CNPJ : _CFe.InfCFe.Dest.CPF)}|" +
-                 $"{_CFe.InfCFe.Ide.AssinaturaQrcode}";
-
             #region Cabeçalho
 
             #region Logotipo
@@ -260,7 +300,7 @@ namespace Gerene.DFe.EscPos
             }
             #endregion
 
-           
+
 
             if (QrCodeLateral)
             {
@@ -277,7 +317,11 @@ namespace Gerene.DFe.EscPos
                 #region QRCode
                 var regiao = pagina.NovaRegiao(0, 0, 240, 500);
                 regiao.Direcao = CmdPosDirecao.EsquerdaParaDireita;
-                regiao.ImprimirQrCode(_qrCode, tamanho: OpenQrCodeModSize.Pequeno);
+
+                if (QrCodeImagem != null)
+                    regiao.ImprimirImagem(QrCodeImagem, OpenAlinhamento.Esquerda);
+                else
+                    regiao.ImprimirQrCode(QRCodeTexto(_CFe), tamanho: OpenQrCodeModSize.Pequeno);
                 #endregion
 
                 #region Outros dados
@@ -289,7 +333,7 @@ namespace Gerene.DFe.EscPos
                 regiao.ImprimirTexto($"Razão Social/Nome: {_CFe.InfCFe.Dest?.Nome ?? "CONSUMIDOR"}".TratarAcento().LimitarString(ColunasCondensado), OpenTamanhoFonte.Condensada);
                 regiao.ImprimirTexto($"SAT No. {_CFe.InfCFe.Ide.NSerieSAT:D9}", OpenTamanhoFonte.Condensada);
                 regiao.ImprimirTexto($"Data e Hora {_CFe.InfCFe.Ide.DEmi:dd/MM/yyyy} {_CFe.InfCFe.Ide.HEmi:HH:mm:ss}", OpenTamanhoFonte.Condensada);
-                
+
                 #region Tributos
                 if (ImprimirDeOlhoNoImposto)
                     regiao.ImprimirTexto($"Trib. aprox. {_CFe.InfCFe.Total.VCFeLei12741.ToString("C2", Cultura)} conforme lei fed. 12.741/2012", OpenTamanhoFonte.Condensada);
@@ -345,7 +389,12 @@ namespace Gerene.DFe.EscPos
                 #endregion
 
                 #region QrCode
-                _Printer.ImprimirQrCode(_qrCode, aAlinhamento: CentralizadoSeTp80mm, tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal : OpenQrCodeModSize.Pequeno);
+                if (QrCodeImagem != null)
+                    _Printer.ImprimirImagem(QrCodeImagem, CentralizadoSeTp80mm);
+                else
+                    _Printer.ImprimirQrCode(QRCodeTexto(_CFe),
+                        aAlinhamento: CentralizadoSeTp80mm,
+                        tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal : OpenQrCodeModSize.Pequeno);
 
                 if (TipoPapel == TipoPapel.Tp80mm)
                     _Printer.PularLinhas(1);
@@ -374,6 +423,9 @@ namespace Gerene.DFe.EscPos
 
             if (CortarPapel)
                 _Printer.CortarPapel(true);
+
+            else
+                _Printer.PularLinhas(3);
 
             EnviarDados();
         }
@@ -469,13 +521,10 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region QrCode
-            string _qrCode = $"{_CFeCanc.InfCFe.ChCanc.OnlyNumber()}|" +
-                             $"{_CFeCanc.InfCFe.Ide.DhEmissao:yyyyMMddHHmmss}|" +
-                             $"{_CFeCanc.InfCFe.Ide.DhEmissao:0.00}|" +
-                             $"{(_CFeCanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CNPJ : _CFeCanc.InfCFe.Dest.CPF)}|" +
-                             $"{_CFeCanc.InfCFe.Ide.AssinaturaQrcode}";
-
-            _Printer.ImprimirQrCode(_qrCode, aAlinhamento: CentralizadoSeTp80mm, tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal : OpenQrCodeModSize.Pequeno);
+            if (QrCodeImagem != null)
+                _Printer.ImprimirImagem(QrCodeImagem, OpenAlinhamento.Esquerda, true);
+            else
+                _Printer.ImprimirQrCode(QRCodeTexto(_CFeCanc), aAlinhamento: CentralizadoSeTp80mm, tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal : OpenQrCodeModSize.Pequeno);
 
             if (TipoPapel == TipoPapel.Tp80mm)
                 _Printer.PularLinhas(1);
@@ -526,13 +575,11 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region QrCode
-            string _qrCodeCancel = $"{_CFeCanc.InfCFe.Id.OnlyNumber()}|" +
-                             $"{_CFeCanc.InfCFe.Ide.DhEmissao:yyyyMMddHHmmss}|" +
-                             $"{_CFeCanc.InfCFe.Total.VCFe:0.00}|" +
-                             $"{(_CFeCanc.InfCFe.Dest?.CNPJ.IsNotNull() == true ? _CFeCanc.InfCFe.Dest.CNPJ : _CFeCanc.InfCFe.Dest.CPF)}|" +
-                             $"{_CFeCanc.InfCFe.Ide.AssinaturaQrcode}";
 
-            _Printer.ImprimirQrCode(_qrCodeCancel, aAlinhamento: CentralizadoSeTp80mm, tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal : OpenQrCodeModSize.Pequeno);
+            if (QrCodeImagemCanc != null)
+                _Printer.ImprimirImagem(QrCodeImagemCanc, OpenAlinhamento.Esquerda, true);            
+            else
+                _Printer.ImprimirQrCode(QrCodeTextCanc(_CFeCanc), aAlinhamento: CentralizadoSeTp80mm, tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal : OpenQrCodeModSize.Pequeno);
 
             _Printer.PularLinhas(1);
             #endregion

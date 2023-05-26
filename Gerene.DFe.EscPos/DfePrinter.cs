@@ -2,6 +2,7 @@
 using OpenAC.Net.EscPos;
 using OpenAC.Net.EscPos.Commom;
 using System;
+using System.Drawing;
 using System.Globalization;
 using System.Text;
 using OpenAlinhamento = OpenAC.Net.EscPos.Commom.CmdAlinhamento;
@@ -162,6 +163,18 @@ namespace Gerene.DFe.EscPos
             set => _ColunasExtendido = value;
         }
 
+        /// <summary>
+        /// Algumas impressoras não suportam QRCode, mas imprimem imagem.
+        /// Neste caso, informar aqui o QRCode. Para impressoras que aceitam QRCode esse atributo NÃO deve ser informado 
+        /// </summary>
+        public Bitmap QrCodeImagem { get; set; }
+
+        /// <summary>
+        /// Algumas impressoras não suportam QRCode, mas imprimem imagem.
+        /// Neste caso, informar aqui o QRCode. Para impressoras que aceitam QRCode esse atributo NÃO deve ser informado 
+        /// </summary>
+        public Bitmap QrCodeImagemCanc { get; set; }
+
         protected EscPosPrinter _Printer { get; set; }
 
         public DfePrinter()
@@ -186,6 +199,9 @@ namespace Gerene.DFe.EscPos
             ConfiguracaoRAW = new RawConfig();
             ConfiguracaoSerial = new SerialConfig();
             ConfiguracaoTCP = new TCPConfig();
+
+            QrCodeImagem = null;
+            QrCodeImagemCanc = null;
         }
 
         public virtual void Dispose()
@@ -262,5 +278,10 @@ namespace Gerene.DFe.EscPos
 
         protected OpenAlinhamento CentralizadoSeTp80mm => TipoPapel == TipoPapel.Tp80mm ? OpenAlinhamento.Centro : OpenAlinhamento.Esquerda;
         protected void ImprimirSeparador(char _char = '-') => _Printer.ImprimirTexto(string.Empty.PadLeft(ColunasCondensado, _char), OpenTamanhoFonte.Condensada);
+
+        public abstract string QRCodeTexto(string xmlcontent);
+
+        public abstract string QRCodeTextoCanc(string xmlcontent);
+
     }
 }

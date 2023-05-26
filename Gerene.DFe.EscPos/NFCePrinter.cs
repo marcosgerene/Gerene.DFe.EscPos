@@ -13,7 +13,6 @@ using OpenQrCodeModSize = OpenAC.Net.EscPos.Commom.QrCodeModSize;
 using NotaFiscal = NFe.Classes.nfeProc;
 using System.Drawing;
 using System.IO;
-using System;
 using OpenAC.Net.EscPos.Commom;
 
 namespace Gerene.DFe.EscPos
@@ -42,6 +41,33 @@ namespace Gerene.DFe.EscPos
             }
         }
         #endregion
+
+        public override string QRCodeTexto(string xmlcontent)
+        {
+            NotaFiscal nota;
+
+            if (xmlcontent.ToLower().Contains("<nfeproc"))
+                nota = new NotaFiscal().CarregarDeXmlString(xmlcontent);
+            else
+            {
+                nota = new NotaFiscal()
+                {
+                    NFe = new NFe.Classes.NFe().CarregarDeXmlString(xmlcontent),
+                    protNFe = new NFe.Classes.Protocolo.protNFe()
+                };
+
+                nota.versao = _NFCe.NFe.infNFe.versao;
+            }
+
+            return QRCodeTexto(nota);
+        }
+
+        private string QRCodeTexto(NotaFiscal nota) => nota.NFe.infNFeSupl.qrCode;
+
+        public override string QRCodeTextoCanc(string xmlcontent)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override void Imprimir(string xmlcontent)
         {
@@ -141,7 +167,7 @@ namespace Gerene.DFe.EscPos
                 _Printer.ImprimirTexto("#|COD|DESC|QTD|UN|VL UN|DESC|VL ITEM", OpenAlinhamento.Centro, OpenEstiloFonte.Negrito);
             else
                 _Printer.ImprimirTexto("COD|DESC|QTD|UN|VL UN|DESC|VL ITEM", OpenEstiloFonte.Negrito);
-            
+
             #region Produtos
             foreach (var det in _NFCe.NFe.infNFe.det)
             {
@@ -290,7 +316,13 @@ namespace Gerene.DFe.EscPos
                 var regiao = pagina.NovaRegiao(0, 0, 240, 450);
                 regiao.Direcao = CmdPosDirecao.EsquerdaParaDireita;
                 regiao.ImprimirTexto("Consulta via QR Code", OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
-                regiao.ImprimirQrCode(_NFCe.NFe.infNFeSupl.qrCode, tamanho: OpenQrCodeModSize.Normal, aAlinhamento: OpenAlinhamento.Centro);
+
+                if (QrCodeImagem != null)
+                    _Printer.ImprimirImagem(QrCodeImagem, OpenAlinhamento.Esquerda, true);
+                else
+                    _Printer.ImprimirQrCode(QRCodeTexto(_NFCe),
+                        aAlinhamento: CentralizadoSeTp80mm,
+                        tamanho: OpenQrCodeModSize.Normal);
                 #endregion
 
                 #region Outros dados
@@ -336,7 +368,7 @@ namespace Gerene.DFe.EscPos
             }
 
             else
-            {               
+            {
                 #region Consumidor
                 ImprimirSeparador();
                 if (_NFCe.NFe.infNFe.dest != null)
@@ -367,7 +399,12 @@ namespace Gerene.DFe.EscPos
                 {
                     _Printer.ImprimirTexto("Consulta via leitor de QR Code", OpenTamanhoFonte.Condensada, CentralizadoSeTp80mm, OpenEstiloFonte.Negrito);
 
-                    _Printer.ImprimirQrCode(_NFCe.NFe.infNFeSupl.qrCode, aAlinhamento: CentralizadoSeTp80mm, tamanho: TipoPapel == TipoPapel.Tp80mm ? OpenQrCodeModSize.Normal : OpenQrCodeModSize.Pequeno);
+                    if (QrCodeImagem != null)
+                        _Printer.ImprimirImagem(QrCodeImagem, OpenAlinhamento.Esquerda, true);
+                    else
+                        _Printer.ImprimirQrCode(QRCodeTexto(_NFCe),
+                            aAlinhamento: CentralizadoSeTp80mm,
+                            tamanho: OpenQrCodeModSize.Normal);
 
                     _Printer.PularLinhas(1);
                 }
@@ -384,13 +421,15 @@ namespace Gerene.DFe.EscPos
                 #endregion
             }
 
-
-
             #endregion
+
             if (CortarPapel)
                 _Printer.CortarPapel(true);
+            else
+                _Printer.PularLinhas(3);
 
             EnviarDados();
         }
+               
     }
 }

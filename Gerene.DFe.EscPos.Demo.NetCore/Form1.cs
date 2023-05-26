@@ -120,8 +120,37 @@ namespace Gerene.DFe.EscPos.Demo.Net6
                 _printer.QrCodeLateral = ChbQRCodeLateral.Checked;
                 _printer.Desenvolvedor = TextDesenvolvedor.Text;
 
+                if (ChbQrCodeImagem.Checked)
+                {
+                    string qrcode = _printer.QRCodeTexto(xml);
+
+                    Bitmap qrCodeImage;
+                    using (var qrGenerator = new QRCoder.QRCodeGenerator())
+                    using (var qrCodeData = qrGenerator.CreateQrCode(qrcode, QRCoder.QRCodeGenerator.ECCLevel.H))
+                    using (var qrCode = new QRCoder.QRCode(qrCodeData))
+                        qrCodeImage = qrCode.GetGraphic(3);
+
+                    _printer.QrCodeImagem = qrCodeImage;                    
+                }
+
                 if ((ModeloDFe)ComboModeloDFe.SelectedItem == ModeloDFe.CancelamentoSat)
+                {
+                    if (ChbQrCodeImagem.Checked)
+                    {
+                        string qrcode = _printer.QRCodeTextoCanc(xml);
+
+                        Bitmap qrCodeImage;
+                        using (var qrGenerator = new QRCoder.QRCodeGenerator())
+                        using (var qrCodeData = qrGenerator.CreateQrCode(qrcode, QRCoder.QRCodeGenerator.ECCLevel.H))
+                        using (var qrCode = new QRCoder.QRCode(qrCodeData))
+                            qrCodeImage = qrCode.GetGraphic(3);
+
+                        _printer.QrCodeImagemCanc = qrCodeImage;
+                    }
+
+
                     (_printer as SatPrinter).ImprimirCancelamento(xml);
+                }
                 else
                     _printer.Imprimir(xml);
             }
