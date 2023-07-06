@@ -71,6 +71,8 @@ DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DF
 
 Change log:
 ----
+1.0.22 - Não imprimia NFCe se a tag infAdic estivesse nula
+
 1.0.21 - Permite imprimir o QrCode como imagem, util para impressoras sem suporte a QrCode
 
 1.0.20 - Opção de customizar o tamanho das colunas (número de caracteres na linha)
