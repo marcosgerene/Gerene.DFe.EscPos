@@ -12,7 +12,7 @@ Permite comunicação via RAW (USB), TCP e Serial.
 Funcionamento:
 ----
 
-O projeto é construído em .Net Standard 2.0 e conta com dois demos (.Net Framework 4.6.2 e .Net 6).
+O projeto é construído em .Net Standard 2.0 e conta com um projeto de demonstração em .NET 6.
 
 Exemplo de uso:
 ```
@@ -58,6 +58,7 @@ using (var qrCode = new QRCoder.QRCode(qrCodeData))
 
 _printer.QrCodeImagem = qrCodeImage;
 ```
+*Importante: **Não** usar o parâmetro QrCodeImagem em impressoras com suporte a QrCode. A impressão de imagem é mais lenta e custosa para a impressora quando comparado a QRCode nativo.* 
 
 Dependências:
 ----
@@ -71,46 +72,29 @@ DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DF
 
 Change log:
 ----
-1.0.22 - Não imprimia NFCe se a tag infAdic estivesse nula
-
-1.0.21 - Permite imprimir o QrCode como imagem, util para impressoras sem suporte a QrCode
-
-1.0.20 - Opção de customizar o tamanho das colunas (número de caracteres na linha)
-
-1.0.19 - QR Code lateral
-
-1.0.18 - Atualizando referencias ao Zeus (remoção dos projetos shared)
-
-1.0.17 - Altera o motor de impressão, adicionando os protcolos TCP e Serial e novos recursos como impressão de caracteres acentuados.
-
-1.0.16 - Remove o @ que aparecia no meio do protocolo no NFCe
-
-1.0.15 - Migrando para OpenAC.Net.Sat
-
-1.0.14 - Opção de alterar casas decimais da quantidade
-
-1.0.13 - Melhora na impressão da observação do contribuinte
-
-1.0.12 - SAT quebrava se o XFant de emitente estivesse nulo
-
-1.0.11 - Opção de ocultar tag "De olho no imposto"
-
-1.0.10 - Não era possível imprimir NFCe sem a tag infAdic (issue #6)
-
-1.0.9 - Impressão em 58mm
-
-1.0.8 - Adiciona a impressão do logotipo
-
-1.0.7 - Adiciona Qtde. total de itens"
-
+1.0.22 - Não imprimia NFCe se a tag infAdic estivesse nula <br/>
+1.0.21 - Permite imprimir o QrCode como imagem, util para impressoras sem suporte a QrCode <br/>
+1.0.20 - Opção de customizar o tamanho das colunas (número de caracteres na linha) <br/>
+1.0.19 - QR Code lateral <br/>
+1.0.18 - Atualizando referencias ao Zeus (remoção dos projetos shared) <br/>
+1.0.17 - Altera o motor de impressão, adicionando os protcolos TCP e Serial e novos recursos como impressão de caracteres acentuados. <br/>
+1.0.16 - Remove o @ que aparecia no meio do protocolo no NFCe <br/>
+1.0.15 - Migrando para OpenAC.Net.Sat <br/>
+1.0.14 - Opção de alterar casas decimais da quantidade <br/>
+1.0.13 - Melhora na impressão da observação do contribuinte <br/>
+1.0.12 - SAT quebrava se o XFant de emitente estivesse nulo <br/>
+1.0.11 - Opção de ocultar tag "De olho no imposto" <br/>
+1.0.10 - Não era possível imprimir NFCe sem a tag infAdic (issue #6) <br/>
+1.0.9 - Impressão em 58mm <br/>
+1.0.8 - Adiciona a impressão do logotipo <br/>
+1.0.7 - Adiciona Qtde. total de itens" <br/>
 1.0.6 - Impressão para cancelamento do SAT
-
 
 
 Break changes:
 ----
 
-A versão 1.0.17 traz um novo motor de impressão (OpenAC.Net.EscPos) que permite impressão RAW (padrão para comunicação USB identica ao comportamento anterior) e adiciona os protocolos TCP e Serial.
+A versão 1.0.17 trouxe um novo motor de impressão (OpenAC.Net.EscPos) que permite impressão RAW (padrão para comunicação USB identica ao comportamento anterior) e adiciona os protocolos TCP e Serial.
 
 Você pode preencher apenas o atributo "Impressora" (antes chamado de "NomeImpressora") e substituir o atributo "TipoImpressora" por "Protocolo" e o comportamento do motor anterior será mantido.
 
