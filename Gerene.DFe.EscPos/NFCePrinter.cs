@@ -272,7 +272,7 @@ namespace Gerene.DFe.EscPos
             #endregion
 
             #region Observações do Contribuinte
-            if (_NFCe.NFe.infNFe.infAdic.infCpl.IsNotNull())
+            if (_NFCe.NFe.infNFe.infAdic != null && _NFCe.NFe.infNFe.infAdic.infCpl.IsNotNull())
             {
                 _Printer.ImprimirTexto("Observações do Contribuinte".TratarAcento(), OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
 
