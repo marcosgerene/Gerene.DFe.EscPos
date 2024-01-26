@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Gerene.DFe.EscPos.Demo.Net6
+namespace Gerene.DFe.EscPos.Demo
 {
     public partial class Form1 : Form
     {

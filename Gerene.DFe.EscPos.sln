@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gerene.DFe.EscPos", "Gerene.DFe.EscPos\Gerene.DFe.EscPos.csproj", "{EAED4963-3A41-46D5-A073-62259DDBF5E4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gerene.DFe.EscPos.Demo.Net6", "Gerene.DFe.EscPos.Demo.NetCore\Gerene.DFe.EscPos.Demo.Net6.csproj", "{6C0AC498-6D10-4DFA-A88A-F66B690D68C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gerene.DFe.EscPos.Demo", "Gerene.DFe.EscPos.Demo\Gerene.DFe.EscPos.Demo.csproj", "{6C0AC498-6D10-4DFA-A88A-F66B690D68C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

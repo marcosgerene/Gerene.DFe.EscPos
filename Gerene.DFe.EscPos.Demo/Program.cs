@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Gerene.DFe.EscPos.Demo.Net6
+namespace Gerene.DFe.EscPos.Demo
 {
     static class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace Gerene.DFe.EscPos.Demo.Net6
+﻿namespace Gerene.DFe.EscPos.Demo
 {
     partial class Form1
     {
