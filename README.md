@@ -12,9 +12,6 @@ Permite comunicação via RAW (USB), TCP e Serial.
 Funcionamento:
 ----
 
-O projeto é construído em .Net Standard 2.0 e conta com um projeto de demonstração em .NET 6.
-
-Exemplo de uso:
 ```
 using (var _printer = new SatPrinter()) //ou new NFCePrinter() para NFCe
 {
