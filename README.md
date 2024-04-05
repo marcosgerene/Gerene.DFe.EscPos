@@ -64,11 +64,12 @@ OpenAC.Net.EscPos (motor de impressão) - https://github.com/OpenAC-Net/OpenAC.N
 
 OpenAC.Net.Sat (desserialização do xml do SAT) - https://github.com/OpenAC-Net/OpenAC.Net.Sat
 
-DFe.Net (desserialização do xml da NFCe) - https://github.com/ZeusAutomacao/DFe.NET
+Hercules.NET (ZeusFiscal) (desserialização do xml da NFCe) - [https://github.com/ZeusAutomacao/DFe.NET](https://github.com/Hercules-NET/ZeusFiscal)
 
 
 Change log:
 ----
+1.0.23 - Removendo o antigo DFe.NET e migrando para Hercules.NET
 1.0.22 - Não imprimia NFCe se a tag infAdic estivesse nula <br/>
 1.0.21 - Permite imprimir o QrCode como imagem, util para impressoras sem suporte a QrCode <br/>
 1.0.20 - Opção de customizar o tamanho das colunas (número de caracteres na linha) <br/>
@@ -95,12 +96,11 @@ A versão 1.0.17 trouxe um novo motor de impressão (OpenAC.Net.EscPos) que perm
 
 Você pode preencher apenas o atributo "Impressora" (antes chamado de "NomeImpressora") e substituir o atributo "TipoImpressora" por "Protocolo" e o comportamento do motor anterior será mantido.
 
+A versão 1.0.23 remove a referência ao DFe.NET (antigo ZeusNfe) e troca pelo Hercules.NET. Por se tratar de um fork é necessário que seja removido a referência ao DFe.NET também na aplicação que usar o Gerene.DFe.EscPos para evitar duplicidade de namespace.
 
 
 Outras configurações:
 ----
-
-Com o novo motor, além dos novos protocolos, existe um controle mais apurado da impressora.
 
 Os atributos "ConfiguracaoRAW", "ConfiguracaoTCP" e "ConfiguracaoSerial" permitem alterações no comportamento da impressora e na forma de comunicação, para mais informações confira o funcionamento em https://github.com/OpenAC-Net/OpenAC.Net.EscPos
 
