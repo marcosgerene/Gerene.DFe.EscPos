@@ -5,7 +5,7 @@
 		<Company>Gerene Sistemas de Informação</Company>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/marcosgerene/Gerene.DFe.EscPos</PackageProjectUrl>
-		<Version>1.0.22</Version>
+		<Version>1.0.23</Version>
 		<PackageLicenseExpression></PackageLicenseExpression>
 		<Description>Impressão em impressora termica para DFes via EscPos e derivados (EscBema, EscDaruma, EscElgin, entre outros) nativo em .NET.
 
@@ -13,7 +13,8 @@ Atualmente a biblioteca atende os documentos SAT e NFCe nos formatos 58 e 80mm.
 
 Permite comunicação via RAW (USB), TCP e Serial.
 		</Description>
-		<PackageReleaseNotes>1.0.22 - Não imprimia NFCe se a tag infAdic estivesse nula
+		<PackageReleaseNotes>1.0.23 - Removendo o antigo DFe.NET e migrando para Hercules.NET
+1.0.22 - Não imprimia NFCe se a tag infAdic estivesse nula
 1.0.21 - Permite imprimir o QrCode como imagem, util para impressoras sem suporte a QrCode
 1.0.20 - Opção de customizar o tamanho das colunas (número de caracteres na linha)
 1.0.19 - QR Code lateral
@@ -35,10 +36,10 @@ Permite comunicação via RAW (USB), TCP e Serial.
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Hercules.NET.NFe.NFCe" Version="2024.4.5.1942" />
 		<PackageReference Include="OpenAC.Net.EscPos" Version="1.5.0" />
 		<PackageReference Include="OpenAC.Net.Sat" Version="1.5.0.2" />
-		<PackageReference Include="System.Drawing.Common" Version="8.0.1" />
-		<PackageReference Include="Zeus.Net.NFe.NFCe" Version="2024.1.26.1413" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
