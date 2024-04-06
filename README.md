@@ -69,7 +69,7 @@ Hercules.NET (ZeusFiscal) (desserialização do xml da NFCe) - [https://github.c
 
 Change log:
 ----
-1.0.23 - Removendo o antigo DFe.NET e migrando para Hercules.NET
+1.0.23 - Removendo o antigo DFe.NET e migrando para Hercules.NET<br/>
 1.0.22 - Não imprimia NFCe se a tag infAdic estivesse nula <br/>
 1.0.21 - Permite imprimir o QrCode como imagem, util para impressoras sem suporte a QrCode <br/>
 1.0.20 - Opção de customizar o tamanho das colunas (número de caracteres na linha) <br/>
