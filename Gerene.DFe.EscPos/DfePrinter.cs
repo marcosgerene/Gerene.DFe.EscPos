@@ -20,7 +20,8 @@ namespace Gerene.DFe.EscPos
     {
         Serial,
         TCP,
-        RAW
+        RAW,
+        File
     }
 
     public abstract class DfePrinter : IDisposable
@@ -64,6 +65,11 @@ namespace Gerene.DFe.EscPos
         /// Este atributo é utilizado somente quando o TipoConexao for "Serial"
         /// </summary>
         public SerialConfig ConfiguracaoSerial { get; set; }
+
+        /// <summary>
+        /// Este atributo é utilizado somente quando o TipoConexao for "File"
+        /// </summary>
+        public FileConfig ConfiguracaoFile { get; set; }
 
         public bool CortarPapel { get; set; }
         public bool ProdutoDuasLinhas { get; set; }
@@ -253,6 +259,13 @@ namespace Gerene.DFe.EscPos
                         ConfiguracaoSerial.Porta = Impressora;
 
                     _Printer = new EscPosPrinter<SerialConfig>(ConfiguracaoSerial);
+                    break;
+
+                case TipoConexao.File:
+                    if (Impressora.IsNotNull())
+                        ConfiguracaoFile.File = Impressora;
+
+                    _Printer = new EscPosPrinter<FileConfig>(ConfiguracaoFile);
                     break;
 
                 default:
