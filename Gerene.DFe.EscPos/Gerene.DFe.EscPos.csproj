@@ -34,6 +34,9 @@ Permite comunicação via RAW (USB), TCP e Serial.
 1.0.6 - Impressão para cancelamento do SAT		</PackageReleaseNotes>
 		<AssemblyVersion>1.0.20.0</AssemblyVersion>
 		<FileVersion>1.0.20.0</FileVersion>
+
+		<Nullable>disable</Nullable>
+
 	</PropertyGroup>
 
 	<ItemGroup>
