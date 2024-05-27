@@ -205,6 +205,7 @@ namespace Gerene.DFe.EscPos
             ConfiguracaoRAW = new RawConfig();
             ConfiguracaoSerial = new SerialConfig();
             ConfiguracaoTCP = new TCPConfig();
+            ConfiguracaoFile = new FileConfig();
 
             QrCodeImagem = null;
             QrCodeImagemCanc = null;
