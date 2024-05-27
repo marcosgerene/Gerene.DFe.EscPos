@@ -6,7 +6,7 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="QRCoder" Version="1.5.1" />
+    <PackageReference Include="QRCoder" Version="1.4.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gerene.DFe.EscPos\Gerene.DFe.EscPos.csproj" />
