@@ -13,7 +13,8 @@ Atualmente a biblioteca atende os documentos SAT e NFCe nos formatos 58 e 80mm.
 
 Permite comunicação via RAW (USB), TCP e Serial.
 		</Description>
-		<PackageReleaseNotes>1.0.24 - Adiciona File (ConfiguracaoFile) às formas de comunicação
+		<PackageReleaseNotes>1.0.25 - QRCode não estava saindo na lateral para NFCe
+1.0.24 - Adiciona File (ConfiguracaoFile) às formas de comunicação
 1.0.23 - Removendo o antigo DFe.NET e migrando para Hercules.NET
 1.0.22 - Não imprimia NFCe se a tag infAdic estivesse nula
 1.0.21 - Permite imprimir o QrCode como imagem, util para impressoras sem suporte a QrCode
@@ -34,6 +35,9 @@ Permite comunicação via RAW (USB), TCP e Serial.
 1.0.6 - Impressão para cancelamento do SAT		</PackageReleaseNotes>
 		<AssemblyVersion>1.0.20.0</AssemblyVersion>
 		<FileVersion>1.0.20.0</FileVersion>
+
+		<Nullable>disable</Nullable>
+
 	</PropertyGroup>
 
 	<ItemGroup>

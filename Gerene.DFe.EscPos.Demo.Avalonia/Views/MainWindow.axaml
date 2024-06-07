@@ -1,0 +1,100 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Gerene.DFe.EscPos.Demo.Avalonia.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:Gerene.DFe.EscPos.Demo.Avalonia.Views"
+        mc:Ignorable="d"
+        x:Class="Gerene.DFe.EscPos.Demo.Avalonia.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Width="650" Height="560"
+		x:DataType="vm:MainViewModel"
+        Title="Gerene.DFe.EscPos.Demo.Avalonia">
+
+	<Design.DataContext>
+		<vm:MainViewModel />
+	</Design.DataContext>
+
+	<Window.DataContext>
+		<vm:MainViewModel />
+	</Window.DataContext>
+
+	<StackPanel Spacing="20" Margin="10, 10">
+
+		<StackPanel>
+			<TextBlock Text="Arquivo XML"  />
+			<Grid ColumnDefinitions="*, Auto" >
+				<TextBox Text="{Binding CaminhoXml}" />
+				<Button Grid.Column="1" Margin="10,0,0,0" Content="..." FontSize="14" FontWeight="Black" Command="{Binding CarregarXmlCommand}" />
+			</Grid>
+		</StackPanel>
+
+		<StackPanel>
+			<TextBlock Text="Impressora"  />
+			<Grid ColumnDefinitions="*, Auto" >
+				<AutoCompleteBox ItemsSource="{Binding Impressoras}" Text="{Binding Impressora}" />
+				<Button Grid.Column="1" Margin="10,0,0,0" Content="..." FontSize="14" FontWeight="Black" Command="{Binding ListarImpressorasCommand}" />
+			</Grid>
+		</StackPanel>
+
+		<Grid ColumnDefinitions="*,*,*">
+			<StackPanel Grid.Column="0" Margin="0 0 10 0">
+				<TextBlock Text="Modelo" />
+				<ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding ModelosDfe}" SelectedItem="{Binding Modelo}" />
+			</StackPanel>
+
+			<StackPanel Grid.Column="1" Margin="5 0 5 0">
+				<TextBlock Text="Protocolo" />
+				<ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding Protocolos}" SelectedItem="{Binding Protocolo}" />
+			</StackPanel>
+
+			<StackPanel Grid.Column="2" Margin="10 0 0 0">
+				<TextBlock Text="Tipo de Papel" />
+				<ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding TiposPapel}" SelectedItem="{Binding TipoPapel}" />
+			</StackPanel>
+		</Grid>
+
+		<Grid ColumnDefinitions="Auto, *">
+			<StackPanel Grid.Column="0" Width="300" >
+				<CheckBox Content="Cortar ao Final" FontWeight="SemiBold" IsChecked="{Binding CortarAoFinal}" />
+				<CheckBox Content="Produto em duas linhas" FontWeight="SemiBold" IsChecked="{Binding ProdutoEmDuasLinhas}" />
+				<CheckBox Content="Barras como código" FontWeight="SemiBold" IsChecked="{Binding BarrasComoCodigo}" />
+				<CheckBox Content="Documento cancelado" Foreground="Red" FontWeight="SemiBold" IsChecked="{Binding DocumentoCancelado}" />
+				<CheckBox Content="Remover acentos" FontWeight="SemiBold" IsChecked="{Binding RemoverAcertos}"  />
+				<CheckBox Content="QRCode Lateral" FontWeight="SemiBold" IsChecked="{Binding QrCodeLateral}" />
+				<CheckBox IsChecked="{Binding QrCodeComoImagem}" >
+					<StackPanel Orientation="Horizontal" Spacing="0">
+						<TextBlock Text="QRCode como Imagem " FontWeight="SemiBold" />
+						<TextBlock Text="(cuidado)" FontWeight="SemiBold" TextDecorations="Strikethrough" />
+					</StackPanel>
+				</CheckBox>
+				<StackPanel>
+					<TextBlock Text="Desenvolvedor" />
+					<TextBox Text="{Binding Desenvolvedor}" />
+				</StackPanel>
+			</StackPanel>
+
+			<Grid Grid.Column="1" RowDefinitions="Auto,*,Auto" Margin="20 0 0 0">
+				<TextBlock Text="Logotipo" />
+
+				<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="0 5">
+					<!-- https://docs.avaloniaui.net/docs/guides/data-binding/how-to-bind-image-files -->
+					<Image Stretch="UniformToFill" Source="{Binding LogotipoBitmap}"  />
+				</Border>
+
+				<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+					<Button Content="Carregar" Command="{Binding CarregarLogotipoCommand}" />
+					<Button Content="Limpar" Command="{Binding LimparLogotipoCommand}" />
+				</StackPanel>
+			</Grid>
+		</Grid>
+
+		<Button HorizontalAlignment="Stretch" Content="Imprimir"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontWeight="Black"
+                Height="40"				
+				Command="{Binding ImprimirCommand}" />
+	</StackPanel>
+
+</Window>

@@ -318,9 +318,9 @@ namespace Gerene.DFe.EscPos
                 regiao.ImprimirTexto("Consulta via QR Code", OpenTamanhoFonte.Condensada, OpenEstiloFonte.Negrito);
 
                 if (QrCodeImagem != null)
-                    _Printer.ImprimirImagem(QrCodeImagem, OpenAlinhamento.Esquerda, true);
+                    regiao.ImprimirImagem(QrCodeImagem, OpenAlinhamento.Esquerda, true);
                 else
-                    _Printer.ImprimirQrCode(QRCodeTexto(_NFCe),
+                    regiao.ImprimirQrCode(QRCodeTexto(_NFCe),
                         aAlinhamento: CentralizadoSeTp80mm,
                         tamanho: OpenQrCodeModSize.Normal);
                 #endregion

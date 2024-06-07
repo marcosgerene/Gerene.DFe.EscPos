@@ -6,12 +6,15 @@ Impressão em impressora termica para DFes via EscPos e derivados (EscBema, EscD
 
 Atualmente a biblioteca atende os documentos SAT e NFCe nos formatos 58 e 80mm.
 
-Permite comunicação via RAW (USB), TCP e Serial.
+Permite comunicação via RAW (USB), TCP, Serial e FileConfig.
 
 
 Funcionamento:
 ----
 
+A biblioteca conta com dois demos escritos em Winforms (Windows) e Avalonia (multi-plataforma).
+
+Exemplo de uso:
 ```
 using (var _printer = new SatPrinter()) //ou new NFCePrinter() para NFCe
 {
@@ -47,15 +50,18 @@ Exemplo de uso do ```QrCodeImagem``` usando o projeto QRCoder:
 ```
 string qrcode = _printer.QRCodeTexto(xml);
 
-Bitmap qrCodeImage;
+SixLabors.ImageSharp.Image qrCodeImage;
 using (var qrGenerator = new QRCoder.QRCodeGenerator())
 using (var qrCodeData = qrGenerator.CreateQrCode(qrcode, QRCoder.QRCodeGenerator.ECCLevel.H))
 using (var qrCode = new QRCoder.QRCode(qrCodeData))
-	qrCodeImage = qrCode.GetGraphic(3);
+    qrCodeImage = qrCode.GetGraphic(3);
 
-_printer.QrCodeImagem = qrCodeImage;
+using MemoryStream memoryStream = new();
+qrCodeImage.SaveAsPng(memoryStream);
+_printer.QrCodeImagem = new System.Drawing.Bitmap(memoryStream);
 ```
-*Importante: **Não** usar o parâmetro QrCodeImagem em impressoras com suporte a QrCode. A impressão de imagem é mais lenta e custosa para a impressora quando comparado a QRCode nativo.* 
+
+*Importante: **Não** usar o parâmetro QrCodeImagem em impressoras com suporte a QrCode. A impressão de imagem é mais lenta e custosa para a impressora quando comparado a QRCode nativo!* 
 
 Dependências:
 ----
@@ -69,6 +75,7 @@ Hercules.NET (ZeusFiscal) (desserialização do xml da NFCe) - [https://github.c
 
 Change log:
 ----
+1.0.25 - QRCode não estava saindo na lateral para NFCe<br/>
 1.0.24 - Adiciona File (ConfiguracaoFile) às formas de comunicação<br/>
 1.0.23 - Removendo o antigo DFe.NET e migrando para Hercules.NET<br/>
 1.0.22 - Não imprimia NFCe se a tag infAdic estivesse nula <br/>

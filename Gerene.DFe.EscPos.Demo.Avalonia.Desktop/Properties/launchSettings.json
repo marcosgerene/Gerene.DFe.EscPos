@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Gerene.DFe.EscPos.Demo.Avalonia.Desktop": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}
