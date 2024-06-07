@@ -52,6 +52,11 @@ namespace Gerene.DFe.EscPos
         public ProtocoloEscPos Protocolo { get; set; }
 
         /// <summary>
+        /// Página de código utilizado na impressora ( padrão é pc437 )
+        /// </summary>
+        public PaginaCodigo PaginaCodigo { get; set; }
+
+        /// <summary>
         /// Este atributo é utilizado somente quando o TipoConexao for "RAW"
         /// </summary>
         public RawConfig ConfiguracaoRAW { get; set; }
@@ -187,6 +192,7 @@ namespace Gerene.DFe.EscPos
         {
             TipoConexao = TipoConexao.RAW;
             Protocolo = ProtocoloEscPos.EscPos;
+            PaginaCodigo = PaginaCodigo.pc437;
             Impressora = string.Empty;
 
             CortarPapel = true;
@@ -274,6 +280,7 @@ namespace Gerene.DFe.EscPos
             }
 
             _Printer.Protocolo = Protocolo;
+            _Printer.PaginaCodigo = PaginaCodigo;
             _Printer.Conectar();
 
             if (QrCodeLateral)
