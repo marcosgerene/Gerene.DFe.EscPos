@@ -52,6 +52,11 @@ namespace Gerene.DFe.EscPos
         public ProtocoloEscPos Protocolo { get; set; }
 
         /// <summary>
+        /// Página de código utilizado na impressora
+        /// </summary>
+        public PaginaCodigo? PaginaCodigo { get; set; }
+
+        /// <summary>
         /// Este atributo é utilizado somente quando o TipoConexao for "RAW"
         /// </summary>
         public RawConfig ConfiguracaoRAW { get; set; }
@@ -271,6 +276,11 @@ namespace Gerene.DFe.EscPos
 
                 default:
                     throw new ArgumentOutOfRangeException();
+            }
+
+            if (PaginaCodigo != null)
+            {
+                _Printer.PaginaCodigo = (PaginaCodigo)PaginaCodigo;
             }
 
             _Printer.Protocolo = Protocolo;
