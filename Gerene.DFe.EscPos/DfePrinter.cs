@@ -54,7 +54,7 @@ namespace Gerene.DFe.EscPos
         /// <summary>
         /// Página de código utilizado na impressora
         /// </summary>
-        public Nullable<PaginaCodigo> PaginaCodigo { get; set; }
+        public PaginaCodigo? PaginaCodigo { get; set; }
 
         /// <summary>
         /// Este atributo é utilizado somente quando o TipoConexao for "RAW"
