@@ -75,6 +75,7 @@ Hercules.NET (ZeusFiscal) (desserialização do xml da NFCe) - [https://github.c
 
 Change log:
 ----
+1.0.26 - Adiciona a propriedade "PaginaCodigo" permitindo alterar a pagina de codigo da impressora<br/>
 1.0.25 - QRCode não estava saindo na lateral para NFCe<br/>
 1.0.24 - Adiciona File (ConfiguracaoFile) às formas de comunicação<br/>
 1.0.23 - Removendo o antigo DFe.NET e migrando para Hercules.NET<br/>
