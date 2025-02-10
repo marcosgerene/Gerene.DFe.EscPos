@@ -42,7 +42,7 @@ Permite comunicação via RAW (USB), TCP e Serial.
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Hercules.NET.NFe.NFCe" Version="2024.5.26.1337" />
+		<PackageReference Include="Hercules.NET.NFe.NFCe" Version="2025.1.16.147" />
 		<PackageReference Include="OpenAC.Net.EscPos" Version="1.5.0" />
 		<PackageReference Include="OpenAC.Net.Sat" Version="1.5.0.2" />
 		<PackageReference Include="System.Drawing.Common" Version="8.0.5" />
