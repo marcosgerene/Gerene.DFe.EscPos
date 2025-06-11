@@ -2,9 +2,9 @@
 
 [![Nuget count](http://img.shields.io/nuget/v/Gerene.DFe.EscPos.svg)](https://www.nuget.org/packages/Gerene.DFe.EscPos)
 
-Impressão em impressora termica para DFes via EscPos e derivados (EscBema, EscDaruma, EscElgin, entre outros) nativo em .NET.
+Impressão em impressora termica para DFes via EscPos e derivados (EscBema, EscDaruma, EscElgin, entre outros) nativo em .NET nos formatos 58 e 80mm.
 
-Atualmente a biblioteca atende os documentos SAT e NFCe nos formatos 58 e 80mm.
+A partir da versão 2.0.0 atende somente NFCe. Versões anteriores (1.0.X) atendem também ao SAT.
 
 Permite comunicação via RAW (USB), TCP, Serial e FileConfig.
 
@@ -16,7 +16,7 @@ A biblioteca conta com dois demos escritos em Winforms (Windows) e Avalonia (mul
 
 Exemplo de uso:
 ```
-using (var _printer = new SatPrinter()) //ou new NFCePrinter() para NFCe
+using (var _printer = new NFCePrinter()) //ou new SatPrinter() para SAT até a versão 1.0.27
 {
 	_printer.Protocolo = ProtocoloEscPos.EscPos; //Protocolo de comunicação	
 	_printer.Impressora = "Nome da impressora"; //Para RAW nome da impressora. Para TCP o IP da impressora na rede. Para serial a porta.
@@ -68,13 +68,15 @@ Dependências:
 
 OpenAC.Net.EscPos (motor de impressão) - https://github.com/OpenAC-Net/OpenAC.Net.EscPos
 
-OpenAC.Net.Sat (desserialização do xml do SAT) - https://github.com/OpenAC-Net/OpenAC.Net.Sat
-
 Hercules.NET (ZeusFiscal) (desserialização do xml da NFCe) - [https://github.com/ZeusAutomacao/DFe.NET](https://github.com/Hercules-NET/ZeusFiscal)
 
+OpenAC.Net.Sat (desserialização do xml do SAT) - https://github.com/OpenAC-Net/OpenAC.Net.Sat (para versões 1.0.X).
 
 Change log:
 ----
+2.0.0 - Remove impressão do SAT, descontinuado pelo estado de SP (as versões 1.0.X continuarão sendo suportadas pela biblioteca).<br/>
+
+1.0.27 - Se o cEAN for SEM GTIN, mesmo que esteja configurado para usar Barras como Código, utiliza o cProd<br/>
 1.0.26 - Adiciona a propriedade "PaginaCodigo" permitindo alterar a pagina de codigo da impressora<br/>
 1.0.25 - QRCode não estava saindo na lateral para NFCe<br/>
 1.0.24 - Adiciona File (ConfiguracaoFile) às formas de comunicação<br/>
@@ -101,12 +103,13 @@ Change log:
 Break changes:
 ----
 
-A versão 1.0.17 trouxe um novo motor de impressão (OpenAC.Net.EscPos) que permite impressão RAW (padrão para comunicação USB identica ao comportamento anterior) e adiciona os protocolos TCP e Serial.
+* A versão 2.0.0 remove o suporte ao SAT (descontinuado pelo estado de São Paulo). Para manter-se imprimindo SAT utilize as versões 1.0.X.
 
-Você pode preencher apenas o atributo "Impressora" (antes chamado de "NomeImpressora") e substituir o atributo "TipoImpressora" por "Protocolo" e o comportamento do motor anterior será mantido.
+* As versões 1.0.X não serão descontinuadas, mas serão consideradas como "legadas".
 
-A versão 1.0.23 remove a referência ao DFe.NET (antigo ZeusNfe) e troca pelo Hercules.NET. Por se tratar de um fork é necessário que seja removido a referência ao DFe.NET também na aplicação que usar o Gerene.DFe.EscPos para evitar duplicidade de namespace.
+* A versão 1.0.23 remove a referência ao DFe.NET (antigo ZeusNfe) e troca pelo Hercules.NET. Por se tratar de um fork é necessário que seja removido a referência ao DFe.NET também na aplicação que usar o Gerene.DFe.EscPos para evitar duplicidade de namespace.
 
+* A versão 1.0.17 trouxe um novo motor de impressão (OpenAC.Net.EscPos) que permite impressão RAW (padrão para comunicação USB identica ao comportamento anterior) e adiciona os protocolos TCP e Serial. Basta preencher o atributo "Impressora" (antes chamado de "NomeImpressora") e substituir o atributo "TipoImpressora" por "Protocolo" e o comportamento do motor anterior será mantido.
 
 Outras configurações:
 ----
