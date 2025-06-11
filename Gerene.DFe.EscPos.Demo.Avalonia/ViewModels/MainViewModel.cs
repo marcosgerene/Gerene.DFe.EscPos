@@ -25,9 +25,7 @@ public partial class MainViewModel : ViewModelBase
 {
     public enum ModeloDFe
     {
-        NFCe,
-        SAT,
-        CancelamentoSat
+        NFCe
     }
 
     public MainViewModel()
@@ -89,7 +87,7 @@ public partial class MainViewModel : ViewModelBase
         Protocolos = (IEnumerable<ProtocoloEscPos>)Enum.GetValues(typeof(ProtocoloEscPos));
         TiposPapel = (IEnumerable<TipoPapel>)Enum.GetValues(typeof(TipoPapel));
 
-        Modelo = ModeloDFe.SAT;
+        Modelo = ModeloDFe.NFCe;
         Protocolo = ProtocoloEscPos.EscPos;
         TipoPapel = TipoPapel.Tp80mm;
     }
@@ -166,7 +164,7 @@ public partial class MainViewModel : ViewModelBase
             await using var stream = await files.Single().OpenReadAsync();
             using MemoryStream memoryStream = new();
             stream.CopyTo(memoryStream);
-            LogotipoBytes = memoryStream.ToArray();                        
+            LogotipoBytes = memoryStream.ToArray();
         }
     }
 
@@ -183,7 +181,7 @@ public partial class MainViewModel : ViewModelBase
         FilePickerOpenOptions pickerOptions = new()
         {
             Title = "Escolher arquivo XML",
-            FileTypeFilter = new[] { 
+            FileTypeFilter = new[] {
                 new FilePickerFileType("Arquivo XML")
                 {
                     Patterns = new string[1] { "*.xml" },
@@ -218,10 +216,6 @@ public partial class MainViewModel : ViewModelBase
                 case ModeloDFe.NFCe:
                     _printer = new NFCePrinter();
                     break;
-                case ModeloDFe.SAT:
-                case ModeloDFe.CancelamentoSat:
-                    _printer = new SatPrinter();
-                    break;
                 default:
                     throw new NotImplementedException();
             }
@@ -255,29 +249,7 @@ public partial class MainViewModel : ViewModelBase
                 _printer.QrCodeImagem = new System.Drawing.Bitmap(memoryStream);
             }
 
-
-            if (Modelo == ModeloDFe.CancelamentoSat)
-            {
-                if (QrCodeComoImagem)
-                {
-                    string qrcode = _printer.QRCodeTextoCanc(xml);
-
-                    SixLabors.ImageSharp.Image qrCodeImage;
-                    using (var qrGenerator = new QRCoder.QRCodeGenerator())
-                    using (var qrCodeData = qrGenerator.CreateQrCode(qrcode, QRCoder.QRCodeGenerator.ECCLevel.H))
-                    using (var qrCode = new QRCoder.QRCode(qrCodeData))
-                        qrCodeImage = qrCode.GetGraphic(3);
-
-                    using MemoryStream memoryStream = new();
-                    qrCodeImage.SaveAsPng(memoryStream);
-                    _printer.QrCodeImagemCanc = new System.Drawing.Bitmap(memoryStream);
-                }
-
-                (_printer as SatPrinter).ImprimirCancelamento(xml);
-            }
-            else
-                _printer.Imprimir(xml);
-
+            _printer.Imprimir(xml);
         }
         catch (Exception ex)
         {

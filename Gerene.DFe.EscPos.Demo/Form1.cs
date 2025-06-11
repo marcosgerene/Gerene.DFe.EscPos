@@ -12,9 +12,7 @@ namespace Gerene.DFe.EscPos.Demo
     {
         private enum ModeloDFe
         {
-            NFCe,
-            SAT,
-            CancelamentoSat
+            NFCe
         }
 
         public Form1()
@@ -98,10 +96,6 @@ namespace Gerene.DFe.EscPos.Demo
                     case ModeloDFe.NFCe:
                         _printer = new NFCePrinter();
                         break;
-                    case ModeloDFe.SAT:
-                    case ModeloDFe.CancelamentoSat:
-                        _printer = new SatPrinter();
-                        break;
                     default:
                         throw new NotImplementedException();
                 }
@@ -132,27 +126,7 @@ namespace Gerene.DFe.EscPos.Demo
 
                     _printer.QrCodeImagem = qrCodeImage;                    
                 }
-
-                if ((ModeloDFe)ComboModeloDFe.SelectedItem == ModeloDFe.CancelamentoSat)
-                {
-                    if (ChbQrCodeImagem.Checked)
-                    {
-                        string qrcode = _printer.QRCodeTextoCanc(xml);
-
-                        Bitmap qrCodeImage;
-                        using (var qrGenerator = new QRCoder.QRCodeGenerator())
-                        using (var qrCodeData = qrGenerator.CreateQrCode(qrcode, QRCoder.QRCodeGenerator.ECCLevel.H))
-                        using (var qrCode = new QRCoder.QRCode(qrCodeData))
-                            qrCodeImage = qrCode.GetGraphic(3);
-
-                        _printer.QrCodeImagemCanc = qrCodeImage;
-                    }
-
-
-                    (_printer as SatPrinter).ImprimirCancelamento(xml);
-                }
-                else
-                    _printer.Imprimir(xml);
+                _printer.Imprimir(xml);
             }
             catch (Exception ex)
             {
