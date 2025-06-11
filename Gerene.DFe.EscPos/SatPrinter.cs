@@ -209,7 +209,7 @@ namespace Gerene.DFe.EscPos
                 string textoE;
 
                 string codProd = det.Prod.CProd;
-                if (UsarBarrasComoCodigo)
+                if (UsarBarrasComoCodigo && det.Prod.CEAN != "SEM GTIN")
                     codProd = $"{(UsarBarrasComoCodigo && det.Prod.CEAN.IsNotNull() ? det.Prod.CEAN : det.Prod.CProd).PadRight(13)}";
 
                 if (ProdutoDuasLinhas)

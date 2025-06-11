@@ -172,7 +172,7 @@ namespace Gerene.DFe.EscPos
             foreach (var det in _NFCe.NFe.infNFe.det)
             {
                 string codProd = det.prod.cProd;
-                if (UsarBarrasComoCodigo)
+                if (UsarBarrasComoCodigo && det.prod.cEAN != "SEM GTIN")
                     codProd = $"{(UsarBarrasComoCodigo && det.prod.cEAN.IsNotNull() ? det.prod.cEAN : det.prod.cProd).PadRight(13)}";
 
                 string textoE;
