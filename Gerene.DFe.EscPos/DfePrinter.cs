@@ -207,11 +207,6 @@ namespace Gerene.DFe.EscPos
 
             RemoverAcentos = true;
 
-            ConfiguracaoRAW = new RawConfig();
-            ConfiguracaoSerial = new SerialConfig();
-            ConfiguracaoTCP = new TCPConfig();
-            ConfiguracaoFile = new FileConfig();
-
             QrCodeImagem = null;
             QrCodeImagemCanc = null;
         }
@@ -247,6 +242,7 @@ namespace Gerene.DFe.EscPos
             switch (TipoConexao)
             {
                 case TipoConexao.RAW:
+                    ConfiguracaoRAW = ConfiguracaoRAW == null ? new RawConfig() : ConfiguracaoRAW;
                     if (Impressora.IsNotNull())
                         ConfiguracaoRAW.Impressora = Impressora;
 
@@ -254,6 +250,7 @@ namespace Gerene.DFe.EscPos
                     break;
 
                 case TipoConexao.TCP:
+                    ConfiguracaoTCP = ConfiguracaoTCP == null ? new TCPConfig() : ConfiguracaoTCP;
                     if (Impressora.IsNotNull())
                         ConfiguracaoTCP.IP = Impressora;
 
@@ -261,6 +258,7 @@ namespace Gerene.DFe.EscPos
                     break;
 
                 case TipoConexao.Serial:
+                    ConfiguracaoSerial = ConfiguracaoSerial == null ? new SerialConfig() : ConfiguracaoSerial;
                     if (Impressora.IsNotNull())
                         ConfiguracaoSerial.Porta = Impressora;
 
@@ -268,6 +266,7 @@ namespace Gerene.DFe.EscPos
                     break;
 
                 case TipoConexao.File:
+                    ConfiguracaoFile = ConfiguracaoFile == null ? new FileConfig() : ConfiguracaoFile;
                     if (Impressora.IsNotNull())
                         ConfiguracaoFile.File = Impressora;
 

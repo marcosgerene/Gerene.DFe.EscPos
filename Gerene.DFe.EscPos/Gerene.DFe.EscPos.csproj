@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net462;netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>net6.0;net8.0;net462;netstandard2.0</TargetFrameworks>
 		<Company>Gerene Sistemas de Informação</Company>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/marcosgerene/Gerene.DFe.EscPos</PackageProjectUrl>
@@ -42,10 +42,10 @@ Permite comunicação via RAW (USB), TCP e Serial.
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Hercules.NET.NFe.NFCe" Version="2025.1.16.147" />
-		<PackageReference Include="OpenAC.Net.EscPos" Version="1.5.0" />
+		<PackageReference Include="Hercules.NET.NFe.NFCe" Version="2025.6.4.1947" />
+		<PackageReference Include="OpenAC.Net.EscPos" Version="1.6.0" />
 		<PackageReference Include="OpenAC.Net.Sat" Version="1.5.0.2" />
-		<PackageReference Include="System.Drawing.Common" Version="8.0.5" />
+		<PackageReference Include="System.Drawing.Common" Version="9.0.6" />
 	</ItemGroup>
 
 	<ItemGroup>
