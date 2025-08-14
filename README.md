@@ -16,7 +16,7 @@ A biblioteca conta com dois demos escritos em Winforms (Windows) e Avalonia (mul
 
 Exemplo de uso:
 ```
-using (var _printer = new NFCePrinter()) //ou new SatPrinter() para SAT até a versão 1.0.27
+using (var _printer = new NFCePrinter()) //ou new SatPrinter() para SAT nas versões 1.0.X
 {
 	_printer.Protocolo = ProtocoloEscPos.EscPos; //Protocolo de comunicação	
 	_printer.Impressora = "Nome da impressora"; //Para RAW nome da impressora. Para TCP o IP da impressora na rede. Para serial a porta.
