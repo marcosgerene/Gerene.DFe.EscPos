@@ -5,7 +5,7 @@
 		<Company>Gerene Sistemas de Informação</Company>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageProjectUrl>https://github.com/marcosgerene/Gerene.DFe.EscPos</PackageProjectUrl>
-		<Version>2.0.0</Version>
+		<Version>2.0.1</Version>
 		<PackageLicenseExpression></PackageLicenseExpression>
 		<Description>Impressão em impressora termica para DFes via EscPos e derivados (EscBema, EscDaruma, EscElgin, entre outros) nativo em .NET.
 
@@ -13,7 +13,8 @@ Atualmente a biblioteca atende os documentos SAT e NFCe nos formatos 58 e 80mm.
 
 Permite comunicação via RAW (USB), TCP e Serial.
 		</Description>
-		<PackageReleaseNotes>2.0.0 - Remove impressão do SAT, descontinuado pelo estado de SP. Para impressão do SAT, utilize diretamente o projeto OpenAC.Net.Sat ou a versão 1.0.27 do Gerene.DFe.EscPos.
+		<PackageReleaseNotes> 2.0.1 - Atualiza a versão do Hercules corrigindo #17 (corresponde à versão legada 1.0.28)
+2.0.0 - Remove impressão do SAT, descontinuado pelo estado de SP. Para impressão do SAT, utilize diretamente o projeto OpenAC.Net.Sat ou a versão 1.0.27 do Gerene.DFe.EscPos.
 1.0.27 - Se o cEAN for SEM GTIN, mesmo que esteja configurado para usar Barras como Código, utiliza o cProd
 1.0.26 - Adiciona a propriedade "PaginaCodigo" permitindo alterar a pagina de codigo da impressora
 1.0.25 - QRCode não estava saindo na lateral para NFCe
@@ -36,8 +37,8 @@ Permite comunicação via RAW (USB), TCP e Serial.
 1.0.8 - Adiciona a impressão do logotipo
 1.0.7 - Adiciona Qtde. total de itens"
 1.0.6 - Impressão para cancelamento do SAT		</PackageReleaseNotes>
-		<AssemblyVersion>1.0.20.0</AssemblyVersion>
-		<FileVersion>1.0.20.0</FileVersion>
+		<AssemblyVersion>2.0.1.0</AssemblyVersion>
+		<FileVersion>2.0.1.0</FileVersion>
 
 		<Nullable>disable</Nullable>
 
