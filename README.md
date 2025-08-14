@@ -76,6 +76,7 @@ Hercules.NET (ZeusFiscal) (desserialização do xml da NFCe) - [https://github.c
 Change log:
 ----
 1.0.28 - Atualiza a versão do Hercules corrigindo #17
+
 1.0.27 - Se o cEAN for SEM GTIN, mesmo que esteja configurado para usar Barras como Código, utiliza o cProd
 1.0.26 - Adiciona a propriedade "PaginaCodigo" permitindo alterar a pagina de codigo da impressora<br/>
 1.0.25 - QRCode não estava saindo na lateral para NFCe<br/>
