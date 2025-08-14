@@ -287,7 +287,10 @@ namespace Gerene.DFe.EscPos
             #region Tributos
             if (ImprimirDeOlhoNoImposto && !QrCodeLateral)
             {
-                _Printer.ImprimirTexto(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom".TratarAcento(), _NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.ToString("C2", Cultura), ColunasCondensado), OpenTamanhoFonte.Condensada);
+                if (!_NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.HasValue)
+                    throw new System.Exception("Atributo \"ImprimirDeOlhoNoImposto\" definido como verdadeiro e o valor aproximado dos tributos não informado na NFC-e.");
+
+                _Printer.ImprimirTexto(GereneHelpers.TextoEsquerda_Direita("Valor aproximado dos Tributos deste Cupom".TratarAcento(), _NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.Value.ToString("C2", Cultura), ColunasCondensado), OpenTamanhoFonte.Condensada);
                 _Printer.ImprimirTexto("(Conforme Lei Fed. 12.741/2012)".TratarAcento(), OpenTamanhoFonte.Condensada);
             }
             #endregion
@@ -356,7 +359,12 @@ namespace Gerene.DFe.EscPos
 
                 #region Tributos
                 if (ImprimirDeOlhoNoImposto)
-                    regiao.ImprimirTexto($"Valor aprox. dos tributos {_NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.ToString("C2", Cultura)} conforme lei fed. 12.741/2012", OpenTamanhoFonte.Condensada);
+                {
+                    if (!_NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.HasValue)
+                        throw new System.Exception("Atributo \"ImprimirDeOlhoNoImposto\" definido como verdadeiro e o valor aproximado dos tributos não informado na NFC-e.");
+
+                    regiao.ImprimirTexto($"Valor aprox. dos tributos {_NFCe.NFe.infNFe.total.ICMSTot.vTotTrib.Value.ToString("C2", Cultura)} conforme lei fed. 12.741/2012", OpenTamanhoFonte.Condensada);
+                }                
                 #endregion
 
                 #region Desenvolvedor
